@@ -9,21 +9,21 @@ CREATE TABLE roles(
 
 -- All users of the system
 CREATE TABLE users(
-    u_id INT NOT NULL,
+    user_id INT NOT NULL,
     f_name VARCHAR(30),
     l_name VARCHAR(30),
     is_active boolean,
     last_login timestamp,
     last_logout timestamp,
-    PRIMARY KEY(u_id)
+    PRIMARY KEY(user_id)
 );
 
 -- Users listed with their roles (a user can have multiple)
 CREATE TABLE user_roles(
-    u_id INT NOT NULL,
+    user_id INT NOT NULL,
     role_id INT NOT NULL,
-    PRIMARY KEY(u_id, role_id),
-    FOREIGN KEY(u_id) REFERENCES users(u_id),
+    PRIMARY KEY(user_id, role_id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
     FOREIGN KEY(role_id) REFERENCES roles(role_id)
 );
 
@@ -68,6 +68,7 @@ CREATE TABLE tasks_input(
     job_id INT NOT NULL,
     wf_id INT NOT NULL,
     task_id INT NOT NULL,
+    user_id INT NOT NULL,
     task_desc VARCHAR(60),
     t_input INT,
     t_output INT,
@@ -76,5 +77,7 @@ CREATE TABLE tasks_input(
     time_recorded timestamp,
     PRIMARY KEY(job_id, wf_id, task_id),
     FOREIGN KEY(job_id) REFERENCES jobs(job_id),
-    FOREIGN KEY(job_id, wf_id) REFERENCES workflows(job_id, wf_id) -- this might have to be reworked
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    -- this might have to be reworked as must reference both job_id and wf_id from workflows
+    FOREIGN KEY(job_id, wf_id) REFERENCES workflows(job_id, wf_id)
 );
