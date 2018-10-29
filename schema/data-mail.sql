@@ -1,4 +1,23 @@
+-- Creates the Schema for the database along with any relevant test data
+
 -- Drop any tables here if they exist
+DROP TABLE roles CASCADE;
+
+DROP TABLE users CASCADE;
+
+DROP TABLE user_roles;
+
+DROP TABLE Persistent_Logins;
+
+DROP TABLE clients CASCADE;
+
+DROP TABLE jobs CASCADE;
+
+DROP TABLE workflows CASCADE;
+
+DROP TABLE tasks_input CASCADE;
+
+DROP TABLE task_list CASCADE;
 
 -- All roles available to users of the system
 CREATE TABLE roles(
@@ -10,12 +29,23 @@ CREATE TABLE roles(
 -- All users of the system
 CREATE TABLE users(
     user_id INT NOT NULL,
+    user_name VARCHAR(36) NOT NULL,
+    encrypted_password  VARCHAR(128) NOT NULL,
     f_name VARCHAR(30),
     l_name VARCHAR(30),
     is_active boolean,
     last_login timestamp,
     last_logout timestamp,
     PRIMARY KEY(user_id)
+);
+
+-- Used by Spring Remember Me API to remember logins.
+CREATE TABLE Persistent_Logins (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    PRIMARY KEY (series)
 );
 
 -- Users listed with their roles (a user can have multiple)
@@ -76,8 +106,11 @@ CREATE TABLE tasks_input(
     time_taken timestamp,
     time_recorded timestamp,
     PRIMARY KEY(job_id, wf_id, task_id),
+    -- this may have to be removed as job_id is also referenced via workflows table
     FOREIGN KEY(job_id) REFERENCES jobs(job_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id),
     -- this might have to be reworked as must reference both job_id and wf_id from workflows
     FOREIGN KEY(job_id, wf_id) REFERENCES workflows(job_id, wf_id)
 );
+
+-- Add any test data here
