@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "clients", //
         uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "client_name")})
-public class AppRole
+                @UniqueConstraint(name = "CLIENTS_UK", columnNames = "client_name")})
+public class Client
 {
 
     @Id
@@ -32,7 +32,7 @@ public class AppRole
 
     public String getClientName()
     {
-        return ClientName;
+        return clientName;
     }
 
     public void setClientName(String clientName)
@@ -47,7 +47,7 @@ public class AppRole
 
     public void setAddress(String address)
     {
-        this.address = addres;
+        this.address = address;
     }
 
 }
