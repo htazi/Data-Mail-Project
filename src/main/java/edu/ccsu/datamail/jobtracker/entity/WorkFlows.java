@@ -11,11 +11,6 @@ public class WorkFlows
 
     @Id
     @GeneratedValue
-    @Column(name = "job_id", nullable = false)
-    private int jobId;
-
-    @Id
-    @GeneratedValue
     @Column(name = "wf_id", nullable = false)
     private int wfId;
 
@@ -25,10 +20,6 @@ public class WorkFlows
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
-
-    public int getJobId(){return jobId;}
-
-    public void setJobId(int jobId){this.jobId = jobId;}
 
     public int getWfId(){return wfId;}
 
