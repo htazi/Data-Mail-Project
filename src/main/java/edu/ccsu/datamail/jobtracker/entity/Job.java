@@ -29,14 +29,9 @@ public class Job
 
     public void setJobDesc(String jobDesc){this.jobDesc = jobDesc;}
 
-    public Client getClient() {
-        return client;
-    }
+    public Client getClient() {return client;}
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
+    public void setClient(Client client) {this.client = client; }
 
 
 }
