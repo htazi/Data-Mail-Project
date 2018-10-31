@@ -1,5 +1,7 @@
 package edu.ccsu.datamail.jobtracker.entity;
 
+import edu.ccsu.datamail.jobtracker.entity.Client;
+
 import javax.persistence.*;
 
 @Entity
