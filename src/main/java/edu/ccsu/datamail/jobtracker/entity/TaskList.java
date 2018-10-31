@@ -1,11 +1,13 @@
 package edu.ccsu.datamail.jobtracker.entity;
 
+import org.postgresql.util.PGmoney;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task_list", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "WORK_FLOWS_UK", columnNames = "acronym")}) //
+@Table(name = "task_list", uniqueConstraints = {
+        @UniqueConstraint(name = "task_list_pk", columnNames = "task_id")
+})
 public class TaskList
 {
 
@@ -24,29 +26,55 @@ public class TaskList
     private boolean isBillable;
 
     @Column(name = "price")
-    private double price ;
+    private PGmoney price;
 
-    public int getTaskId(){return taskId;}
+    public int getTaskId()
+    {
+        return taskId;
+    }
 
-    public void setTaskId(int taskId){this.taskId = taskId;}
+    public void setTaskId(int taskId)
+    {
+        this.taskId = taskId;
+    }
 
-    public String getAcronym(){return acronym;}
+    public String getAcronym()
+    {
+        return acronym;
+    }
 
-    public void setAcronym(String acronym){this. acronym = acronym;}
+    public void setAcronym(String acronym)
+    {
+        this.acronym = acronym;
+    }
 
-    public String getTaskDesc() {return taskDesc;}
+    public String getTaskDesc()
+    {
+        return taskDesc;
+    }
 
-    public void setTaskDesc(String taskDesc){this.taskDesc = taskDesc;}
+    public void setTaskDesc(String taskDesc)
+    {
+        this.taskDesc = taskDesc;
+    }
 
-    public boolean getBillabel() {return isBillable;}
+    public boolean isBillable()
+    {
+        return isBillable;
+    }
 
-    public void setBillabel(boolean isBillable){this.isBillable= isBillable;}
+    public void setBillable(boolean billable)
+    {
+        isBillable = billable;
+    }
 
-    public double getPrice() {return price;}
+    public PGmoney getPrice()
+    {
+        return price;
+    }
 
-    public void setPrice(double price) {this.price = price; }
-
-
+    public void setPrice(PGmoney price)
+    {
+        this.price = price;
+    }
 }
-
-

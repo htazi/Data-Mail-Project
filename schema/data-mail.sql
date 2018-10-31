@@ -68,7 +68,7 @@ CREATE TABLE user_role (
 CREATE TABLE client (
   client_id   INT NOT NULL,
   client_name VARCHAR(30),
-  addr        VARCHAR(45),
+  address     VARCHAR(45),
   CONSTRAINT client_pk PRIMARY KEY (client_id)
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE job (
   CONSTRAINT job_fk FOREIGN KEY (client_id) REFERENCES client (client_id)
 );
 
--- List of all workflows and their descriptions
+-- List of all workFlows and their descriptions
 CREATE TABLE workflow (
   job_id  INT NOT NULL,
   wf_id   INT NOT NULL,

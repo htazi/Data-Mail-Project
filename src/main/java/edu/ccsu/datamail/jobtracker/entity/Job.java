@@ -1,13 +1,11 @@
 package edu.ccsu.datamail.jobtracker.entity;
 
-import edu.ccsu.datamail.jobtracker.entity.Client;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "jobs", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "JOBS_UK", columnNames = "client_id")}) //
+@Table(name = "jobs", uniqueConstraints = {
+        @UniqueConstraint(name = "JOBS_UK", columnNames = "client_id")
+})
 public class Job
 {
 
@@ -23,18 +21,34 @@ public class Job
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    public int getJobId(){return jobId;}
+    public int getJobId()
+    {
+        return jobId;
+    }
 
-    public void setJobId(int jobId){this.jobId = jobId;}
+    public void setJobId(int jobId)
+    {
+        this.jobId = jobId;
+    }
 
-    public String getJobDesc() {return jobDesc;}
+    public String getJobDesc()
+    {
+        return jobDesc;
+    }
 
-    public void setJobDesc(String jobDesc){this.jobDesc = jobDesc;}
+    public void setJobDesc(String jobDesc)
+    {
+        this.jobDesc = jobDesc;
+    }
 
-    public Client getClient() {return client;}
+    public Client getClient()
+    {
+        return client;
+    }
 
-    public void setClient(Client client) {this.client = client; }
-
-
+    public void setClient(Client client)
+    {
+        this.client = client;
+    }
 }
 

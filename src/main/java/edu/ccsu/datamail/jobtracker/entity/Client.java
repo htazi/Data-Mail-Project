@@ -3,9 +3,9 @@ package edu.ccsu.datamail.jobtracker.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "clients", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "CLIENTS_UK", columnNames = "client_name")})
+@Table(name = "client", uniqueConstraints = {
+        @UniqueConstraint(name = "client_pk", columnNames = "client_id")
+})
 public class Client
 {
 
