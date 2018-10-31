@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>workflowss</title>
+    <style>
+        .test
+        {
+            margin: 5px;
+            color: red;
+        }
+        .tableheader
+
+        {
+            margin: 5px;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>Workflows for this job are :</h1>
+
+<table>
+
+    <tr style="color: green" class="tableheader">
+
+        <th>WorkFlow ID</th>
+
+        <th style="position: relative; left: 100px; ">Job ID</th>
+
+        <th style="position: relative; left: 200px; ">Workflow Description</th>
+
+    </tr>
+
+</table>
+
+<tr  th:each="workflow : ${workflows}">
+
+    <div>
+        <input name="input1" class='test' type="text"  th:value="${wf.wf_id}"/>
+        <input name ="input2" class='test' type="text"  th:value="${wf.job_id}"/>
+        <input name="input3" class='test' type="text"  th:value="${wf.wf_desc}"/><br>
+    </div>
+
+</tr>
+</body>
+</html>
