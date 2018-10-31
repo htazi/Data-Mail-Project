@@ -3,26 +3,26 @@ package edu.ccsu.datamail.jobtracker.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "App_Role", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name")})
+@Table(name = "app_role", uniqueConstraints = {
+        @UniqueConstraint(name = "app_role_uk", columnNames = "role_name")
+})
 public class AppRole
 {
 
     @Id
     @GeneratedValue
-    @Column(name = "Role_Id", nullable = false)
-    private Long roleId;
+    @Column(name = "role_id", nullable = false)
+    private Integer roleId;
 
-    @Column(name = "Role_Name", length = 30, nullable = false)
+    @Column(name = "role_name", length = 30, nullable = false)
     private String roleName;
 
-    public Long getRoleId()
+    public Integer getRoleId()
     {
         return roleId;
     }
 
-    public void setRoleId(Long roleId)
+    public void setRoleId(Integer roleId)
     {
         this.roleId = roleId;
     }
