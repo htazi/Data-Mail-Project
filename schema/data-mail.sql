@@ -191,5 +191,13 @@ values (7, 6, 6);
 insert into user_role (user_role_id, USER_ID, ROLE_ID)
 values (8, 7, 7);
 
+insert into client(client_id)
+values(1);
+
+insert into job(job_id, client_id)
+values(1, 1);
+
+insert into workflow(job_id, wf_id, wf_desc)
+values(1, 0, 'Wooh if you can see this it works');
 ---
 Commit;
