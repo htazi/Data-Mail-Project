@@ -10,30 +10,36 @@ import javax.persistence.*;
 public class Workflow
 {
 
+    /**
+     * The id for this Workflow, unique for each job
+     */
     @Id
     @GeneratedValue
     @Column(name = "wf_id", nullable = false)
-    private int workflowId;
+    private Integer workflowId;
 
+    /**
+     * The job this Workflow is associated with
+     */
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
 
+    /**
+     * The Description for this workflow
+     */
     @Column(name = "wf_desc", length = 60)
     private String wfDesc;
 
-
-    public int getWfId(){return workflowId;}
-
-    public String getWfDesc()
+    public int getWorkflowId()
     {
-        return wfDesc;
+        return workflowId;
     }
 
-    public void setWfDesc(String wfDesc)
+    public void setWorkflowId(int workflowId)
     {
-        this.wfDesc = wfDesc;
+        this.workflowId = workflowId;
     }
 
     public Job getJob()
@@ -46,5 +52,25 @@ public class Workflow
         this.job = job;
     }
 
+    public String getWfDesc()
+    {
+        return wfDesc;
+    }
+
+    public void setWfDesc(String wfDesc)
+    {
+        this.wfDesc = wfDesc;
+    }
+
+    /**
+     * Returns a String representation of this Workflow
+     *
+     * @return a string containing information on this Workflow
+     */
+    @Override
+    public String toString()
+    {
+        return "job: " + job.getJobId() + " workflow: " + workflowId.toString() + " description: " + wfDesc;
+    }
 }
 
