@@ -2,7 +2,7 @@ package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.dao.AppRoleDAO;
 import edu.ccsu.datamail.jobtracker.dao.AppUserDAO;
-import edu.ccsu.datamail.jobtracker.entity.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

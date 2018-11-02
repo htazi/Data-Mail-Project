@@ -55,13 +55,11 @@ CREATE TABLE persistent_logins (
 
 -- Users listed with their app_role (a app_user can have multiple)
 CREATE TABLE user_role (
-  user_role_id INT NOT NULL,
-  user_id      INT NOT NULL,
-  role_id      INT NOT NULL,
-  CONSTRAINT user_role_pk PRIMARY KEY (user_role_id),
+  user_id INT NOT NULL,
+  role_id INT NOT NULL,
+  CONSTRAINT user_role_pk PRIMARY KEY (user_id, role_id),
   CONSTRAINT user_role_fk1 FOREIGN KEY (user_id) REFERENCES app_user (user_id),
-  CONSTRAINT user_role_fk2 FOREIGN KEY (role_id) REFERENCES app_role (role_id),
-  CONSTRAINT user_role_uk UNIQUE (user_id, role_id)
+  CONSTRAINT user_role_fk2 FOREIGN KEY (role_id) REFERENCES app_role (role_id)
 );
 
 -- Clients that are associated with data mail jobs
@@ -102,22 +100,22 @@ CREATE TABLE task_list (
 
 -- List of all the recorded tasks input by employees
 CREATE TABLE input_task (
-  job_id        INT NOT NULL,
-  wf_id         INT NOT NULL,
-  task_id       INT NOT NULL,
-  user_id       INT NOT NULL,
-  task_desc     VARCHAR(60),
-  t_input       INT,
-  t_output      INT,
-  t_dropped     INT,
-  time_taken    INT,
-  time_recorded timestamp,
-  CONSTRAINT input_task_pk PRIMARY KEY (job_id, wf_id, task_id),
+  job_id          INT NOT NULL,
+  wf_id           INT NOT NULL,
+  task_num        INT NOT NULL,
+  task_id         INT NOT NULL,
+  user_id         INT NOT NULL,
+  task_desc       VARCHAR(60),
+  records_in      INT,
+  records_out     INT,
+  records_dropped INT,
+  time_taken      INT,
+  time_recorded   TIMESTAMPTZ,
+  CONSTRAINT input_task_pk PRIMARY KEY (job_id, wf_id, task_num),
   CONSTRAINT input_task_fk1 FOREIGN KEY (user_id) REFERENCES app_user (user_id),
+  CONSTRAINT input_task_fk2 FOREIGN KEY (task_id) REFERENCES task_list (task_id),
   -- this might have to be reworked as must reference both job_id and wf_id from workflow
-  CONSTRAINT input_task_fk2 FOREIGN KEY (job_id, wf_id) REFERENCES workflow (job_id, wf_id),
-  -- this may have to be removed as job_id is also referenced via workflow table
-  CONSTRAINT input_task_fk3 FOREIGN KEY (job_id) REFERENCES job (job_id)
+  CONSTRAINT input_task_fk3 FOREIGN KEY (job_id, wf_id) REFERENCES workflow (job_id, wf_id)
 );
 
 -- Add any test data here
@@ -167,29 +165,43 @@ insert into app_role (role_id, role_name)
 values (7, 'ROLE_Manager');
 
 -- Tie test app_user to app_user permissions
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (1, 1, 1);
+insert into user_role (USER_ID, ROLE_ID)
+values (1, 1);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (2, 1, 2);
+insert into user_role (USER_ID, ROLE_ID)
+values (1, 2);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (3, 2, 2);
+insert into user_role (USER_ID, ROLE_ID)
+values (2, 2);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (4, 3, 3);
+insert into user_role (USER_ID, ROLE_ID)
+values (3, 3);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (5, 4, 4);
+insert into user_role (USER_ID, ROLE_ID)
+values (4, 4);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (6, 5, 5);
+insert into user_role (USER_ID, ROLE_ID)
+values (5, 5);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (7, 6, 6);
+insert into user_role (USER_ID, ROLE_ID)
+values (6, 6);
 
-insert into user_role (user_role_id, USER_ID, ROLE_ID)
-values (8, 7, 7);
+insert into user_role (USER_ID, ROLE_ID)
+values (7, 7);
 
+insert into client (client_id)
+values (1);
+
+insert into job (job_id, client_id)
+values (1, 1);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (1, 0, 'Wooh if you can see this it works');
+
+insert into task_list (task_id, acronym, t_desc, is_billable)
+values (0, 'test', 'this is a test task', FALSE);
+
+insert into input_task(job_id, wf_id, task_num, task_id, user_id)
+values(1, 0, 1, 0, 2);
 ---
 Commit;

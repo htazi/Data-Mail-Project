@@ -1,6 +1,6 @@
 package edu.ccsu.datamail.jobtracker.dao;
 
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.job.InputTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,24 +9,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-@Repository
 @Transactional
-public class AppUserDAO
+@Repository
+public class InputTaskDAO
 {
-
     @Autowired
     private EntityManager entityManager;
 
-    public AppUser findUserAccount(String userName)
+    public InputTask findInputTask()
     {
         try {
-            String sql = "Select e from " + AppUser.class.getName() + " e " //
-                    + " Where e.userName = :userName ";
-
-            Query query = entityManager.createQuery(sql, AppUser.class);
-            query.setParameter("userName", userName);
-
-            return (AppUser) query.getSingleResult();
+            String sql = "Select t from " + InputTask.class.getName() + " t " + "Where t.taskNum = 1 AND t.workflow.workflowId = 0 AND t.workflow.job.jobId = 1";
+            Query query = entityManager.createQuery(sql, InputTask.class);
+            return (InputTask) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
