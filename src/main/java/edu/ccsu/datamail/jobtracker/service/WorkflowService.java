@@ -25,7 +25,7 @@ public class WorkflowService
      */
     public Workflow getWorkflows(int workflowId, int jobId)
     {
-        return workflowDAO.findWorkflow();
+        return workflowDAO.findWorkflow(workflowId, jobId);
     }
 
     /*

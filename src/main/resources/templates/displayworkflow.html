@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>items</title>
+    <style>
+        .test
+        {
+            margin: 5px;
+            color: red;
+        }
+        .tableheader
+        {
+            margin: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    </script>
+
+</head>
+<body>
+<h1>The list of all jobs:</h1>
+<table>
+    <tr style="color: green" class="tableheader">
+        <th>ID</th>
+        <th style="position: relative; left: 176px; ">Job ID</th>
+        <th style="position: relative; left: 324px; ">Workflow ID</th>
+    </tr>
+</table>
+
+    <div>
+
+        <input name="input1" class='test' type="text"  th:value="${workflow.job_id}"/>
+        <input name ="input2" class='test' type="text"  th:value="${workflow.wf_id}"/>
+
+        <!--<input name="input3" class='test' type="text"  th:value="${job.getTaskinput()}"/><br>-->
+    </div><br>
+
+
+</body>
+</html>

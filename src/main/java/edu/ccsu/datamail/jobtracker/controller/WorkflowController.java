@@ -15,15 +15,27 @@ public class WorkflowController
     private WorkflowService workflowService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/workflows/displayworkflow")
-    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
     {
 
         Workflow t = workflowService.getWorkflows(workflow, job);
-        String result = t.getWorkflowId() + " " + t.getJob() + " " + t.getWfDesc();
+        String result = t.getWorkflowId() + " " + t.getJob();
 
         model.addAttribute("workflow", result);
         return "displayworkflow";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
+    public String getWorkflow()
+    {
+
+//        Workflow t = workflowService.getWorkflows(workflow,1);
+//        String result = t.getWorkflowId() + " " + t.getJob() + " " + t.getWfDesc();
+//
+//        model.addAttribute("workflow", result);
+        return "workflows";
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
     public String addWorkflow()

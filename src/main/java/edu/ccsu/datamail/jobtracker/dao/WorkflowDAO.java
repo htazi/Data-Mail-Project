@@ -16,7 +16,7 @@ public class WorkflowDAO
     @Autowired
     private EntityManager entityManager;
 
-    public Workflow findWorkflow()
+    public Workflow findWorkflow(int workflowID,int jobID)
     {
         try { // currently finds a specific workflow instead of any workflow
             String sql = "Select w from " + Workflow.class.getName() + " w "+ "Where w.workflowId = 0 AND w.job.jobId = 1";
