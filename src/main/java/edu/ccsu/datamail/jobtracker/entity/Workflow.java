@@ -2,8 +2,8 @@ package edu.ccsu.datamail.jobtracker.entity;
 
 import javax.persistence.*;
 
-@IdClass(WorkflowPK.class)
 @Entity
+@IdClass(WorkflowPK.class)
 @Table(name = "workflow", uniqueConstraints = {
         @UniqueConstraint(name = "workflow_pk", columnNames = {"job_id", "wf_id"})
 })
