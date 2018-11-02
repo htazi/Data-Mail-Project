@@ -1,6 +1,6 @@
 package edu.ccsu.datamail.jobtracker.dao;
 
-import edu.ccsu.datamail.jobtracker.entity.UserRole;
+import edu.ccsu.datamail.jobtracker.entity.user.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
