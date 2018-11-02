@@ -1,4 +1,4 @@
-package edu.ccsu.datamail.jobtracker.entity;
+package edu.ccsu.datamail.jobtracker.entity.job;
 
 import org.postgresql.util.PGmoney;
 

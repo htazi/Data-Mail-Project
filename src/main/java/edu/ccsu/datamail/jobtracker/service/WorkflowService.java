@@ -1,7 +1,7 @@
 package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
-import edu.ccsu.datamail.jobtracker.entity.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class WorkflowService
      * Finds and returns a workflow associated with a given job
      *
      * @param workflowId the id of the workflow
-     * @param jobId the id of the job the workflow belongs to
+     * @param jobId      the id of the job the workflow belongs to
      * @return the workflow if found, null otherwise
      */
     public Workflow getWorkflows(int workflowId, int jobId)

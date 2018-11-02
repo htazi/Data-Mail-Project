@@ -1,6 +1,6 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
-import edu.ccsu.datamail.jobtracker.entity.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.service.WorkflowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
