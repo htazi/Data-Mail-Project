@@ -1,13 +1,14 @@
 package edu.ccsu.datamail.jobtracker.entity.user;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @IdClass(UserRole.class)
 @Table(name = "user_role", uniqueConstraints = {
         @UniqueConstraint(name = "user_role_pk", columnNames = {"user_id", "role_id"})
 })
-public class UserRole
+public class UserRole implements Serializable
 {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,7 +39,6 @@ public class UserRole
     {
         this.appRole = appRole;
     }
-
 
     /**
      * Returns a hashCode value for this object
