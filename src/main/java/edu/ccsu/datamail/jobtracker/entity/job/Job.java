@@ -3,8 +3,8 @@ package edu.ccsu.datamail.jobtracker.entity.job;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "jobs", uniqueConstraints = {
-        @UniqueConstraint(name = "JOBS_UK", columnNames = "client_id")
+@Table(name = "job", uniqueConstraints = {
+        @UniqueConstraint(name = "job_pk", columnNames = "job_id")
 })
 public class Job
 {
@@ -49,6 +49,36 @@ public class Job
     public void setClient(Client client)
     {
         this.client = client;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Job)) {
+            return false;
+        }
+
+        Job job = (Job) o;
+
+        if (jobId != job.jobId) {
+            return false;
+        }
+        if (jobDesc != null ? !jobDesc.equals(job.jobDesc) : job.jobDesc != null) {
+            return false;
+        }
+        return client != null ? client.equals(job.client) : job.client == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = jobId;
+        result = 31 * result + (jobDesc != null ? jobDesc.hashCode() : 0);
+        result = 31 * result + (client != null ? client.hashCode() : 0);
+        return result;
     }
 }
 

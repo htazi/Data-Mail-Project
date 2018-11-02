@@ -100,24 +100,22 @@ CREATE TABLE task_list (
 
 -- List of all the recorded tasks input by employees
 CREATE TABLE input_task (
-  job_id        INT NOT NULL,
-  wf_id         INT NOT NULL,
-  task_num      INT NOT NULL,
-  task_id       INT NOT NULL,
-  user_id       INT NOT NULL,
-  task_desc     VARCHAR(60),
-  t_input       INT,
-  t_output      INT,
-  t_dropped     INT,
-  time_taken    INT,
-  time_recorded TIMESTAMPTZ,
+  job_id          INT NOT NULL,
+  wf_id           INT NOT NULL,
+  task_num        INT NOT NULL,
+  task_id         INT NOT NULL,
+  user_id         INT NOT NULL,
+  task_desc       VARCHAR(60),
+  records_in      INT,
+  records_out     INT,
+  records_dropped INT,
+  time_taken      INT,
+  time_recorded   TIMESTAMPTZ,
   CONSTRAINT input_task_pk PRIMARY KEY (job_id, wf_id, task_num),
   CONSTRAINT input_task_fk1 FOREIGN KEY (user_id) REFERENCES app_user (user_id),
   CONSTRAINT input_task_fk2 FOREIGN KEY (task_id) REFERENCES task_list (task_id),
   -- this might have to be reworked as must reference both job_id and wf_id from workflow
-  CONSTRAINT input_task_fk3 FOREIGN KEY (job_id, wf_id) REFERENCES workflow (job_id, wf_id),
-  -- this may have to be removed as job_id is also referenced via workflow table
-  CONSTRAINT input_task_fk4 FOREIGN KEY (job_id) REFERENCES job (job_id)
+  CONSTRAINT input_task_fk3 FOREIGN KEY (job_id, wf_id) REFERENCES workflow (job_id, wf_id)
 );
 
 -- Add any test data here
@@ -199,5 +197,11 @@ values (1, 1);
 
 insert into workflow (job_id, wf_id, wf_desc)
 values (1, 0, 'Wooh if you can see this it works');
+
+insert into task_list (task_id, acronym, t_desc, is_billable)
+values (0, 'test', 'this is a test task', FALSE);
+
+insert into input_task(job_id, wf_id, task_num, task_id, user_id)
+values(1, 0, 1, 0, 2);
 ---
 Commit;
