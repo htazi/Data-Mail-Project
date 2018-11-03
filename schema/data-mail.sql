@@ -203,5 +203,68 @@ values (0, 'test', 'this is a test task', FALSE);
 
 insert into input_task(job_id, wf_id, task_num, task_id, user_id)
 values(1, 0, 1, 0, 2);
+
+---task_list preload data
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (1, 'TXSET', 'Letter Text Set Up', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (2, 'Multi', 'Download, Decrypt, File Map & Initial Counts', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (3, 'XFER', 'Upload Client Mail File', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (4, 'MTS', 'Upload for Mail Tracking', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (5, 'CVT', 'Convert to Standard Layout', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (6, 'PGM', 'Programming', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (7, 'PRST', 'USPS, Presort Standard', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (8, 'SEED', 'Append Seeds', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (9, 'SAMP', 'Samples', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (10, 'WFD', 'Sign Offs, Laser', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (11, 'RETYP', '100% Mail, Retypes Processing', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (12, 'NTST', 'Audit Selection', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (13, 'BEF', 'Backend File Processing', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (14, 'CAN', 'Canadian Mail', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (15, 'TAB', 'Counts/Tab Reports', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (16, 'IMB', 'IMB append/update', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (17, 'INTL', 'International Mail', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (18, 'PDFBEF', 'Mail File PDF Archiving', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (19, 'MTRK', 'Mail Tracking', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (20, 'DEDUPE', 'Merge/Purge (Dedupe)', TRUE, 0.00);
+
 ---
 Commit;
