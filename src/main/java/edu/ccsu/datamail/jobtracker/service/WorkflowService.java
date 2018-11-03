@@ -29,13 +29,13 @@ public class WorkflowService
     }
 
     /*
-        private List<Workflow> workflows = new ArrayList<>(Arrays.asList(new Workflow(1, "aaa", 1), new Workflow(2, "bbb", 2), new Workflow(3, "ccc", 3)));
+        private List<Workflow> workflow = new ArrayList<>(Arrays.asList(new Workflow(1, "aaa", 1), new Workflow(2, "bbb", 2), new Workflow(3, "ccc", 3)));
 
         public List<Workflow> getAllWorkflows()
         {
             List<Workflow> workFlows = new ArrayList<>();
-            workflowRepository.findAll().forEach(workflows::add);
-            return workflows;
+            workflowRepository.findAll().forEach(workflow::add);
+            return workflow;
         }
     */
     public void addWorkflow(Workflow workflow)

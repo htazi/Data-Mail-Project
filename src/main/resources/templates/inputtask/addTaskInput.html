@@ -34,63 +34,37 @@
 <hr>
 <form  class="container" method='POST' action="/taskinputs/add" th:action="@{/taskinputs/add}">
 
-    <!--Job ID: <input name="job_id"  type="text">-->
-    <!--<span>Task ID:</span>  <input name="task_id"  type="text"><br>-->
-    <!--<span>User ID:</span> <input name="user_ID"  type="text">-->
 
 
-    <!--Time taken: <input name="time_taken"  type="text"><br>-->
-    <!--Records Input: <input name="records_input"  type="text">-->
-    <!--Records Output: <input name="records_output"  type="text"><br>-->
-
-
-    <!--Records Dropped: <input name="records_dropped"  type="text">-->
-    <!--&lt;!&ndash;Current Time: <input name="current_time"  type="text"><br>&ndash;&gt;-->
-    <!--User Note: <input name="user_note"  type="text">-->
-    <!--Workflow: <input name="workflow"  type="text">-->
-
-    <!--<input type="submit" value="Add Task Input" >-->
-
-    <div> <p>This job is for client number: <span th:text="${clientIdresult}"></span></p></div>
+    <div> <h3>Workflow ID: <span th:text="${workflow.getWorkflowId()}"></span></h3></div>
     <table align="center">
         <tr>
             <td>Job ID</td>
+            <td>Workflow ID</td>
             <td>Task ID</td>
             <td>User ID</td>
             <td>Time Taken</td>
             <td>Records Input</td>
             <td>Records Output</td>
             <td>Records Dropped</td>
-            <td>Workflow</td>
+
             <!--<td>Current Time</td>-->
         </tr>
         <tr >
-            <td><input type="text" name="job_id"  size="10"  th:value="${jobId}"></td>
+            <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
+            <td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>
+            <td><input type="text" name="workflow"  size="10"  th:value="${workflow.getWorkflowId()}"></td>
             <td><input type="text" name="task_id" size="10" ></td>
-            <td><input type="text" name="user_ID" size="10"></td>
             <td><input type="text" name="time_taken" size="10"></td>
+            <td><input type="text" name="user_ID" size="10"></td>
             <td><input type="text" name="records_input" size="10"></td>
             <td><input type="text" name="records_output" size="10"></td>
             <td><input type="text" name="records_dropped" size="10"></td>
-            <td><input type="text" name="workflow"  size="10"></td>
+
+
             <!--<td><input id='timenow' type="text" name="current_time"  size="10"></td>-->
 
-
-
         </tr>
-
-        <!--<tr >-->
-        <!--<td><input type="text" name="inputbox" size="10"></td>-->
-        <!--<td><input type="text" name="inputbox" size="10"></td>-->
-        <!--<td><input type="text" name="inputbox" size="10"></td>-->
-        <!--<td><input type="text" name="inputboxstring" size="10"></td>-->
-        <!--<td><input type="text" name="inputbox" size="10"></td>-->
-        <!--<td><input type="text" name="inputbox" size="10"></td>-->
-        <!--<td><input type="text" name="inputbox"  size="10"></td>-->
-        <!--<td><input type="text" name="inputboxstring"  size="10"></td>-->
-
-        <!--<td><input type="text" name="inputboxstring"  size="10"></td>-->
-        <!--</tr>-->
 
 
         <tr>  <td>User Note</td></tr>
