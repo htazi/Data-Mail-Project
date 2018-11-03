@@ -21,19 +21,20 @@
 
 </head>
 <body>
-<h1>The list of all jobs:</h1>
+<h1>Returned Workflow:</h1>
 <table>
     <tr style="color: green" class="tableheader">
-        <th>ID</th>
-        <th style="position: relative; left: 176px; ">Job ID</th>
-        <th style="position: relative; left: 324px; ">Workflow ID</th>
+        <th>Job ID</th>
+        <th style="position: relative; left: 30px; ">Workflow ID</th>
+        <th style="position: relative; left: 50px; ">Job Description</th>
     </tr>
 </table>
 
     <div>
 
-        <input name="input1" class='test' type="text"  th:value="${workflow.job_id}"/>
-        <input name ="input2" class='test' type="text"  th:value="${workflow.wf_id}"/>
+
+        <h2 th:if="${workflow != null}" th:text="${workflow}"></h2>
+        <h2 th:if="${workflow == null}" th:text="No such a workflow exists"></h2>
 
         <!--<input name="input3" class='test' type="text"  th:value="${job.getTaskinput()}"/><br>-->
     </div><br>

@@ -14,26 +14,40 @@ public class WorkflowController
     @Autowired
     private WorkflowService workflowService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/workflows/displayworkflow")
-    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
-    {
+//    @RequestMapping(method = RequestMethod.POST, value = "/workflows/displayworkflow")
+//    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+//    {
+//        System.out.println("tesing controller");
+//
+//        Workflow t = workflowService.getWorkflows(workflow, job);
+//        String result = t.toString();
+//        model.addAttribute("workflow", result);
+//        return "displayworkflow";
+//    }
 
-        Workflow t = workflowService.getWorkflows(workflow, job);
-        String result = t.getWorkflowId() + " " + t.getJob();
 
-        model.addAttribute("workflow", result);
-        return "displayworkflow";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
+        @RequestMapping(method = RequestMethod.GET, value = "/workflows")
     public String getWorkflow()
     {
 
-//        Workflow t = workflowService.getWorkflows(workflow,1);
-//        String result = t.getWorkflowId() + " " + t.getJob() + " " + t.getWfDesc();
-//
-//        model.addAttribute("workflow", result);
         return "workflows";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
+    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+    {
+
+        System.out.println("tesing controller");
+        Workflow t = workflowService.getWorkflows(workflow, job);
+        if(t != null) {
+            String result = t.toString();
+            model.addAttribute("workflow", result);
+        }
+        else
+        {
+            model.addAttribute("workflow", "No such a workflow exists");
+        }
+        return "displayworkflow";
     }
 
 

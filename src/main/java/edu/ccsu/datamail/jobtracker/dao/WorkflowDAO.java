@@ -19,7 +19,7 @@ public class WorkflowDAO
     public Workflow findWorkflow(int workflowID,int jobID)
     {
         try { // currently finds a specific workflow instead of any workflow
-            String sql = "Select w from " + Workflow.class.getName() + " w "+ "Where w.workflowId = 0 AND w.job.jobId = 1";
+            String sql = "Select w from " + Workflow.class.getName() + " w "+ "Where w.workflowId =" + workflowID + "AND w.job.jobId = " + jobID;
             Query query = entityManager.createQuery(sql, Workflow.class);
             return (Workflow) query.getSingleResult();
         } catch (NoResultException e) {
