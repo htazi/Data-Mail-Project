@@ -196,12 +196,15 @@ insert into job (job_id, client_id)
 values (1, 1);
 
 insert into workflow (job_id, wf_id, wf_desc)
-values (1, 0, 'Wooh if you can see this it works');
+values (1, 0, 'Test workflow 0 for job 1');
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (1, 1, 'Test workflow 1 for job 1');
 
 insert into task_list (task_id, acronym, t_desc, is_billable)
 values (0, 'test', 'this is a test task', FALSE);
 
-insert into input_task(job_id, wf_id, task_num, task_id, user_id)
-values(1, 0, 1, 0, 2);
+insert into input_task (job_id, wf_id, task_num, task_id, user_id)
+values (1, 0, 1, 0, 2);
 ---
 Commit;

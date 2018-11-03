@@ -19,25 +19,15 @@ public class WorkflowService
     /**
      * Finds and returns a workflow associated with a given job
      *
-     * @param workflowId the id of the workflow
      * @param jobId      the id of the job the workflow belongs to
+     * @param workflowId the id of the workflow
      * @return the workflow if found, null otherwise
      */
-    public Workflow getWorkflows(int workflowId, int jobId)
+    public Workflow getWorkflow(int jobId, int workflowId)
     {
-        return workflowDAO.findWorkflow();
+        return workflowDAO.findWorkflow(jobId, workflowId);
     }
 
-    /*
-        private List<Workflow> workflows = new ArrayList<>(Arrays.asList(new Workflow(1, "aaa", 1), new Workflow(2, "bbb", 2), new Workflow(3, "ccc", 3)));
-
-        public List<Workflow> getAllWorkflows()
-        {
-            List<Workflow> workFlows = new ArrayList<>();
-            workflowRepository.findAll().forEach(workflows::add);
-            return workflows;
-        }
-    */
     public void addWorkflow(Workflow workflow)
     {
         workflowRepository.save(workflow);

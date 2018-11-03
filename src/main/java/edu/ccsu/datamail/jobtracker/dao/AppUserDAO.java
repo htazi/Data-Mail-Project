@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+/**
+ * Provides functionality to perform transactions on the database involving user accounts
+ */
 @Repository
 @Transactional
 public class AppUserDAO
@@ -17,10 +20,16 @@ public class AppUserDAO
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * Retrieve's a user's information from the database using the specified username
+     *
+     * @param userName the username of the user
+     * @return an AppUser if a record was found, null otherwise
+     */
     public AppUser findUserAccount(String userName)
     {
         try {
-            String sql = "Select e from " + AppUser.class.getName() + " e " //
+            String sql = "Select e from " + AppUser.class.getName() + " e "
                     + " Where e.userName = :userName ";
 
             Query query = entityManager.createQuery(sql, AppUser.class);
