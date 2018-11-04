@@ -18,7 +18,7 @@ public class WorkflowController
     public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
     {
 
-        Workflow t = workflowService.getWorkflows(workflow, job);
+        Workflow t = workflowService.getWorkflow(workflow, job);
         String result = t.getWorkflowId() + " " + t.getJob() + " " + t.getWfDesc();
 
         model.addAttribute("workflow", result);
