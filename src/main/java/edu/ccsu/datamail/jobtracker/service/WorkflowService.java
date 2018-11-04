@@ -1,6 +1,7 @@
 package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
+import edu.ccsu.datamail.jobtracker.entity.job.User;
 import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class WorkflowService
         return workflowDAO.findWorkflow(workflowId, jobId);
     }
 
+    public User getUserID(int userId)
+    {
+        return workflowDAO.findUserID(userId);
+    }
+
     /*
         private List<Workflow> workflow = new ArrayList<>(Arrays.asList(new Workflow(1, "aaa", 1), new Workflow(2, "bbb", 2), new Workflow(3, "ccc", 3)));
 
@@ -50,6 +56,6 @@ public class WorkflowService
 
     public void deleteWorkflow(int wfId)
     {
-        workflowRepository.deleteById(String.valueOf(wfId));
+        workflowRepository.deleteById(wfId);
     }
 }

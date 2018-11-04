@@ -31,7 +31,7 @@ public class InputTaskService {
     public InputTask getTaskInput(int id){
 
 
-        InputTask t = taskInputRepository.findById(String.valueOf(id)).get();
+        InputTask t = taskInputRepository.findById(id).get();
         return t;
     }
 
@@ -51,7 +51,7 @@ public class InputTaskService {
     public void deleteTaskInput(int id){
 
 
-        taskInputRepository.deleteById(String.valueOf(id));
+        taskInputRepository.deleteById(id);
     }
 
 }

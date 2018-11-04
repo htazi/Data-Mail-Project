@@ -1,6 +1,10 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+
+//import edu.ccsu.datamail.jobtracker.service.AppUserService;
+//import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
+//import edu.ccsu.datamail.jobtracker.service.WorkflowService;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -41,9 +45,15 @@ public class InputTask
     /**
      * The id of the user who recorded this task
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser userId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private AppUser userId;
+
+
+    @Column(name = "user_id", length = 60)
+    private int userId;
+
+
 
     @Column(name = "task_desc", length = 60)
     private String description;
@@ -78,6 +88,33 @@ public class InputTask
     @Column(name = "time_recorded")
     private LocalDate timeRecorded;
 
+//    WorkflowService  workflowservice ;
+//    AvailableTaskService availableTaskService ;
+//    AppUserService appUserService;
+
+    public InputTask(int job_id, int wf_id, int task_num, int task_id, int user_id, String task_description,
+                     int records_in, int records_out, int records_dropped, int time_taken, LocalDate time_recorded) {
+        super();
+
+
+        this.taskNum = task_num;
+//        this.workflow = workflowservice.getWorkflows( wf_id, job_id);
+//        this.task_id =  availableTaskService.getTaskList(task_id);
+//        this.userId = appUserDAO.findUserByID(user_id);
+//
+//        AppUser appUser = appUserService.getUserID(user_id);
+//        this.userId = appUser.getUserId();
+
+        this.userId = user_id;
+        this.description = task_description;
+        this.recordsIn= records_in;
+        this.recordsOut=records_out;
+        this.recordsDropped = records_dropped;
+        this.timeTaken = time_taken;
+        this.timeRecorded = time_recorded;
+
+    }
+
     public Integer getTaskNum()
     {
         return taskNum;
@@ -108,15 +145,15 @@ public class InputTask
         this.task_id = task_id;
     }
 
-    public AppUser getUserId()
-    {
-        return userId;
-    }
-
-    public void setUserId(AppUser userId)
-    {
-        this.userId = userId;
-    }
+//    public AppUser getUserId()
+//    {
+//        return userId;
+//    }
+//
+//    public void setUserId(AppUser userId)
+//    {
+//        this.userId = userId;
+//    }
 
     public String getDescription()
     {
@@ -204,9 +241,9 @@ public class InputTask
         if (task_id != null ? !task_id.equals(inputTask.task_id) : inputTask.task_id != null) {
             return false;
         }
-        if (userId != null ? !userId.equals(inputTask.userId) : inputTask.userId != null) {
-            return false;
-        }
+//        if (userId != null ? !userId.equals(inputTask.userId) : inputTask.userId != null) {
+//            return false;
+//        }
         if (description != null ? !description.equals(inputTask.description) : inputTask.description != null) {
             return false;
         }
@@ -236,7 +273,7 @@ public class InputTask
         int result = taskNum != null ? taskNum.hashCode() : 0;
         result = 31 * result + (workflow != null ? workflow.hashCode() : 0);
         result = 31 * result + (task_id != null ? task_id.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+       // result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (recordsIn != null ? recordsIn.hashCode() : 0);
         result = 31 * result + (recordsOut != null ? recordsOut.hashCode() : 0);

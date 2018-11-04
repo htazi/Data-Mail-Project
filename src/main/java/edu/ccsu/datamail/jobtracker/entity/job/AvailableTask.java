@@ -46,6 +46,19 @@ public class AvailableTask
     @Column(name = "price")
     private PGmoney price;
 
+    public AvailableTask( ) {
+
+    }
+
+    public AvailableTask(String acronym, String taskDesc, boolean isBillable, PGmoney price) {
+        super();
+
+        this.acronym = acronym;
+        this.taskDesc = taskDesc;
+        this.isBillable = isBillable;
+        this.price = price;
+    }
+
     public int getTaskId()
     {
         return taskId;

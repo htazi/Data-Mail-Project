@@ -26,7 +26,7 @@ public class WorkflowController
 //    }
 
 
-        @RequestMapping(method = RequestMethod.GET, value = "/workflows")
+    @RequestMapping(method = RequestMethod.GET, value = "/workflows")
     public String getWorkflow()
     {
 
