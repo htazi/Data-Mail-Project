@@ -32,4 +32,19 @@ public class AppUserDAO
         }
     }
 
+    public AppUser findUserByID(int userId)
+    {
+        try {
+            String sql = "Select e from " + AppUser.class.getName() + " e " //
+                    + " Where e.userId = :userId ";
+
+            Query query = entityManager.createQuery(sql, AppUser.class);
+            query.setParameter("userId", userId);
+
+            return (AppUser) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }
