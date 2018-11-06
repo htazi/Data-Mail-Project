@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>items</title>
+    <style>
+        .test
+        {
+            margin: 5px;
+            color: red;
+        }
+        .tableheader
+        {
+            margin: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    </script>
+
+</head>
+<body>
+<h1>Returned Workflow:</h1>
+<table>
+    <tr style="color: green" class="tableheader">
+        <th>Job ID</th>
+        <th style="position: relative; left: 30px; ">Workflow ID</th>
+        <th style="position: relative; left: 50px; ">Job Description</th>
+    </tr>
+</table>
+
+    <div>
+
+
+        <h2 th:if="${workflow != null}" th:text="${workflow}"></h2>
+        <h2 th:if="${workflow == null}" th:text="No such a workflow exists"></h2>
+
+        <!--<input name="input3" class='test' type="text"  th:value="${job.getTaskinput()}"/><br>-->
+    </div><br>
+<a href="/workflows">Go back to find another workflow</a><br><br>
+
+</body>
+</html>

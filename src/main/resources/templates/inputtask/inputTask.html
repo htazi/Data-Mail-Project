@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var d = new Date();
+            var t = d.getHours() + ":" + d.getMinutes();
+            jQuery('#timenow').val(t);
+            jQuery('#timestamp').text(d);
+        });
+    </script>
+    <style>
+        .container {
+            justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+        }
+        input{
+            margin: 5px;
+        }
+        td{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<br>
+<p id="timestamp" style="position: relative; left: 50px"></p>
+<h1 style="text-align: center">Please Input A Task Input</h1><br>
+<hr>
+<form  class="container" method='POST' action="/taskinputs/add" th:action="@{/taskinputs/add}">
+
+
+
+    <div> <h3>Workflow ID: <span th:text="${workflow.getWorkflowId()}"></span></h3></div>
+    <table align="center">
+        <tr>
+            <td>Job ID</td>
+            <td>Workflow ID</td>
+            <td>Task ID</td>
+            <td>User ID</td>
+            <td>Time Taken</td>
+            <td>Records Input</td>
+            <td>Records Output</td>
+            <td>Records Dropped</td>
+
+            <!--<td>Current Time</td>-->
+        </tr>
+        <tr >
+            <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
+            <td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>
+            <td><input type="text" name="workflow"  size="10"  th:value="${workflow.getWorkflowId()}"></td>
+            <td><input type="text" name="task_id" size="10" ></td>
+            <td><input type="text" name="time_taken" size="10"></td>
+            <td><input type="text" name="user_ID" size="10"></td>
+            <td><input type="text" name="records_input" size="10"></td>
+            <td><input type="text" name="records_output" size="10"></td>
+            <td><input type="text" name="records_dropped" size="10"></td>
+
+
+            <!--<td><input id='timenow' type="text" name="current_time"  size="10"></td>-->
+
+        </tr>
+
+
+        <tr>  <td>User Note</td></tr>
+        <tr>
+            <td colspan="5" ><input type="text" name="user_note"  size="52"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn btn-success"></td>
+            <td rowspan="2">&nbsp;</td>
+
+
+        </tr>
+    </table>
+
+
+
+</form>
+<!--<h1>Hellow World!</h1>-->
+</body>
+</html>

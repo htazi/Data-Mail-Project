@@ -2,6 +2,7 @@ package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
 import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
 import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,6 @@ public class WorkflowService
 
     public void deleteWorkflow(int wfId)
     {
-        workflowRepository.deleteById(String.valueOf(wfId));
+        workflowRepository.deleteById(wfId);
     }
 }

@@ -14,16 +14,42 @@ public class WorkflowController
     @Autowired
     private WorkflowService workflowService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/workflows/displayworkflow")
-    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+//    @RequestMapping(method = RequestMethod.POST, value = "/workflow/displayworkflow")
+//    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+//    {
+//        System.out.println("tesing controller");
+//
+//        Workflow t = workflowService.getWorkflows(workflow, job);
+//        String result = t.toString();
+//        model.addAttribute("workflow", result);
+//        return "displayworkflow";
+//    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/workflows")
+    public String getWorkflow()
     {
 
-        Workflow t = workflowService.getWorkflow(workflow, job);
-        String result = t.getWorkflowId() + " " + t.getJob() + " " + t.getWfDesc();
-
-        model.addAttribute("workflow", result);
-        return "displayworkflow";
+        return "workflow/workflows";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
+    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+    {
+        System.out.println("tesing controller");
+        Workflow t = workflowService.getWorkflows(workflow, job);
+        if(t != null) {
+            //String result = t.toString();
+            model.addAttribute("workflow", t);
+            return "inputtask/addTaskInput";
+        }
+        else
+        {
+            model.addAttribute("workflow", "No such a workflow exists");
+            return "workflow/displayworkflow";
+        }
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
     public String addWorkflow()
@@ -31,16 +57,7 @@ public class WorkflowController
         return ("addworkflow");
     }
 
-    /*
-    @RequestMapping(method= RequestMethod.POST, value="/workflows/add")
 
-    public void addWorkflow(@RequestParam("wf_id") int wfId, @RequestParam("wf_desc") String wfDesc, @RequestParam("job_id") Job job){
-
-        Workflow t =  new Workflow(wfId, wfDesc, job);
-
-        workflowService.addWorkflow(t);
-    }
-    */
 
     @RequestMapping(method = RequestMethod.PUT, value = "/workflows/{wf_id}")
 
