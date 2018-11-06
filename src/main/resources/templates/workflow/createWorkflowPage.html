@@ -14,6 +14,47 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            $('#workflow').focus();
+            // $('#submitbtn').on('click', function () {
+            //    return empty();
+
+            //});
+        });
+
+        function empty() {
+            var result = validate("workflow");
+            var result2 =  validate("job");
+            if(result && result2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        function validate(elementId) {
+
+            var x = document.getElementById(elementId).value;
+            var xid = "#" + elementId;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for " + elementId);
+                $(xid).focus();
+                $(xid).val("");
+                return false;
+            }
+
+            return true;
+        }
+
+
+    </script>
+
+
 </head>
     <body>
         <div style="text-align:center">
@@ -23,7 +64,7 @@
                     <table align="center" style="margin: 0px auto;">
                         <tr>
                             <td>workflow:</td>
-                            <td><input name='workflow' value=''></td>
+                            <td><p name='workflow' value=''>0</p></td>
                         </tr>
                         <tr>
                             <td>Description:</td>

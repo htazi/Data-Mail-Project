@@ -47,14 +47,14 @@ public class AvailableTask
 
     }
 
-    public AvailableTask(String acronym, String taskDesc, boolean isBillable, PGmoney price) {
-        super();
-
-        this.acronym = acronym;
-        this.taskDesc = taskDesc;
-        this.isBillable = isBillable;
-        this.price = price;
-    }
+//    public AvailableTask(String acronym, String taskDesc, boolean isBillable, PGmoney price) {
+//        super();
+//
+//        this.acronym = acronym;
+//        this.taskDesc = taskDesc;
+//        this.isBillable = isBillable;
+//        this.price = price;
+//    }
 
     public int getTaskId()
     {
