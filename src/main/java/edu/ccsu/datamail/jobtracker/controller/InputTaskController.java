@@ -20,10 +20,6 @@ public class InputTaskController {
     @Autowired
     public InputTaskController(InputTaskService taskService) { this.taskService = taskService;}
 
-
-
-
-
     @RequestMapping(method= RequestMethod.GET, value="/taskinputs/displaytaskinputs")
     public String showalltaskinputs(Model model){
 

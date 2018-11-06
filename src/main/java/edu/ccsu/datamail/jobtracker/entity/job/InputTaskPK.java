@@ -1,7 +1,6 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * ID class for the InputTask JPA
