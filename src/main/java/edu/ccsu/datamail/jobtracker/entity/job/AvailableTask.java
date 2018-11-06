@@ -1,7 +1,5 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
-import org.postgresql.util.PGmoney;
-
 import javax.persistence.*;
 
 /**
@@ -18,7 +16,6 @@ public class AvailableTask
      * The Id of the task
      */
     @Id
-    @GeneratedValue
     @Column(name = "task_id", nullable = false)
     private int taskId;
 
@@ -44,7 +41,7 @@ public class AvailableTask
      * The price of the task if billable
      */
     @Column(name = "price")
-    private PGmoney price;
+    private Double price;
 
     public AvailableTask( ) {
 
@@ -99,13 +96,51 @@ public class AvailableTask
         isBillable = billable;
     }
 
-    public PGmoney getPrice()
+    public Double getPrice()
     {
         return price;
     }
 
-    public void setPrice(PGmoney price)
+    public void setPrice(Double price)
     {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AvailableTask)) {
+            return false;
+        }
+
+        AvailableTask that = (AvailableTask) o;
+
+        if (taskId != that.taskId) {
+            return false;
+        }
+        if (isBillable != that.isBillable) {
+            return false;
+        }
+        if (acronym != null ? !acronym.equals(that.acronym) : that.acronym != null) {
+            return false;
+        }
+        if (taskDesc != null ? !taskDesc.equals(that.taskDesc) : that.taskDesc != null) {
+            return false;
+        }
+        return price != null ? price.equals(that.price) : that.price == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = taskId;
+        result = 31 * result + (acronym != null ? acronym.hashCode() : 0);
+        result = 31 * result + (taskDesc != null ? taskDesc.hashCode() : 0);
+        result = 31 * result + (isBillable ? 1 : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        return result;
     }
 }

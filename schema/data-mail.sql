@@ -90,11 +90,11 @@ CREATE TABLE workflow (
 
 -- List of all available tasks and information associated with them
 CREATE TABLE task_list (
-  task_id     INT NOT NULL,
+  task_id     INT     NOT NULL,
   acronym     VARCHAR(6),
   t_desc      VARCHAR(60),
-  is_billable BOOLEAN,
-  price       money,
+  is_billable BOOLEAN NOT NULL,
+  price       NUMERIC,
   CONSTRAINT task_list_pk PRIMARY KEY (task_id)
 );
 
@@ -196,12 +196,77 @@ insert into job (job_id, client_id)
 values (1, 1);
 
 insert into workflow (job_id, wf_id, wf_desc)
-values (1, 0, 'Wooh if you can see this it works');
+values (1, 0, 'Test workflow 0 for job 1');
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (1, 1, 'Test workflow 1 for job 1');
 
 insert into task_list (task_id, acronym, t_desc, is_billable)
 values (0, 'test', 'this is a test task', FALSE);
 
-insert into input_task(job_id, wf_id, task_num, task_id, user_id)
-values(1, 0, 1, 0, 2);
+insert into input_task (job_id, wf_id, task_num, task_id, user_id)
+values (1, 0, 1, 0, 2);
+
+---task_list preload data
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (1, 'TXSET', 'Letter Text Set Up', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (2, 'Multi', 'Download, Decrypt, File Map & Initial Counts', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (3, 'XFER', 'Upload Client Mail File', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (4, 'MTS', 'Upload for Mail Tracking', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (5, 'CVT', 'Convert to Standard Layout', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (6, 'PGM', 'Programming', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (7, 'PRST', 'USPS, Presort Standard', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (8, 'SEED', 'Append Seeds', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (9, 'SAMP', 'Samples', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (10, 'WFD', 'Sign Offs, Laser', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (11, 'RETYP', '100% Mail, Retypes Processing', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (12, 'NTST', 'Audit Selection', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (13, 'BEF', 'Backend File Processing', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (14, 'CAN', 'Canadian Mail', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (15, 'TAB', 'Counts/Tab Reports', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (16, 'IMB', 'IMB append/update', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (17, 'INTL', 'International Mail', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (18, 'PDFBEF', 'Mail File PDF Archiving', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (19, 'MTRK', 'Mail Tracking', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (20, 'DEDUPE', 'Merge/Purge (Dedupe)', TRUE, 0.00);
+
 ---
 Commit;

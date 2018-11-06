@@ -1,13 +1,33 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "job", uniqueConstraints = {
         @UniqueConstraint(name = "job_pk", columnNames = "job_id")
 })
-public class Job
+public class Job implements Serializable
 {
+    /**
+     * Default Constructor:
+     */
+    public Job()
+    {
+    }
+
+    /**
+     * Alternate Constructor:
+     * Creates a new Job with the associated description and client
+     *
+     * @param jobDesc the description of the job
+     * @param client  the client associated with the job
+     */
+    public Job(String jobDesc, Client client)
+    {
+        this.jobDesc = jobDesc; // Id not included here as its generated, may have to change later
+        this.client = client;
+    }
 
     @Id
     @GeneratedValue
@@ -51,6 +71,12 @@ public class Job
         this.client = client;
     }
 
+    /**
+     * Determines if this object is equal to another object
+     *
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o)
     {
@@ -72,6 +98,11 @@ public class Job
         return client != null ? client.equals(job.client) : job.client == null;
     }
 
+    /**
+     * Returns a hashCode value for this object
+     *
+     * @return an integer hash code for this object
+     */
     @Override
     public int hashCode()
     {

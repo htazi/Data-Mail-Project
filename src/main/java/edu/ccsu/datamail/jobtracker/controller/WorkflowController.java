@@ -36,7 +36,6 @@ public class WorkflowController
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
     public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
     {
-
         System.out.println("tesing controller");
         Workflow t = workflowService.getWorkflows(workflow, job);
         if(t != null) {
@@ -49,8 +48,6 @@ public class WorkflowController
             model.addAttribute("workflow", "No such a workflow exists");
             return "workflow/displayworkflow";
         }
-
-
     }
 
 

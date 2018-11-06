@@ -3,8 +3,13 @@ package edu.ccsu.datamail.jobtracker.entity.job;
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
+/**
+ * JPA class for the input_task table in the database
+ * <p>
+ * Contains information associated with a specific task entered as part of a job
+ */
 @Entity
 @IdClass(InputTaskPK.class)
 @Table(name = "input_task", uniqueConstraints = {
@@ -12,6 +17,42 @@ import java.time.LocalDate;
 })
 public class InputTask
 {
+    /**
+     * Default Constructor
+     */
+    public InputTask()
+    {
+    }
+
+    /**
+     * Alternate Constructor:
+     * Creates a new InputTask object with all fields initialized
+     *
+     * @param taskNum        the number of the task in the job and workflow
+     * @param workflow       the workflow (and by extension job) the task is associated with
+     * @param task_id        the identifier of the task type
+     * @param userId         the user who input the task
+     * @param description    the optional description of the task
+     * @param recordsIn      the amount of records in before the task was completed
+     * @param recordsOut     the amount of records out after the task was completed
+     * @param recordsDropped the amount of records dropped as a result of the task
+     * @param timeTaken      the setup time for the task
+     * @param timeRecorded   the time the record of the task was entered by the user
+     */
+    public InputTask(Integer taskNum, Workflow workflow, AvailableTask task_id, AppUser userId, String description,
+                     Integer recordsIn, Integer recordsOut, Integer recordsDropped, Integer timeTaken, Timestamp timeRecorded)
+    {
+        this.taskNum = taskNum;
+        this.workflow = workflow;
+        this.task_id = task_id;
+        this.userId = userId;
+        this.description = description;
+        this.recordsIn = recordsIn;
+        this.recordsOut = recordsOut;
+        this.recordsDropped = recordsDropped;
+        this.timeTaken = timeTaken;
+        this.timeRecorded = timeRecorded;
+    }
 
     /**
      * The identifier for the task in the workflow
@@ -76,7 +117,7 @@ public class InputTask
      * The time this task was recorded into the system by the user
      */
     @Column(name = "time_recorded")
-    private LocalDate timeRecorded;
+    private Timestamp timeRecorded;
 
     public Integer getTaskNum()
     {
@@ -168,20 +209,21 @@ public class InputTask
         this.timeTaken = timeTaken;
     }
 
-    public LocalDate getTimeRecorded()
+    public Timestamp getTimeRecorded()
     {
         return timeRecorded;
     }
 
-    public void setTimeRecorded(LocalDate timeRecorded)
+    public void setTimeRecorded(Timestamp timeRecorded)
     {
         this.timeRecorded = timeRecorded;
     }
 
     /**
-     * Returns a hashCode value for this object
+     * Determines if this object is equal to another object
      *
-     * @return an integer hash code for this object
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
      */
     @Override
     public boolean equals(Object o)
