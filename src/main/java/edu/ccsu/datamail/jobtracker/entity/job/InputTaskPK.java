@@ -1,7 +1,6 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * ID class for the InputTask JPA
@@ -43,9 +42,10 @@ class InputTaskPK implements Serializable
     }
 
     /**
-     * Returns a hashCode value for this object
+     * Determines if this object is equal to another object
      *
-     * @return an integer hash code for this object
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
      */
     @Override
     public boolean equals(Object o)

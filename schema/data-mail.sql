@@ -90,11 +90,11 @@ CREATE TABLE workflow (
 
 -- List of all available tasks and information associated with them
 CREATE TABLE task_list (
-  task_id     INT NOT NULL,
+  task_id     INT     NOT NULL,
   acronym     VARCHAR(6),
   t_desc      VARCHAR(60),
-  is_billable BOOLEAN,
-  price       money,
+  is_billable BOOLEAN NOT NULL,
+  price       NUMERIC,
   CONSTRAINT task_list_pk PRIMARY KEY (task_id)
 );
 
@@ -204,8 +204,8 @@ values (1, 1, 'Test workflow 1 for job 1');
 insert into task_list (task_id, acronym, t_desc, is_billable)
 values (0, 'test', 'this is a test task', FALSE);
 
-insert into input_task(job_id, wf_id, task_num, task_id, user_id)
-values(1, 0, 1, 0, 2);
+insert into input_task (job_id, wf_id, task_num, task_id, user_id)
+values (1, 0, 1, 0, 2);
 
 ---task_list preload data
 insert into task_list (task_id, acronym, t_desc, is_billable, price)

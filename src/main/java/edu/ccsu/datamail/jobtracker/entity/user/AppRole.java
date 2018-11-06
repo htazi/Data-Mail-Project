@@ -8,6 +8,23 @@ import javax.persistence.*;
 })
 public class AppRole
 {
+    /**
+     * Default Constructor
+     */
+    public AppRole()
+    {
+    }
+
+    /**
+     * Alternate Constructor:
+     * Creates a new role with the specified name
+     *
+     * @param roleName the name of the new role
+     */
+    public AppRole(String roleName)
+    {
+        this.roleName = roleName;
+    }
 
     @Id
     @GeneratedValue
@@ -38,24 +55,27 @@ public class AppRole
     }
 
     /**
-     * Returns a hashCode value for this object
+     * Determines if this object is equal to another object
      *
-     * @return an integer hash code for this object
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
      */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object o)
     {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+        if (this == o) {
             return true;
         }
-        if (obj instanceof AppRole) {
-            AppRole other = (AppRole) obj;
-            return this.roleId.equals(other.roleId) && this.roleName.equals(other.roleName);
+        if (!(o instanceof AppRole)) {
+            return false;
         }
-        return false;
+
+        AppRole appRole = (AppRole) o;
+
+        if (roleId != null ? !roleId.equals(appRole.roleId) : appRole.roleId != null) {
+            return false;
+        }
+        return roleName != null ? roleName.equals(appRole.roleName) : appRole.roleName == null;
     }
 
     /**
@@ -66,13 +86,8 @@ public class AppRole
     @Override
     public int hashCode()
     {
-        int hash = 53;
-        if (roleId != null) {
-            hash += roleId.hashCode();
-        }
-        if (roleName != null) {
-            hash += roleName.hashCode();
-        }
-        return hash;
+        int result = roleId != null ? roleId.hashCode() : 0;
+        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
+        return result;
     }
 }
