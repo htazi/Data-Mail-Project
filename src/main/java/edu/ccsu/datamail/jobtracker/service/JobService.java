@@ -10,6 +10,9 @@ import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class JobService {
 
@@ -31,4 +34,22 @@ public class JobService {
         return jobDAO.findJob(jobId);
     }
 
+    public int findWFNumber(int jobId) {
+
+        List<Workflow> wf  = new ArrayList();
+        wf = jobDAO.findNextWorkflowId(jobId);
+        int max=0;
+
+        for(Workflow w:wf)
+        {
+            int num1 =  w.getWorkflowId();
+            if( num1 > max)
+            {
+                max = num1;
+            }
+        }
+        max = max +1;
+
+        return max;
+    }
 }

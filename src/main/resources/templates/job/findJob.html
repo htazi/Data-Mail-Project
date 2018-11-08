@@ -35,7 +35,7 @@
     <br>
     <br>
     <div >
-        <form  method='POST' action="/jobs/findjob" th:action="@{/jobs/findjob}">
+        <form  method='POST' action="/jobs/findjob">
             <h3 style="display: inline;">Jod ID: </h3>
 
             <input id="textbox" name="jobId"  type="text"  />
@@ -43,10 +43,11 @@
             <input type="submit" class="btn btn-success" onClick= "return empty()" value="find a job">
         </form>
     </div>
-
+    <h1 style="color: red;" th:text="${job}"></h1>
+    <!--<h1 style="color: blue;" th:text="${param2 + ' and  ' + param1}"></h1>-->
 </div>
 
-<h1 th:text="${job}"></h1>
+
 
 </body>
 </html>
