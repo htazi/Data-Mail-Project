@@ -4,7 +4,6 @@ import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.service.WorkflowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -22,33 +21,33 @@ public class WorkflowController
 //        Workflow t = workflowService.getWorkflows(workflow, job);
 //        String result = t.toString();
 //        model.addAttribute("workflow", result);
-//        return "displayworkflow";
+//        return "workflow/displayworkflow";
 //    }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/workflows")
-    public String getWorkflow()
-    {
-
-        return "workflow/workflows";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
-    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
-    {
-        System.out.println("tesing controller");
-        Workflow t = workflowService.getWorkflows(workflow, job);
-        if(t != null) {
-            //String result = t.toString();
-            model.addAttribute("workflow", t);
-            return "inputtask/addTaskInput";
-        }
-        else
-        {
-            model.addAttribute("workflow", "No such a workflow exists");
-            return "workflow/displayworkflow";
-        }
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/workflows")
+//    public String getWorkflow()
+//    {
+//
+//        return "workflow/workflows";
+//    }
+//
+//    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
+//    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
+//    {
+//        System.out.println("tesing controller");
+//        Workflow t = workflowService.getWorkflows(workflow, job);
+//        if(t != null) {
+//            //String result = t.toString();
+//            model.addAttribute("workflow", t);
+//            return "inputtask/addTaskInput";
+//        }
+//        else
+//        {
+//            model.addAttribute("workflow", "No such a workflow exists");
+//            return "workflow/displayworkflow";
+//        }
+//    }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
