@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.*;
 public class WorkflowController
 {
 
+    private final WorkflowService workflowService;
+
     @Autowired
-    private WorkflowService workflowService;
+    public WorkflowController(WorkflowService workflowService)
+    {
+        this.workflowService = workflowService;
+    }
 
 //    @RequestMapping(method = RequestMethod.POST, value = "/workflow/displayworkflow")
 //    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)

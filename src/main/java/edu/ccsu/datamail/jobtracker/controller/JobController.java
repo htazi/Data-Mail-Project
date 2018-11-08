@@ -9,9 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class JobController {
+public class JobController
+{
+
+    private final JobService jobService;
+
     @Autowired
-    private JobService jobService;
+    public JobController(JobService jobService)
+    {
+        this.jobService = jobService;
+    }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobs/findjob")
@@ -26,14 +33,13 @@ public class JobController {
     {
 
         Job t = jobService.getJob(jobId);
-        if(t != null) {
+        if (t != null) {
             model.addAttribute("workflow", t);
             return "workflow/createWorkflowPage";
         }
-        else
-        {
+        else {
             model.addAttribute("job", "No such a job exists");
-            return  "job/findJob";
+            return "job/findJob";
         }
 
 

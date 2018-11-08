@@ -12,34 +12,39 @@ import java.util.Date;
 
 
 @Controller
-public class InputTaskController {
+public class InputTaskController
+{
+
+    private final InputTaskService taskService;
 
     @Autowired
-    private InputTaskService taskService;
+    public InputTaskController(InputTaskService taskService)
+    {
+        this.taskService = taskService;
+    }
 
-    @Autowired
-    public InputTaskController(InputTaskService taskService) { this.taskService = taskService;}
-
-    @RequestMapping(method= RequestMethod.GET, value="/taskinputs/displaytaskinputs")
-    public String showalltaskinputs(Model model){
+    @RequestMapping(method = RequestMethod.GET, value = "/taskinputs/displaytaskinputs")
+    public String showalltaskinputs(Model model)
+    {
 
         model.addAttribute("taskinputs", taskService.getAllTaskInputs());
         return "displaytaskinputs";
     }
 
-    @RequestMapping(method= RequestMethod.POST, value = "/taskinputs/displaytaskinput")
-    public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model){
+    @RequestMapping(method = RequestMethod.POST, value = "/taskinputs/displaytaskinput")
+    public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model)
+    {
         InputTask t = taskService.getTaskInput(taskinputs);
-        String result  = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + ""+ t.getTimeTaken();
+        String result = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + "" + t.getTimeTaken();
 
         model.addAttribute("inputtasks", result);
         return "inputtask/displaytaskinput";
     }
 
 
-
-    @RequestMapping(method= RequestMethod.GET, value="/inputtask/add")
-    public String addInputTask(){
+    @RequestMapping(method = RequestMethod.GET, value = "/inputtask/add")
+    public String addInputTask()
+    {
 
         return ("inputtask/addTaskInput");
     }
@@ -68,13 +73,15 @@ public class InputTaskController {
 //
 //    }
 
-    @RequestMapping(method= RequestMethod.PUT, value="/taskinputs/{id}")
-    public void updatetaskinput(@RequestBody InputTask taskinput, @PathVariable int id){
+    @RequestMapping(method = RequestMethod.PUT, value = "/taskinputs/{id}")
+    public void updatetaskinput(@RequestBody InputTask taskinput, @PathVariable int id)
+    {
         taskService.updateTaskInput(id, taskinput);
     }
 
-    @RequestMapping(method= RequestMethod.DELETE, value="/taskinputs/{id}")
-    public void deletetaskinput(@PathVariable int id){
+    @RequestMapping(method = RequestMethod.DELETE, value = "/taskinputs/{id}")
+    public void deletetaskinput(@PathVariable int id)
+    {
         taskService.deleteTaskInput(id);
     }
 
