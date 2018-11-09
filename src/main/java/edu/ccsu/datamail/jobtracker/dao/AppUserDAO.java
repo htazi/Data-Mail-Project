@@ -14,6 +14,7 @@ import javax.persistence.Query;
  */
 @Repository
 @Transactional
+@Deprecated
 public class AppUserDAO
 {
 
