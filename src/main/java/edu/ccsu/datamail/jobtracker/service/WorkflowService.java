@@ -1,9 +1,7 @@
 package edu.ccsu.datamail.jobtracker.service;
 
-import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
 import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.entity.job.WorkflowPK;
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
 import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +16,10 @@ public class WorkflowService
      */
     private final WorkflowRepository workflowRepository;
 
-    /**
-     * A DAO for directly querying the database for workflows
-     */
-    private final WorkflowDAO workflowDAO;
-
     @Autowired
-    public WorkflowService(WorkflowRepository workflowRepository, WorkflowDAO workflowDAO)
+    public WorkflowService(WorkflowRepository workflowRepository)
     {
         this.workflowRepository = workflowRepository;
-        this.workflowDAO = workflowDAO;
     }
 
     /**
