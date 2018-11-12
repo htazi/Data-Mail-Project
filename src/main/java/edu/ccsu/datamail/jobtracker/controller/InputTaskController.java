@@ -5,11 +5,10 @@ import edu.ccsu.datamail.jobtracker.service.InputTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.Date;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class InputTaskController
@@ -26,26 +25,25 @@ public class InputTaskController
     @RequestMapping(method = RequestMethod.GET, value = "/taskinputs/displaytaskinputs")
     public String showalltaskinputs(Model model)
     {
-
-        model.addAttribute("taskinputs", taskService.getAllTaskInputs());
+        //model.addAttribute("taskinputs", taskService.getAllTaskInputs()); TODO: replace with with another method call
         return "displaytaskinputs";
     }
 
+    /* TODO: Make this method retrieve inputTasks correctly instead of with a partial primary key
     @RequestMapping(method = RequestMethod.POST, value = "/taskinputs/displaytaskinput")
     public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model)
     {
-        InputTask t = taskService.getTaskInput(taskinputs);
+        InputTask t = taskService.get(taskinputs);
         String result = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + "" + t.getTimeTaken();
 
         model.addAttribute("inputtasks", result);
         return "inputtask/displaytaskinput";
     }
-
+    */
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputtask/add")
     public String addInputTask()
     {
-
         return ("inputtask/addTaskInput");
     }
 //
@@ -79,10 +77,11 @@ public class InputTaskController
         taskService.updateTaskInput(id, taskinput);
     }
 
+    /*
     @RequestMapping(method = RequestMethod.DELETE, value = "/taskinputs/{id}")
     public void deletetaskinput(@PathVariable int id)
     {
         taskService.deleteTaskInput(id);
     }
-
+    */
 }

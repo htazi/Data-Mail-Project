@@ -64,15 +64,14 @@ public class WorkflowController
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/workflows/{wf_id}")
-
     public void updateWorkflow(@RequestBody Workflow workflow, @PathVariable int wfId)
     {
-        workflowService.updateWorkflow(wfId, workflow);
+        //workflowService.updateWorkflow(wfId, workflow);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/workflows/{wf_id}")
     public void deleteWorkflow(@PathVariable int wfId)
     {
-        workflowService.deleteWorkflow(wfId);
+        //workflowService.deleteWorkflow(wfId);  // workflows cannot be deleted using a single integer
     }
 }
