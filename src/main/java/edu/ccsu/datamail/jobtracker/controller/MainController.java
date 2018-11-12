@@ -19,7 +19,7 @@ public class MainController
     {
         model.addAttribute("title", "Welcome");
         model.addAttribute("message", "This is welcome page!");
-        return "welcomePage";
+        return "user/welcomePage";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -31,21 +31,21 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "adminPage";
+        return "user/adminPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model)
     {
 
-        return "loginPage";
+        return "user/loginPage";
     }
 
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
     public String logoutSuccessfulPage(Model model)
     {
         model.addAttribute("title", "Logout");
-        return "logoutSuccessfulPage";
+        return "user/logoutSuccessfulPage";
     }
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "userInfoPage";
+        return "user/userInfoPage";
     }
 
     @RequestMapping(value = "/billing", method = RequestMethod.GET)
@@ -79,7 +79,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "billingPage";
+        return "user/billingPage";
     }
 
     @RequestMapping(value = "/dataProcessing", method = RequestMethod.GET)
@@ -96,7 +96,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "dataProcessingPage";
+        return "user/dataProcessingPage";
     }
 
     @RequestMapping(value = "/fileTransfer", method = RequestMethod.GET)
@@ -113,7 +113,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "fileTransferPage";
+        return "user/fileTransferPage";
     }
 
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
@@ -130,7 +130,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "managerPage";
+        return "user/managerPage";
     }
 
     @RequestMapping(value = "/programmer", method = RequestMethod.GET)
@@ -147,7 +147,7 @@ public class MainController
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
-        return "programmerPage";
+        return "user/programmerPage";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -167,7 +167,7 @@ public class MainController
 
         }
 
-        return "403Page";
+        return "user/403Page";
     }
 
 }
