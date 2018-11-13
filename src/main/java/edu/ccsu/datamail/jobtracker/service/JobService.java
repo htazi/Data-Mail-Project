@@ -1,10 +1,12 @@
 package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
+import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
 import edu.ccsu.datamail.jobtracker.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,22 +36,23 @@ public class JobService
         return job;
     }
 
-    public int findWFNumber(int jobId) {
-
-        List<Workflow> wf  = new ArrayList();
+    public int findWFNumber(int jobId)
+    {
+        /*
+        List<Workflow> wf;
         wf = jobDAO.findNextWorkflowId(jobId);
-        int max=0;
+        int max = 0;
 
-        for(Workflow w:wf)
-        {
-            int num1 =  w.getWorkflowId();
-            if( num1 > max)
-            {
+        for (Workflow w : wf) {
+            int num1 = w.getWorkflowId();
+            if (num1 > max) {
                 max = num1;
             }
         }
-        max = max +1;
+        max = max + 1;
 
         return max;
+        */
+        return 0;
     }
 }
