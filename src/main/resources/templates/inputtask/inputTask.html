@@ -32,7 +32,7 @@
 <p id="timestamp" style="position: relative; left: 50px"></p>
 <h1 style="text-align: center">Please Input A Task Input</h1><br>
 <hr>
-<form  class="container" method='POST' action="/taskinputs/add" th:action="@{/taskinputs/add}">
+<form  class="container" method="POST" action="/taskinputs/add" th:action="@{/taskinputs/add}">
 
 
 
@@ -62,24 +62,16 @@
             <td><input type="text" name="records_dropped" size="10"></td>
 
 
-            <!--<td><input id='timenow' type="text" name="current_time"  size="10"></td>-->
+</tr>
 
-        </tr>
-
-
-        <tr>  <td>User Note</td></tr>
-        <tr>
-            <td colspan="5" ><input type="text" name="user_note"  size="52"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" class="btn btn-success"></td>
-            <td rowspan="2">&nbsp;</td>
+<td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
+<td><input type="submit" class="btn btn-success" name="submit" value="New Workflow"></td>
+<td><input type="submit" class="btn btn-success" name="submit"value="Finish"></td>
+<td rowspan="2">&nbsp;</td>
 
 
-        </tr>
-    </table>
-
-
+</tr>
+</table>
 
 </form>
 <!--<h1>Hellow World!</h1>-->

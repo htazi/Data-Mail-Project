@@ -1,38 +1,55 @@
-<div xmlns:th="http://www.thymeleaf.org"
-     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+     <!--style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">-->
 
-    <a th:href="@{/}">Home</a>
+    <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
 
-    | &nbsp;
+    <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Home</a>
+            </div>
 
-    <a th:href="@{/userInfo}">User Info</a>
+            <div class="nav navbar-nav">
+            <a th:href="@{/userInfo}">User Info</a>
 
-    | &nbsp;
+                 &nbsp;&nbsp;
 
-    <a th:href="@{/admin}">Admin</a>
+            <a th:href="@{/admin}">Admin</a>
 
-    | &nbsp;
+                 &nbsp;&nbsp;
 
-    <a th:href="@{/billing}">Billing</a>
+            <a th:href="@{/billing}">Billing</a>
 
-    | &nbsp;
+                &nbsp;&nbsp;
 
-    <a th:href="@{/dataProcessing}">Data Processing</a>
+            <a th:href="@{/dataProcessing}">Data Processing</a>
 
-    | &nbsp;
+                &nbsp;&nbsp;
 
-    <a th:href="@{/fileTransfer}">File Transfer</a>
+            <a th:href="@{/fileTransfer}">File Transfer</a>
 
-    | &nbsp;
+                &nbsp;&nbsp;
 
-    <a th:href="@{/manager}">Manager</a>
+            <a th:href="@{/manager}">Manager</a>
 
-    | &nbsp;
+                &nbsp;&nbsp;
 
-    <a th:href="@{/programmer}">Production Programmer</a>
+            <a th:href="@{/programmer}">Production Programmer</a>
 
-    | &nbsp;
+                &nbsp;&nbsp;
 
-    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+            <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
 
-</div>
+            </div>
+        </div>
+    </nav>
+    </body>
+</html>
