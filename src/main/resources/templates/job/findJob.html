@@ -19,7 +19,7 @@
                 alert("Enter A Number for job ID");
                 console.log("function fired");
                 return false;
-            };
+            }
         }
     </script>
 
@@ -31,7 +31,7 @@
 <br>
 <br>
 <div align="center">
-    <h1>Please Input JobID:</h1>
+    <h1>Please Input Job ID:</h1>
     <br>
     <br>
     <div >
@@ -43,10 +43,9 @@
             <input type="submit" class="btn btn-success" onClick= "return empty()" value="find a job">
         </form>
     </div>
-
+    <h1 style="color: red;" th:text="${job}"></h1>
 </div>
 
-<h1 th:text="${job}"></h1>
 
 </body>
 </html>

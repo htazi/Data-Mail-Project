@@ -25,7 +25,7 @@
 
         function empty() {
             var result = validate("workflow");
-            var result2 =  validate("job");
+            var result2 =  validate("wf_desc");
             if(result && result2)
             {
                 return true;
@@ -51,7 +51,13 @@
             return true;
         }
 
-
+        /*function incrementValue()
+        {
+            var value = parseInt(document.getElementById("workflow").value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById("workflow").value = value;
+        }*/
     </script>
 
 
@@ -59,20 +65,38 @@
     <body>
         <div style="text-align:center">
             <h1>Create Workflow:</h1>
-            <!-- Need to create a controller -->
-            <form  method='POST' action="/workflow/add" th:action="@{/workflows/add}">
+            <br>
+            <br>
+
+            <form  method="GET  " action="/workflows/add" th:action="@{/workflows/add}">
                     <table align="center" style="margin: 0px auto;">
                         <tr>
-                            <td>workflow:</td>
-                            <td><p name='workflow' value=''>0</p></td>
+                            <td>Job ID:</td>
+                           <td><input type="text" th:value="${job.jobId}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Workflow:</td>
+                            <td><input type="text" name="workflow" th:value="${nextWorkflowId}" ></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="8">&nbsp;</td>
                         </tr>
                         <tr>
                             <td>Description:</td>
-                            <td><input type='text' name='wf_desc' value = '' /></td>
+                            <td><input type="text" name="wfdesc" value=""/></td>
                         </tr>
                     </table><br>
-                    <button class="btn btn-success" type ="submit" name = " submit" > Add</button>
+                    <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
+                    <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
+                <input type="hidden" name="jobId" th:value="${job.jobId}" />
+                <input type="hidden" name="wfId" th:value="${nextWorkflowId}"/>
             </form>
+            <br>
+
         </div>
     </body>
 </html>

@@ -32,11 +32,11 @@
 <p id="timestamp" style="position: relative; left: 50px"></p>
 <h1 style="text-align: center">Please Input A Task Input</h1><br>
 <hr>
-<form  class="container" method='POST' action="/taskinputs/add" th:action="@{/taskinputs/add}">
+<form  class="container" method="POST" action="/taskinputs/add" th:action="@{/taskinputs/add}">
 
 
 
-    <div> <h3>Workflow ID: <span th:text="${workflow.getWorkflowId()}"></span></h3></div>
+    <div> <h3>Workflow ID: <span th:text="${jobId}"></span></h3></div>
     <table align="center">
         <tr>
             <td>Job ID</td>
@@ -52,8 +52,8 @@
         </tr>
         <tr >
             <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
-            <td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>
-            <td><input type="text" name="workflow"  size="10"  th:value="${workflow.getWorkflowId()}"></td>
+            <td><input type="text" name="job_id"  size="10"  th:value="${jobId}"></td>
+            <td><input type="text" name="workflow"  size="10"  th:value="${wfId}"></td>
             <td><input type="text" name="task_id" size="10" ></td>
             <td><input type="text" name="time_taken" size="10"></td>
             <td><input type="text" name="user_ID" size="10"></td>
@@ -62,24 +62,16 @@
             <td><input type="text" name="records_dropped" size="10"></td>
 
 
-            <!--<td><input id='timenow' type="text" name="current_time"  size="10"></td>-->
+</tr>
 
-        </tr>
-
-
-        <tr>  <td>User Note</td></tr>
-        <tr>
-            <td colspan="5" ><input type="text" name="user_note"  size="52"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" class="btn btn-success"></td>
-            <td rowspan="2">&nbsp;</td>
+<td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
+<td><input type="submit" class="btn btn-success" name="submit" value="New Workflow"></td>
+<td><input type="submit" class="btn btn-success" name="submit"value="Finish"></td>
+<td rowspan="2">&nbsp;</td>
 
 
-        </tr>
-    </table>
-
-
+</tr>
+</table>
 
 </form>
 <!--<h1>Hellow World!</h1>-->
