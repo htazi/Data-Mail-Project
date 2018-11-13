@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Contains attributes related to the primary key of the input_task table in the database
  * Workflow represents the foreign key for attributes job_id and wf_id that are part of the primary key of input_task
  */
-class InputTaskPK implements Serializable
+public class InputTaskPK implements Serializable
 {
 
     /**

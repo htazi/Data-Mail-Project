@@ -10,8 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import java.util.List;
+
+import static javax.swing.UIManager.getInt;
+
 @Repository
 @Transactional
+@Deprecated
 public class JobDAO {
 
     @Autowired
@@ -37,4 +42,22 @@ public class JobDAO {
             return null;
         }
     }
+
+    public List<Workflow> findNextWorkflowId(int jobNum)
+    {
+        try {
+            String sql = "Select w from " + Workflow.class.getName() + " w "
+                    + " Where w.job.jobId = :jobNum";
+
+            Query query = entityManager.createQuery(sql, Workflow.class); // create the query
+            query.setParameter("jobNum", jobNum); // replace the placeholders with the passed integers
+
+             return (List)query.getResultList();
+
+        } catch (NoResultException e) { // return null if no record was found
+            return null;
+        }
+    }
+
+
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
  * <p>
  * Contains atttributes related to the primary key of the user_role table
  */
-class UserRolePK implements Serializable
+public class UserRolePK implements Serializable
 {
     /**
      * The user of the job tracker

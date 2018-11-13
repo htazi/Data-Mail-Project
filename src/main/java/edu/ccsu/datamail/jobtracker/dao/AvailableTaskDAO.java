@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+@Deprecated
 public class AvailableTaskDAO {
     @Autowired
     private EntityManager entityManager;

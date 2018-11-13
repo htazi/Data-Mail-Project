@@ -14,6 +14,7 @@ import javax.persistence.Query;
  */
 @Repository
 @Transactional
+@Deprecated
 public class WorkflowDAO
 {
     @Autowired
@@ -41,5 +42,7 @@ public class WorkflowDAO
             return null;
         }
     }
+
+
 
 }
