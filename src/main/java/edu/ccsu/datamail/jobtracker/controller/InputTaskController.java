@@ -41,10 +41,12 @@ public class InputTaskController
     }
     */
 
-    @RequestMapping(method = RequestMethod.GET, value = "/inputtask/add")
-    public String addInputTask()
-    {
-        return ("inputtask/addTaskInput");
+    @RequestMapping(method= RequestMethod.GET, value="/inputTasks/add")
+    public String addInputTask(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, Model model){
+
+        model.addAttribute("jobId", jobId);
+        model.addAttribute("wfId", wfId);
+        return ("inputtask/inputTask");
     }
 //
 //    @RequestMapping(method= RequestMethod.POST, value="/taskinputs/add")

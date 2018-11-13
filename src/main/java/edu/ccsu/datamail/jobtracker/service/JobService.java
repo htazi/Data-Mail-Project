@@ -34,4 +34,22 @@ public class JobService
         return job;
     }
 
+    public int findWFNumber(int jobId) {
+
+        List<Workflow> wf  = new ArrayList();
+        wf = jobDAO.findNextWorkflowId(jobId);
+        int max=0;
+
+        for(Workflow w:wf)
+        {
+            int num1 =  w.getWorkflowId();
+            if( num1 > max)
+            {
+                max = num1;
+            }
+        }
+        max = max +1;
+
+        return max;
+    }
 }

@@ -36,7 +36,7 @@
 
 
 
-    <div> <h3>Workflow ID: <span th:text="${workflow.getWorkflowId()}"></span></h3></div>
+    <div> <h3>Workflow ID: <span th:text="${jobId}"></span></h3></div>
     <table align="center">
         <tr>
             <td>Job ID</td>
@@ -52,8 +52,8 @@
         </tr>
         <tr >
             <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
-            <td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>
-            <td><input type="text" name="workflow"  size="10"  th:value="${workflow.getWorkflowId()}"></td>
+            <td><input type="text" name="job_id"  size="10"  th:value="${jobId}"></td>
+            <td><input type="text" name="workflow"  size="10"  th:value="${wfId}"></td>
             <td><input type="text" name="task_id" size="10" ></td>
             <td><input type="text" name="time_taken" size="10"></td>
             <td><input type="text" name="user_ID" size="10"></td>
