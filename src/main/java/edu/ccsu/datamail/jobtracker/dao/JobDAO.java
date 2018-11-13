@@ -16,6 +16,7 @@ import static javax.swing.UIManager.getInt;
 
 @Repository
 @Transactional
+@Deprecated
 public class JobDAO {
 
     @Autowired

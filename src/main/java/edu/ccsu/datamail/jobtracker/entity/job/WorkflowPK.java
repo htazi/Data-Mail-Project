@@ -7,8 +7,17 @@ import java.io.Serializable;
  * <p>
  * Contains attributes related to the primary key of the workflow table in the database
  */
-class WorkflowPK implements Serializable
+public class WorkflowPK implements Serializable
 {
+    public WorkflowPK()
+    {
+    }
+
+    public WorkflowPK(Integer workflowId, Job job)
+    {
+        this.workflowId = workflowId;
+        this.job = job;
+    }
 
     /**
      * The Workflow Id, unique for each job

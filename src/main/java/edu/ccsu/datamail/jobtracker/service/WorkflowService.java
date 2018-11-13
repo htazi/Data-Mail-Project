@@ -1,32 +1,36 @@
 package edu.ccsu.datamail.jobtracker.service;
 
-import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
 import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.job.WorkflowPK;
 import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class WorkflowService
 {
+    /**
+     * A Crud repository for accessing workflows in the database
+     */
+    private final WorkflowRepository workflowRepository;
 
     @Autowired
-    private WorkflowRepository workflowRepository;
-
-    @Autowired
-private WorkflowDAO workflowDAO;
+    public WorkflowService(WorkflowRepository workflowRepository)
+    {
+        this.workflowRepository = workflowRepository;
+    }
 
     /**
-     * Finds and returns a workflow associated with a given job
+     * Attempts to find a workflow given a workflow primary key
      *
-     * @param jobId      the id of the job the workflow belongs to
-     * @param workflowId the id of the workflow
-     * @return the workflow if found, null otherwise
+     * @param wfId the primary key of the workflow desired
+     * @return an optional container that may contain the workflow
      */
-    public Workflow getWorkflow(int jobId, int workflowId)
+    public Optional<Workflow> getWorkflow(WorkflowPK wfId)
     {
-        return workflowDAO.findWorkflow(jobId, workflowId);
+        return workflowRepository.findById(wfId);
     }
 
     public void addWorkflow(Workflow workflow)
@@ -34,13 +38,13 @@ private WorkflowDAO workflowDAO;
         workflowRepository.save(workflow);
     }
 
-    public void updateWorkflow(int wfId, Workflow workflow)
+    public void updateWorkflow(Workflow workflow)
     {
         workflowRepository.save(workflow);
     }
 
-    public void deleteWorkflow(int wfId)
+    public void deleteWorkflow(WorkflowPK workflow)
     {
-        workflowRepository.deleteById(wfId);
+        workflowRepository.deleteById(workflow);
     }
 }

@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class WorkflowController
 {
 
+    private final WorkflowService workflowService;
+
     @Autowired
-    private WorkflowService workflowService;
+    public WorkflowController(WorkflowService workflowService)
+    {
+        this.workflowService = workflowService;
+    }
 
 //    @RequestMapping(method = RequestMethod.POST, value = "/workflow/displayworkflow")
 //    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
@@ -78,15 +83,14 @@ public class WorkflowController
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/workflows/{wf_id}")
-
     public void updateWorkflow(@RequestBody Workflow workflow, @PathVariable int wfId)
     {
-        workflowService.updateWorkflow(wfId, workflow);
+        //workflowService.updateWorkflow(wfId, workflow);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/workflows/{wf_id}")
     public void deleteWorkflow(@PathVariable int wfId)
     {
-        workflowService.deleteWorkflow(wfId);
+        //workflowService.deleteWorkflow(wfId);  // workflows cannot be deleted using a single integer
     }
 }

@@ -11,9 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class JobController {
+public class JobController
+{
+
+    private final JobService jobService;
+
     @Autowired
-    private JobService jobService;
+    public JobController(JobService jobService)
+    {
+        this.jobService = jobService;
+    }
 
     @Controller
     public class TestController {
@@ -57,7 +64,6 @@ public class JobController {
     @RequestMapping(method = RequestMethod.POST, value = "/jobs/findjob")
     public String toGetToWf(@RequestParam("jobId") int jobId, Model model)
     {
-
         Job job = jobService.getJob(jobId);
         if(job!= null) {
 
@@ -66,10 +72,9 @@ public class JobController {
             model.addAttribute("nextWorkflowId", nextWorkflowId);
             return "workflow/createWorkflowPage";
         }
-        else
-        {
+        else {
             model.addAttribute("job", "No such a job exists");
-            return  "job/findJob";
+            return "job/findJob";
         }
 
 
