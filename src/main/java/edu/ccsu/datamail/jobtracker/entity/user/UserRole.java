@@ -10,6 +10,16 @@ import java.io.Serializable;
 })
 public class UserRole implements Serializable
 {
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser appUser;
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    private AppRole appRole;
+
     /**
      * Default Constructor
      */
@@ -29,16 +39,6 @@ public class UserRole implements Serializable
         this.appUser = appUser;
         this.appRole = appRole;
     }
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser appUser;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    private AppRole appRole;
 
     public AppUser getAppUser()
     {

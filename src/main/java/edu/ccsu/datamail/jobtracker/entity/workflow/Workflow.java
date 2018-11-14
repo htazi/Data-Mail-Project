@@ -1,4 +1,6 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.workflow;
+
+import edu.ccsu.datamail.jobtracker.entity.job.Job;
 
 import javax.persistence.*;
 
@@ -14,6 +16,27 @@ import javax.persistence.*;
 })
 public class Workflow
 {
+    /**
+     * The id for this Workflow, unique for each job
+     */
+    @Id
+    @Column(name = "wf_id", nullable = false)
+    private Integer workflowId;
+
+    /**
+     * The job this Workflow is associated with
+     */
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id", nullable = false)
+    private Job job;
+
+    /**
+     * The Description for this workflow
+     */
+    @Column(name = "wf_desc", length = 60)
+    private String wfDesc;
+
     /**
      * Default Constructor
      */
@@ -35,27 +58,6 @@ public class Workflow
         this.job = job;
         this.wfDesc = wfDesc;
     }
-
-    /**
-     * The id for this Workflow, unique for each job
-     */
-    @Id
-    @Column(name = "wf_id", nullable = false)
-    private Integer workflowId;
-
-    /**
-     * The job this Workflow is associated with
-     */
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id", nullable = false)
-    private Job job;
-
-    /**
-     * The Description for this workflow
-     */
-    @Column(name = "wf_desc", length = 60)
-    private String wfDesc;
 
     public int getWorkflowId()
     {

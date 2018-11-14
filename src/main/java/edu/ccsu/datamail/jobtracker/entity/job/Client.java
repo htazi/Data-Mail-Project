@@ -9,6 +9,17 @@ import javax.persistence.*;
 public class Client
 {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "client_id", nullable = false)
+    private int clientId;
+
+    @Column(name = "client_name", length = 30)
+    private String clientName;
+
+    @Column(name = "address", length = 45)
+    private String address;
+
     /**
      * Default Constructor:
      */
@@ -21,24 +32,13 @@ public class Client
      * Creates a client with the specified name and address
      *
      * @param clientName the name of the client
-     * @param address the address of the client
+     * @param address    the address of the client
      */
     public Client(String clientName, String address)
     {
         this.clientName = clientName;
         this.address = address;
     }
-
-    @Id
-    @GeneratedValue
-    @Column(name = "client_id", nullable = false)
-    private int clientId;
-
-    @Column(name = "client_name", length = 30)
-    private String clientName;
-
-    @Column(name = "address", length = 45)
-    private String address;
 
     public int getClientId()
     {

@@ -1,4 +1,4 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.task;
 
 import javax.persistence.*;
 
@@ -43,18 +43,19 @@ public class AvailableTask
     @Column(name = "price")
     private Double price;
 
-    public AvailableTask( ) {
+    public AvailableTask()
+    {
 
     }
 
-//    public AvailableTask(String acronym, String taskDesc, boolean isBillable, PGmoney price) {
-//        super();
-//
-//        this.acronym = acronym;
-//        this.taskDesc = taskDesc;
-//        this.isBillable = isBillable;
-//        this.price = price;
-//    }
+    public AvailableTask(int taskId, String acronym, String taskDesc, boolean isBillable, Double price)
+    {
+        this.taskId = taskId;
+        this.acronym = acronym;
+        this.taskDesc = taskDesc;
+        this.isBillable = isBillable;
+        this.price = price;
+    }
 
     public int getTaskId()
     {

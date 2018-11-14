@@ -19,6 +19,22 @@ public class UserRolePK implements Serializable
      */
     private AppRole appRole;
 
+    public UserRolePK()
+    {
+    }
+
+    /**
+     * Creates a new UserRolePK with the associated AppUser and UserRole
+     *
+     * @param appUser the AppUser who has the specified role
+     * @param appRole the UserRole of the specified AppUser
+     */
+    public UserRolePK(AppUser appUser, AppRole appRole)
+    {
+        this.appUser = appUser;
+        this.appRole = appRole;
+    }
+
     public AppUser getAppUser()
     {
         return appUser;

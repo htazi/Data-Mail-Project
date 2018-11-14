@@ -1,4 +1,6 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.task;
+
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 
 import java.io.Serializable;
 
@@ -20,6 +22,16 @@ public class InputTaskPK implements Serializable
      * The workflow (and by extension job) this task is associated with
      */
     private Workflow workflow;
+
+    public InputTaskPK()
+    {
+    }
+
+    public InputTaskPK(Integer taskNum, Workflow workflow)
+    {
+        this.taskNum = taskNum;
+        this.workflow = workflow;
+    }
 
     public Integer getTaskNum()
     {

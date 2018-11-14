@@ -1,6 +1,7 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.task;
 
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -17,6 +18,74 @@ import java.sql.Timestamp;
 })
 public class InputTask
 {
+    /**
+     * The identifier for the task in the workflow
+     */
+    @Id
+    @Column(name = "task_num", nullable = false)
+    private Integer taskNum;
+
+    /**
+     * The workflow (and by extension job) this task is associated with
+     */
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "wf_id", referencedColumnName = "wf_id", nullable = false),
+            @JoinColumn(name = "job_id", referencedColumnName = "job_id", nullable = false)
+    })
+    private Workflow workflow;
+
+    /**
+     * The id of the task recorded
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id", nullable = false)
+    private AvailableTask task_id;
+
+    /**
+     * The id of the user who recorded this task
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser userId;
+
+    /**
+     * The description of the task
+     */
+    @Column(name = "task_desc", length = 60)
+    private String description;
+
+    /**
+     * The number of records in to the task
+     */
+    @Column(name = "records_in")
+    private Integer recordsIn;
+
+    /**
+     * The number of records out after performing the task
+     */
+    @Column(name = "records_out")
+    private Integer recordsOut;
+
+    /**
+     * The number of records dropped as a result of the
+     */
+    @Column(name = "records_dropped")
+    private Integer recordsDropped;
+
+    /**
+     * The time in minutes it took the user to setup the task
+     */
+    @Column(name = "time_taken")
+    private Integer timeTaken;
+
+    /**
+     * The time this task was recorded into the system by the user
+     */
+    @Column(name = "time_recorded")
+    private Timestamp timeRecorded;
+
     /**
      * Default Constructor
      */
@@ -53,71 +122,6 @@ public class InputTask
         this.timeTaken = timeTaken;
         this.timeRecorded = timeRecorded;
     }
-
-    /**
-     * The identifier for the task in the workflow
-     */
-    @Id
-    @Column(name = "task_num", nullable = false)
-    private Integer taskNum;
-
-    /**
-     * The workflow (and by extension job) this task is associated with
-     */
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "wf_id", referencedColumnName = "wf_id", nullable = false),
-            @JoinColumn(name = "job_id", referencedColumnName = "job_id", nullable = false)
-    })
-    private Workflow workflow;
-
-    /**
-     * The id of the task recorded
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id", nullable = false)
-    private AvailableTask task_id;
-
-    /**
-     * The id of the user who recorded this task
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser userId;
-
-    @Column(name = "task_desc", length = 60)
-    private String description;
-
-    /**
-     * The number of records in to the task
-     */
-    @Column(name = "records_in")
-    private Integer recordsIn;
-
-    /**
-     * The number of records out after performing the task
-     */
-    @Column(name = "records_out")
-    private Integer recordsOut;
-
-    /**
-     * The number of records dropped as a result of the
-     */
-    @Column(name = "records_dropped")
-    private Integer recordsDropped;
-
-    /**
-     * The time in minutes it took the user to setup the task
-     */
-    @Column(name = "time_taken")
-    private Integer timeTaken;
-
-    /**
-     * The time this task was recorded into the system by the user
-     */
-    @Column(name = "time_recorded")
-    private Timestamp timeRecorded;
 
     public Integer getTaskNum()
     {

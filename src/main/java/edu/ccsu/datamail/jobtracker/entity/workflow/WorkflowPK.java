@@ -1,4 +1,6 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.workflow;
+
+import edu.ccsu.datamail.jobtracker.entity.job.Job;
 
 import java.io.Serializable;
 
@@ -9,16 +11,6 @@ import java.io.Serializable;
  */
 public class WorkflowPK implements Serializable
 {
-    public WorkflowPK()
-    {
-    }
-
-    public WorkflowPK(Integer workflowId, Job job)
-    {
-        this.workflowId = workflowId;
-        this.job = job;
-    }
-
     /**
      * The Workflow Id, unique for each job
      */
@@ -28,6 +20,19 @@ public class WorkflowPK implements Serializable
      * The Job this Workflow is associated with
      */
     private Job job;
+
+    /**
+     * Default Constructor
+     */
+    public WorkflowPK()
+    {
+    }
+
+    public WorkflowPK(Integer workflowId, Job job)
+    {
+        this.workflowId = workflowId;
+        this.job = job;
+    }
 
     public Integer getWorkflowId()
     {

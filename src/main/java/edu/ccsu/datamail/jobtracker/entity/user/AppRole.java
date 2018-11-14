@@ -8,6 +8,14 @@ import javax.persistence.*;
 })
 public class AppRole
 {
+    @Id
+    @GeneratedValue
+    @Column(name = "role_id", nullable = false)
+    private Integer roleId;
+
+    @Column(name = "role_name", length = 30, nullable = false)
+    private String roleName;
+
     /**
      * Default Constructor
      */
@@ -25,14 +33,6 @@ public class AppRole
     {
         this.roleName = roleName;
     }
-
-    @Id
-    @GeneratedValue
-    @Column(name = "role_id", nullable = false)
-    private Integer roleId;
-
-    @Column(name = "role_name", length = 30, nullable = false)
-    private String roleName;
 
     public Integer getRoleId()
     {
