@@ -9,6 +9,17 @@ import java.io.Serializable;
 })
 public class Job implements Serializable
 {
+    @Id
+    @Column(name = "job_id", nullable = false)
+    private Integer jobId;
+
+    @Column(name = "job_desc", length = 60)
+    private String jobDesc;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
     /**
      * Default Constructor:
      */
@@ -20,26 +31,16 @@ public class Job implements Serializable
      * Alternate Constructor:
      * Creates a new Job with the associated description and client
      *
+     * @param jobId   the integer id of the job
      * @param jobDesc the description of the job
      * @param client  the client associated with the job
      */
-    public Job(String jobDesc, Client client)
+    public Job(Integer jobId, String jobDesc, Client client)
     {
-        this.jobDesc = jobDesc; // Id not included here as its generated, may have to change later
+        this.jobId = jobId;
+        this.jobDesc = jobDesc;
         this.client = client;
     }
-
-    @Id
-    @GeneratedValue
-    @Column(name = "job_id", nullable = false)
-    private int jobId;
-
-    @Column(name = "job_desc", length = 60)
-    private String jobDesc;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
 
     public int getJobId()
     {

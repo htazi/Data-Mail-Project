@@ -9,36 +9,6 @@ import java.sql.Timestamp;
 })
 public class AppUser
 {
-    /**
-     * Default Constructor
-     */
-    public AppUser()
-    {
-    }
-
-    /**
-     * Alterate Constructor
-     * Creates a new AppUser with all fields initialized
-     * @param userName the username the user will use to login
-     * @param encryptedPassword the user's encrypted password
-     * @param firstName the user's first name
-     * @param lastName the user's last name
-     * @param lastLogin the last time the user logged in
-     * @param lastLogout the last time the user logged out
-     * @param isActive flag that allows the user to login and access the system
-     */
-    public AppUser(String userName, String encryptedPassword, String firstName, String lastName, Timestamp lastLogin,
-                   Timestamp lastLogout, boolean isActive)
-    {
-        this.userName = userName;
-        this.encryptedPassword = encryptedPassword;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.lastLogin = lastLogin;
-        this.lastLogout = lastLogout;
-        this.isActive = isActive;
-    }
-
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
@@ -65,6 +35,36 @@ public class AppUser
     @Column(name = "is_active", length = 1, nullable = false)
     private boolean isActive;
 
+    /**
+     * Default Constructor
+     */
+    public AppUser()
+    {
+    }
+
+    /**
+     * Alterate Constructor
+     * Creates a new AppUser with all fields initialized
+     *
+     * @param userName          the username the user will use to login
+     * @param encryptedPassword the user's encrypted password
+     * @param firstName         the user's first name
+     * @param lastName          the user's last name
+     * @param lastLogin         the last time the user logged in
+     * @param lastLogout        the last time the user logged out
+     * @param isActive          flag that allows the user to login and access the system
+     */
+    public AppUser(String userName, String encryptedPassword, String firstName, String lastName, Timestamp lastLogin,
+                   Timestamp lastLogout, boolean isActive)
+    {
+        this.userName = userName;
+        this.encryptedPassword = encryptedPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastLogin = lastLogin;
+        this.lastLogout = lastLogout;
+        this.isActive = isActive;
+    }
 
     public Integer getUserId()
     {

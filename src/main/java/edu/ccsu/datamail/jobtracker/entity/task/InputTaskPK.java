@@ -1,4 +1,4 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.task;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Contains attributes related to the primary key of the input_task table in the database
  * Workflow represents the foreign key for attributes job_id and wf_id that are part of the primary key of input_task
  */
-class InputTaskPK implements Serializable
+public class InputTaskPK implements Serializable
 {
 
     /**
@@ -17,9 +17,25 @@ class InputTaskPK implements Serializable
     private Integer taskNum;
 
     /**
-     * The workflow (and by extension job) this task is associated with
+     * The id of the workflow this task is associated with
      */
-    private Workflow workflow;
+    private Integer workflowId;
+
+    /**
+     * The id of the job this task is associated with
+     */
+    private Integer jobId;
+
+    public InputTaskPK()
+    {
+    }
+
+    public InputTaskPK(Integer taskNum, Integer workflowId, Integer jobId)
+    {
+        this.taskNum = taskNum;
+        this.workflowId = workflowId;
+        this.jobId = jobId;
+    }
 
     public Integer getTaskNum()
     {
@@ -29,16 +45,6 @@ class InputTaskPK implements Serializable
     public void setTaskNum(Integer taskNum)
     {
         this.taskNum = taskNum;
-    }
-
-    public Workflow getWorkflow()
-    {
-        return workflow;
-    }
-
-    public void setWorkflow(Workflow workflow)
-    {
-        this.workflow = workflow;
     }
 
     /**
@@ -62,7 +68,10 @@ class InputTaskPK implements Serializable
         if (taskNum != null ? !taskNum.equals(that.taskNum) : that.taskNum != null) {
             return false;
         }
-        return workflow != null ? workflow.equals(that.workflow) : that.workflow == null;
+        if (workflowId != null ? !workflowId.equals(that.workflowId) : that.workflowId != null) {
+            return false;
+        }
+        return jobId != null ? jobId.equals(that.jobId) : that.jobId == null;
     }
 
     /**
@@ -74,7 +83,8 @@ class InputTaskPK implements Serializable
     public int hashCode()
     {
         int result = taskNum != null ? taskNum.hashCode() : 0;
-        result = 31 * result + (workflow != null ? workflow.hashCode() : 0);
+        result = 31 * result + (workflowId != null ? workflowId.hashCode() : 0);
+        result = 31 * result + (jobId != null ? jobId.hashCode() : 0);
         return result;
     }
 }

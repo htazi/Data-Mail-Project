@@ -1,55 +1,65 @@
 package edu.ccsu.datamail.jobtracker.service;
 
-import edu.ccsu.datamail.jobtracker.dao.JobDAO;
-import edu.ccsu.datamail.jobtracker.dao.WorkflowDAO;
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
-import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
 import edu.ccsu.datamail.jobtracker.repository.JobRepository;
-import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+/**
+ * Provides services related to manipulating jobs and accessing jobs in the database
+ */
 @Service
-public class JobService {
-
-    @Autowired
-    private JobRepository jobRepository;
-
-    @Autowired
-    private JobDAO jobDAO;
+public class JobService
+{
+    /**
+     * A Crud repository for accessing jobs stored in the database
+     */
+    private final JobRepository jobRepository;
 
     /**
-     * Finds and returns a workflow associated with a given job
+     * Autowired Constructor
      *
-     * @param jobId      the id of the job the workflow belongs to
-     * @param jobId the id of the workflow
-     * @return the workflow if found, null otherwise
+     * @param jobRepository the job CRUD repository for accessing the database
      */
-    public Job getJob(int jobId) {
-
-        return jobDAO.findJob(jobId);
+    @Autowired
+    public JobService(JobRepository jobRepository)
+    {
+        this.jobRepository = jobRepository;
     }
 
-    public int findWFNumber(int jobId) {
+    /**
+     * Attempts to find a job given the passed jobId
+     *
+     * @param jobId the id of the requested job
+     * @return A job object containing information on the requested job
+     * @throws JobNotFoundException if no job with this id is found in the database
+     */
+    public Job getJob(int jobId) throws JobNotFoundException
+    {
+        Optional<Job> jobContainer = jobRepository.findById(jobId);
+        return jobContainer.orElseThrow(() -> new JobNotFoundException("Job with Id: " + jobId + " not found"));
+    }
 
-        List<Workflow> wf  = new ArrayList();
+    public int findWFNumber(int jobId)
+    {
+        /*
+        List<Workflow> wf;
         wf = jobDAO.findNextWorkflowId(jobId);
-        int max=0;
+        int max = 0;
 
-        for(Workflow w:wf)
-        {
-            int num1 =  w.getWorkflowId();
-            if( num1 > max)
-            {
+        for (Workflow w : wf) {
+            int num1 = w.getWorkflowId();
+            if (num1 > max) {
                 max = num1;
             }
         }
-        max = max +1;
+        max = max + 1;
 
         return max;
+        */
+        return 0;
     }
 }

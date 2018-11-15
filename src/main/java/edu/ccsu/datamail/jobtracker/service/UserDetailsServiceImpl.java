@@ -1,8 +1,8 @@
 package edu.ccsu.datamail.jobtracker.service;
 
-import edu.ccsu.datamail.jobtracker.dao.AppRoleDAO;
-import edu.ccsu.datamail.jobtracker.dao.AppUserDAO;
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.repository.AppUserRepository;
+import edu.ccsu.datamail.jobtracker.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,33 +14,39 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService
 {
 
-    @Autowired
-    private AppUserDAO appUserDAO;
+    private final AppUserRepository appUserRepository;
+
+    private final UserRoleRepository userRoleRepository;
 
     @Autowired
-    private AppRoleDAO appRoleDAO;
+    public UserDetailsServiceImpl(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository)
+    {
+        this.appUserRepository = appUserRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException
     {
-        AppUser appUser = this.appUserDAO.findUserAccount(userName);
-
-        if (appUser == null) {
+        Optional<AppUser> appUserContainer = this.appUserRepository.findByUserName(userName); // attempt to pull a user
+        AppUser appUser;
+        if (!appUserContainer.isPresent()) { // throw an exception if no user was found
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
-
+        else { // get the app user if one was found
+            appUser = appUserContainer.get();
+        }
         System.out.println("Found User: " + appUser);
+        List<String> roleNames = userRoleRepository.getRoleNames(appUser.getUserId()); // [ROLE_USER, ROLE_ADMIN,..]
 
-        // [ROLE_USER, ROLE_ADMIN,..]
-        List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
-
-        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {
             for (String role : roleNames) {
                 // ROLE_USER, ROLE_ADMIN,..
@@ -49,7 +55,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
             }
         }
 
-        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(), //
+        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(),
                 appUser.getEncryptedPassword(), grantList);
 
         return userDetails;

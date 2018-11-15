@@ -1,46 +1,46 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
-import edu.ccsu.datamail.jobtracker.entity.job.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
 import edu.ccsu.datamail.jobtracker.service.InputTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Date;
-
-
 @Controller
-public class InputTaskController {
+public class InputTaskController
+{
+
+    private final InputTaskService taskService;
 
     @Autowired
-    private InputTaskService taskService;
+    public InputTaskController(InputTaskService taskService)
+    {
+        this.taskService = taskService;
+    }
 
-    @Autowired
-    public InputTaskController(InputTaskService taskService) { this.taskService = taskService;}
-
-    @RequestMapping(method= RequestMethod.GET, value="/taskinputs/displaytaskinputs")
-    public String showalltaskinputs(Model model){
-
-        model.addAttribute("taskinputs", taskService.getAllTaskInputs());
+    @RequestMapping(method = RequestMethod.GET, value = "/taskinputs/displaytaskinputs")
+    public String showalltaskinputs(Model model)
+    {
+        //model.addAttribute("taskinputs", taskService.getAllTaskInputs()); TODO: replace with with another method call
         return "displaytaskinputs";
     }
 
-    @RequestMapping(method= RequestMethod.POST, value = "/taskinputs/displaytaskinput")
-    public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model){
-        InputTask t = taskService.getTaskInput(taskinputs);
-        String result  = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + ""+ t.getTimeTaken();
+    /* TODO: Make this method retrieve inputTasks correctly instead of with a partial primary key
+    @RequestMapping(method = RequestMethod.POST, value = "/taskinputs/displaytaskinput")
+    public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model)
+    {
+        InputTask t = taskService.get(taskinputs);
+        String result = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + "" + t.getTimeTaken();
 
         model.addAttribute("inputtasks", result);
         return "inputtask/displaytaskinput";
     }
+    */
 
-
-
-    @RequestMapping(method= RequestMethod.GET, value="/inputTasks/add")
-    public String addInputTask(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, Model model){
-
+    @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/add")
+    public String addInputTask(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, Model model)
+    {
         model.addAttribute("jobId", jobId);
         model.addAttribute("wfId", wfId);
         return ("inputtask/inputTask");
@@ -70,14 +70,17 @@ public class InputTaskController {
 //
 //    }
 
-    @RequestMapping(method= RequestMethod.PUT, value="/taskinputs/{id}")
-    public void updatetaskinput(@RequestBody InputTask taskinput, @PathVariable int id){
-        taskService.updateTaskInput(id, taskinput);
+    @RequestMapping(method = RequestMethod.PUT, value = "/taskinputs/{id}")
+    public void updatetaskinput(@RequestBody InputTask taskinput, @PathVariable int id)
+    {
+        //taskService.updateTaskInput(id, taskinput);
     }
 
-    @RequestMapping(method= RequestMethod.DELETE, value="/taskinputs/{id}")
-    public void deletetaskinput(@PathVariable int id){
+    /*
+    @RequestMapping(method = RequestMethod.DELETE, value = "/taskinputs/{id}")
+    public void deletetaskinput(@PathVariable int id)
+    {
         taskService.deleteTaskInput(id);
     }
-
+    */
 }

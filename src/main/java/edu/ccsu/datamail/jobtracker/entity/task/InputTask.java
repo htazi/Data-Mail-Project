@@ -1,6 +1,7 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.task;
 
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,43 +19,6 @@ import java.sql.Timestamp;
 public class InputTask
 {
     /**
-     * Default Constructor
-     */
-    public InputTask()
-    {
-    }
-
-    /**
-     * Alternate Constructor:
-     * Creates a new InputTask object with all fields initialized
-     *
-     * @param taskNum        the number of the task in the job and workflow
-     * @param workflow       the workflow (and by extension job) the task is associated with
-     * @param task_id        the identifier of the task type
-     * @param userId         the user who input the task
-     * @param description    the optional description of the task
-     * @param recordsIn      the amount of records in before the task was completed
-     * @param recordsOut     the amount of records out after the task was completed
-     * @param recordsDropped the amount of records dropped as a result of the task
-     * @param timeTaken      the setup time for the task
-     * @param timeRecorded   the time the record of the task was entered by the user
-     */
-    public InputTask(Integer taskNum, Workflow workflow, AvailableTask task_id, AppUser userId, String description,
-                     Integer recordsIn, Integer recordsOut, Integer recordsDropped, Integer timeTaken, Timestamp timeRecorded)
-    {
-        this.taskNum = taskNum;
-        this.workflow = workflow;
-        this.task_id = task_id;
-        this.userId = userId;
-        this.description = description;
-        this.recordsIn = recordsIn;
-        this.recordsOut = recordsOut;
-        this.recordsDropped = recordsDropped;
-        this.timeTaken = timeTaken;
-        this.timeRecorded = timeRecorded;
-    }
-
-    /**
      * The identifier for the task in the workflow
      */
     @Id
@@ -62,13 +26,26 @@ public class InputTask
     private Integer taskNum;
 
     /**
-     * The workflow (and by extension job) this task is associated with
+     * The integer id of the workflow this task is a part of
      */
     @Id
+    @Column(name = "wf_id", nullable = false)
+    private Integer workflowId;
+
+    /**
+     * The integer id of the job this task is a part of
+     */
+    @Id
+    @Column(name = "job_id", nullable = false)
+    private Integer jobId;
+
+    /**
+     * The workflow JPA (and by extension job) this task is associated with
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-            @JoinColumn(name = "wf_id", referencedColumnName = "wf_id", nullable = false),
-            @JoinColumn(name = "job_id", referencedColumnName = "job_id", nullable = false)
+            @JoinColumn(name = "wf_id", referencedColumnName = "wf_id", insertable = false, updatable = false),
+            @JoinColumn(name = "job_id", referencedColumnName = "job_id", insertable = false, updatable = false)
     })
     private Workflow workflow;
 
@@ -76,8 +53,8 @@ public class InputTask
      * The id of the task recorded
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id", nullable = false)
-    private AvailableTask task_id;
+    @JoinColumn(name = "taskId", nullable = false)
+    private AvailableTask taskId;
 
     /**
      * The id of the user who recorded this task
@@ -86,6 +63,9 @@ public class InputTask
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser userId;
 
+    /**
+     * The description of the task
+     */
     @Column(name = "task_desc", length = 60)
     private String description;
 
@@ -119,6 +99,47 @@ public class InputTask
     @Column(name = "time_recorded")
     private Timestamp timeRecorded;
 
+    /**
+     * Default Constructor
+     */
+    public InputTask()
+    {
+    }
+
+    /**
+     * Alternate Constructor:
+     * Creates a new InputTask object with all fields initialized
+     *
+     * @param taskNum        the number of the task in the job and workflow
+     * @param workflowId     the integer id of the workflow this task is a part of
+     * @param jobId          the integer id of the job this task is a part of
+     * @param workflow       the workflow (and by extension job) the task is associated with
+     * @param taskId        the identifier of the task type
+     * @param userId         the user who input the task
+     * @param description    the optional description of the task
+     * @param recordsIn      the amount of records in before the task was completed
+     * @param recordsOut     the amount of records out after the task was completed
+     * @param recordsDropped the amount of records dropped as a result of the task
+     * @param timeTaken      the setup time for the task
+     * @param timeRecorded   the time the record of the task was entered by the user
+     */
+    public InputTask(Integer taskNum, Integer workflowId, Integer jobId, Workflow workflow, AvailableTask taskId, AppUser userId, String description,
+                     Integer recordsIn, Integer recordsOut, Integer recordsDropped, Integer timeTaken, Timestamp timeRecorded)
+    {
+        this.taskNum = taskNum;
+        this.workflowId = workflowId;
+        this.jobId = jobId;
+        this.workflow = workflow;
+        this.taskId = taskId;
+        this.userId = userId;
+        this.description = description;
+        this.recordsIn = recordsIn;
+        this.recordsOut = recordsOut;
+        this.recordsDropped = recordsDropped;
+        this.timeTaken = timeTaken;
+        this.timeRecorded = timeRecorded;
+    }
+
     public Integer getTaskNum()
     {
         return taskNum;
@@ -127,6 +148,26 @@ public class InputTask
     public void setTaskNum(Integer taskNum)
     {
         this.taskNum = taskNum;
+    }
+
+    public Integer getWorkflowId()
+    {
+        return workflowId;
+    }
+
+    public void setWorkflowId(Integer workflowId)
+    {
+        this.workflowId = workflowId;
+    }
+
+    public Integer getJobId()
+    {
+        return jobId;
+    }
+
+    public void setJobId(Integer jobId)
+    {
+        this.jobId = jobId;
     }
 
     public Workflow getWorkflow()
@@ -141,12 +182,12 @@ public class InputTask
 
     public AvailableTask getTask_id()
     {
-        return task_id;
+        return taskId;
     }
 
-    public void setTask_id(AvailableTask task_id)
+    public void setTask_id(AvailableTask taskId)
     {
-        this.task_id = task_id;
+        this.taskId = taskId;
     }
 
     public AppUser getUserId()
@@ -240,10 +281,16 @@ public class InputTask
         if (taskNum != null ? !taskNum.equals(inputTask.taskNum) : inputTask.taskNum != null) {
             return false;
         }
+        if (workflowId != null ? !workflowId.equals(inputTask.workflowId) : inputTask.workflowId != null) {
+            return false;
+        }
+        if (jobId != null ? !jobId.equals(inputTask.jobId) : inputTask.jobId != null) {
+            return false;
+        }
         if (workflow != null ? !workflow.equals(inputTask.workflow) : inputTask.workflow != null) {
             return false;
         }
-        if (task_id != null ? !task_id.equals(inputTask.task_id) : inputTask.task_id != null) {
+        if (taskId != null ? !taskId.equals(inputTask.taskId) : inputTask.taskId != null) {
             return false;
         }
         if (userId != null ? !userId.equals(inputTask.userId) : inputTask.userId != null) {
@@ -276,8 +323,10 @@ public class InputTask
     public int hashCode()
     {
         int result = taskNum != null ? taskNum.hashCode() : 0;
+        result = 31 * result + (workflowId != null ? workflowId.hashCode() : 0);
+        result = 31 * result + (jobId != null ? jobId.hashCode() : 0);
         result = 31 * result + (workflow != null ? workflow.hashCode() : 0);
-        result = 31 * result + (task_id != null ? task_id.hashCode() : 0);
+        result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (recordsIn != null ? recordsIn.hashCode() : 0);
@@ -298,5 +347,4 @@ public class InputTask
     {
         return "task number: " + taskNum.toString() + " " + workflow.toString();
     }
-
 }
