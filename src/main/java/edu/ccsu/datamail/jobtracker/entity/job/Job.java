@@ -10,9 +10,8 @@ import java.io.Serializable;
 public class Job implements Serializable
 {
     @Id
-    @GeneratedValue
     @Column(name = "job_id", nullable = false)
-    private int jobId;
+    private Integer jobId;
 
     @Column(name = "job_desc", length = 60)
     private String jobDesc;

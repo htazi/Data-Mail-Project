@@ -1,19 +1,29 @@
 package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
-import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
 import edu.ccsu.datamail.jobtracker.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Provides services related to manipulating jobs and accessing jobs in the database
+ */
 @Service
 public class JobService
 {
+    /**
+     * A Crud repository for accessing jobs stored in the database
+     */
     private final JobRepository jobRepository;
 
+    /**
+     * Autowired Constructor
+     *
+     * @param jobRepository the job CRUD repository for accessing the database
+     */
     @Autowired
     public JobService(JobRepository jobRepository)
     {
@@ -24,16 +34,13 @@ public class JobService
      * Attempts to find a job given the passed jobId
      *
      * @param jobId the id of the requested job
-     * @return the job, if it was found in the database
+     * @return A job object containing information on the requested job
+     * @throws JobNotFoundException if no job with this id is found in the database
      */
-    public Job getJob(int jobId)
+    public Job getJob(int jobId) throws JobNotFoundException
     {
         Optional<Job> jobContainer = jobRepository.findById(jobId);
-        Job job = null;
-        if (jobContainer.isPresent()) { // may want to throw an exception if a job isn't found
-            job = jobContainer.get();
-        }
-        return job;
+        return jobContainer.orElseThrow(() -> new JobNotFoundException("Job with Id: " + jobId + " not found"));
     }
 
     public int findWFNumber(int jobId)

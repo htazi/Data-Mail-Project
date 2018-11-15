@@ -12,7 +12,7 @@ public class Client
     @Id
     @GeneratedValue
     @Column(name = "client_id", nullable = false)
-    private int clientId;
+    private Integer clientId;
 
     @Column(name = "client_name", length = 30)
     private String clientName;
@@ -40,12 +40,12 @@ public class Client
         this.address = address;
     }
 
-    public int getClientId()
+    public Integer getClientId()
     {
         return clientId;
     }
 
-    public void setClientId(int clientId)
+    public void setClientId(Integer clientId)
     {
         this.clientId = clientId;
     }

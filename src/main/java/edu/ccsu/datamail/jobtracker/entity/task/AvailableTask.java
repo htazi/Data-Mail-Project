@@ -17,7 +17,7 @@ public class AvailableTask
      */
     @Id
     @Column(name = "task_id", nullable = false)
-    private int taskId;
+    private Integer taskId;
 
     /**
      * The Acronym of the task
@@ -48,7 +48,7 @@ public class AvailableTask
 
     }
 
-    public AvailableTask(int taskId, String acronym, String taskDesc, boolean isBillable, Double price)
+    public AvailableTask(Integer taskId, String acronym, String taskDesc, boolean isBillable, Double price)
     {
         this.taskId = taskId;
         this.acronym = acronym;
@@ -57,12 +57,12 @@ public class AvailableTask
         this.price = price;
     }
 
-    public int getTaskId()
+    public Integer getTaskId()
     {
         return taskId;
     }
 
-    public void setTaskId(int taskId)
+    public void setTaskId(Integer taskId)
     {
         this.taskId = taskId;
     }
