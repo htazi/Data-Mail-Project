@@ -1,4 +1,6 @@
-package edu.ccsu.datamail.jobtracker.entity.job;
+package edu.ccsu.datamail.jobtracker.entity.workflow;
+
+import edu.ccsu.datamail.jobtracker.entity.job.Job;
 
 import javax.persistence.*;
 
@@ -15,6 +17,30 @@ import javax.persistence.*;
 public class Workflow
 {
     /**
+     * The id for this Workflow, unique for each job
+     */
+    @Id
+    @Column(name = "wf_id", nullable = false)
+    private Integer workflowId;
+
+    @Id
+    @Column(name = "job_id", nullable = false)
+    private Integer jobId;
+
+    /**
+     * The job this Workflow is associated with
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id", insertable = false, updatable = false)
+    private Job job;
+
+    /**
+     * The Description for this workflow
+     */
+    @Column(name = "wf_desc", length = 60)
+    private String wfDesc;
+
+    /**
      * Default Constructor
      */
     public Workflow()
@@ -26,36 +52,17 @@ public class Workflow
      * Creates a new Workflow ojbect with all fields initialized
      *
      * @param workflowId the id of the workflow within a job
+     * @param jobId      the integer id of the job
      * @param job        the job this workflow is associated with
      * @param wfDesc     the description of the workflow
      */
-    public Workflow(Integer workflowId, Job job, String wfDesc)
+    public Workflow(Integer workflowId, Integer jobId, Job job, String wfDesc)
     {
         this.workflowId = workflowId;
+        this.jobId = jobId;
         this.job = job;
         this.wfDesc = wfDesc;
     }
-
-    /**
-     * The id for this Workflow, unique for each job
-     */
-    @Id
-    @Column(name = "wf_id", nullable = false)
-    private Integer workflowId;
-
-    /**
-     * The job this Workflow is associated with
-     */
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id", nullable = false)
-    private Job job;
-
-    /**
-     * The Description for this workflow
-     */
-    @Column(name = "wf_desc", length = 60)
-    private String wfDesc;
 
     public int getWorkflowId()
     {
@@ -137,6 +144,16 @@ public class Workflow
     public String toString()
     {
         return "job: " + job.getJobId() + " workflow: " + workflowId.toString() + " description: " + wfDesc;
+    }
+
+    public Integer getJobId()
+    {
+        return jobId;
+    }
+
+    public void setJobId(Integer jobId)
+    {
+        this.jobId = jobId;
     }
 }
 

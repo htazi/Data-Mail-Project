@@ -1,8 +1,8 @@
 package edu.ccsu.datamail.jobtracker.repository;
 
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
-import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
-import edu.ccsu.datamail.jobtracker.entity.job.WorkflowPK;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.workflow.WorkflowPK;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

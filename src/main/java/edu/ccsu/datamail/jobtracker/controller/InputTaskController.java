@@ -1,6 +1,6 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
-import edu.ccsu.datamail.jobtracker.entity.job.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
 import edu.ccsu.datamail.jobtracker.service.InputTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,9 +38,9 @@ public class InputTaskController
     }
     */
 
-    @RequestMapping(method= RequestMethod.GET, value="/inputTasks/add")
-    public String addInputTask(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, Model model){
-
+    @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/add")
+    public String addInputTask(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, Model model)
+    {
         model.addAttribute("jobId", jobId);
         model.addAttribute("wfId", wfId);
         return ("inputtask/inputTask");

@@ -1,50 +1,92 @@
 package edu.ccsu.datamail.jobtracker.service;
 
-import edu.ccsu.datamail.jobtracker.entity.job.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTaskPK;
+import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 import edu.ccsu.datamail.jobtracker.repository.InputTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Provides services related to manipulating InputTasks and accessing InputTasks in the database
+ */
 @Service
 public class InputTaskService
 {
-    private final InputTaskRepository taskInputRepository;
+    /**
+     * CRUD repository for accessing InputTasks stored in the database
+     */
+    private final InputTaskRepository inputTaskRepository;
 
+    /**
+     * Autowired Constructor for initializing CRUD repository references
+     *
+     * @param inputTaskRepository CRUD repository for accessing InputTasks
+     */
     @Autowired
-    public InputTaskService(InputTaskRepository taskInputRepository)
+    public InputTaskService(InputTaskRepository inputTaskRepository)
     {
-        this.taskInputRepository = taskInputRepository;
+        this.inputTaskRepository = inputTaskRepository;
     }
 
-    public List<InputTask> getAllTaskInputs()
+
+    /**
+     * Finds all InputTasks that are part of a given workflow
+     *
+     * @param workflow the workflow that the tasks belong to
+     * @return A list containing all InputTasks associated with the Workflow
+     */
+    public List<InputTask> getAllInWorkflow(Workflow workflow)
     {
-        List<InputTask> taskinputs = new ArrayList<>();
-        taskInputRepository.findAll().forEach(taskinputs::add);
-        return taskinputs;
+        return inputTaskRepository.findAllByWorkflow(workflow);
     }
 
-/*
-    public InputTask getTaskInput(int id)
+    /**
+     * Retrieves an InputTask from the database using the provided InputTaskPK object
+     *
+     * @param inputTaskPK the primary key of the InputTask requested
+     * @return An InputTask Object containing information on the requested task
+     * @throws TaskNotFoundException if no task was found with the supplied primary key
+     */
+    public InputTask getInputTask(InputTaskPK inputTaskPK) throws TaskNotFoundException
     {
-        return null;
+        Optional<InputTask> taskContainer = inputTaskRepository.findById(inputTaskPK);
+        return taskContainer.orElseThrow(() -> new TaskNotFoundException("InputTask with PrimaryKey: "
+                + inputTaskPK.toString() + " not Found"));
     }
 
-    public void addTaskInput(InputTask taskinput)
+    /**
+     * Retrieves an InputTask from the database with the specified jobId, workflowId, and taskNum
+     *
+     * @param jobId      the Id of the job the InputTask belongs to
+     * @param workflowId the Id of the workflow the InputTask belongs to
+     * @param taskNum    the number of the task requested
+     * @return An InputTask object containing information on the requested task
+     * @throws TaskNotFoundException if no task was found with these identifiers
+     */
+    public InputTask getInputTask(int jobId, int workflowId, int taskNum) throws TaskNotFoundException
     {
-        taskInputRepository.save(taskinput);
+        Optional<InputTask> taskContainer = inputTaskRepository.findInputTask(jobId, workflowId, taskNum);
+        return taskContainer.orElseThrow(() -> new TaskNotFoundException("InputTask with jobId " + jobId
+                + " workflowId " + workflowId + " taskNum: " + taskNum + " not Found"));
     }
 
-    public void updateTaskInput(int id, InputTask taskinput)
+    public void addInputTask(InputTask inputTask)
     {
-        taskInputRepository.save(taskinput);
+        inputTaskRepository.save(inputTask);
     }
 
-    public void deleteTaskInput(int id)
+    public void updateInputTask(InputTask inputTask)
     {
-        taskInputRepository.deleteById(id);
+        inputTaskRepository.save(inputTask);
     }
-*/
+
+    public void deleteInputTask(InputTaskPK inputTaskPK)
+    {
+        inputTaskRepository.deleteById(inputTaskPK);
+    }
 }

@@ -1,9 +1,9 @@
 package edu.ccsu.datamail.jobtracker.repository;
 
-import edu.ccsu.datamail.jobtracker.entity.job.InputTask;
-import edu.ccsu.datamail.jobtracker.entity.job.InputTaskPK;
-import edu.ccsu.datamail.jobtracker.entity.job.Workflow;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTaskPK;
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +29,7 @@ public interface InputTaskRepository extends CrudRepository<InputTask, InputTask
 
     /**
      * Finds all InputTasks associated with the supplied workflow
+     *
      * @param workflow the supplied workflow
      * @return a list of the Workflow's InputTasks
      */

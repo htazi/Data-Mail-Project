@@ -1,6 +1,6 @@
 package edu.ccsu.datamail.jobtracker.repository;
 
-import edu.ccsu.datamail.jobtracker.entity.job.AvailableTask;
+import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
