@@ -25,13 +25,14 @@ public class InputTaskService
     /**
      * Autowired Constructor for initializing CRUD repository references
      *
-     * @param taskInputRepository CRUD repository for accessing InputTasks
+     * @param inputTaskRepository CRUD repository for accessing InputTasks
      */
     @Autowired
-    public InputTaskService(InputTaskRepository taskInputRepository)
+    public InputTaskService(InputTaskRepository inputTaskRepository)
     {
-        this.inputTaskRepository = taskInputRepository;
+        this.inputTaskRepository = inputTaskRepository;
     }
+
 
     /**
      * Finds all InputTasks that are part of a given workflow
@@ -45,12 +46,26 @@ public class InputTaskService
     }
 
     /**
+     * Retrieves an InputTask from the database using the provided InputTaskPK object
+     *
+     * @param inputTaskPK the primary key of the InputTask requested
+     * @return An InputTask Object containing information on the requested task
+     * @throws TaskNotFoundException if no task was found with the supplied primary key
+     */
+    public InputTask getInputTask(InputTaskPK inputTaskPK) throws TaskNotFoundException
+    {
+        Optional<InputTask> taskContainer = inputTaskRepository.findById(inputTaskPK);
+        return taskContainer.orElseThrow(() -> new TaskNotFoundException("InputTask with PrimaryKey: "
+                + inputTaskPK.toString() + " not Found"));
+    }
+
+    /**
      * Retrieves an InputTask from the database with the specified jobId, workflowId, and taskNum
      *
      * @param jobId      the Id of the job the InputTask belongs to
      * @param workflowId the Id of the workflow the InputTask belongs to
      * @param taskNum    the number of the task requested
-     * @return An InputTask object containing the information of the requested task
+     * @return An InputTask object containing information on the requested task
      * @throws TaskNotFoundException if no task was found with these identifiers
      */
     public InputTask getInputTask(int jobId, int workflowId, int taskNum) throws TaskNotFoundException
