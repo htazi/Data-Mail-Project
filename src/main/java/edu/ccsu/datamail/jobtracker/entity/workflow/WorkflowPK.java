@@ -1,6 +1,5 @@
 package edu.ccsu.datamail.jobtracker.entity.workflow;
 
-import edu.ccsu.datamail.jobtracker.entity.job.Job;
 
 import java.io.Serializable;
 
@@ -17,9 +16,9 @@ public class WorkflowPK implements Serializable
     private Integer workflowId;
 
     /**
-     * The Job this Workflow is associated with
+     * The id of the jobId this Workflow is associated with
      */
-    private Job job;
+    private Integer jobId;
 
     /**
      * Default Constructor
@@ -28,10 +27,10 @@ public class WorkflowPK implements Serializable
     {
     }
 
-    public WorkflowPK(Integer workflowId, Job job)
+    public WorkflowPK(Integer workflowId, Integer jobId)
     {
         this.workflowId = workflowId;
-        this.job = job;
+        this.jobId = jobId;
     }
 
     public Integer getWorkflowId()
@@ -44,14 +43,14 @@ public class WorkflowPK implements Serializable
         this.workflowId = workflowId;
     }
 
-    public Job getJob()
+    public Integer getJob()
     {
-        return job;
+        return jobId;
     }
 
-    public void setJob(Job job)
+    public void setJob(Integer jobId)
     {
-        this.job = job;
+        this.jobId = jobId;
     }
 
     /**
@@ -71,7 +70,7 @@ public class WorkflowPK implements Serializable
         }
         if (obj instanceof WorkflowPK) {
             WorkflowPK other = (WorkflowPK) obj;
-            return this.workflowId.equals(other.workflowId) && this.job.equals(other.job);
+            return this.workflowId.equals(other.workflowId) && this.jobId.equals(other.jobId);
         }
         else {
             return false;
@@ -90,8 +89,8 @@ public class WorkflowPK implements Serializable
         if (workflowId != null) {
             hash += workflowId.hashCode();
         }
-        if (job != null) {
-            hash += job.hashCode();
+        if (jobId != null) {
+            hash += jobId.hashCode();
         }
         return hash;
     }

@@ -11,13 +11,19 @@ import java.io.Serializable;
 public class UserRole implements Serializable
 {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser appUser;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
     @Id
+    @Column(name = "role_id", nullable = false)
+    private Integer roleId;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private AppUser appUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", insertable = false, updatable = false)
     private AppRole appRole;
 
     /**
@@ -31,13 +37,37 @@ public class UserRole implements Serializable
      * Alternate Construtor:
      * Creates a new UserRole with all fields initialized
      *
+     * @param userId  the integer id of the user
+     * @param roleId  the integer id of the user's role
      * @param appUser the user that will be assigned a new role
      * @param appRole the role assigned to the user
      */
-    public UserRole(AppUser appUser, AppRole appRole)
+    public UserRole(Integer userId, Integer roleId, AppUser appUser, AppRole appRole)
     {
+        this.userId = userId;
+        this.roleId = roleId;
         this.appUser = appUser;
         this.appRole = appRole;
+    }
+
+    public Integer getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(Integer userId)
+    {
+        this.userId = userId;
+    }
+
+    public Integer getRoleId()
+    {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId)
+    {
+        this.roleId = roleId;
     }
 
     public AppUser getAppUser()
@@ -78,6 +108,12 @@ public class UserRole implements Serializable
 
         UserRole userRole = (UserRole) o;
 
+        if (userId != null ? !userId.equals(userRole.userId) : userRole.userId != null) {
+            return false;
+        }
+        if (roleId != null ? !roleId.equals(userRole.roleId) : userRole.roleId != null) {
+            return false;
+        }
         if (appUser != null ? !appUser.equals(userRole.appUser) : userRole.appUser != null) {
             return false;
         }
@@ -92,7 +128,9 @@ public class UserRole implements Serializable
     @Override
     public int hashCode()
     {
-        int result = appUser != null ? appUser.hashCode() : 0;
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+        result = 31 * result + (appUser != null ? appUser.hashCode() : 0);
         result = 31 * result + (appRole != null ? appRole.hashCode() : 0);
         return result;
     }

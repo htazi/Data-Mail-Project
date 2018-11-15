@@ -10,14 +10,14 @@ import java.io.Serializable;
 public class UserRolePK implements Serializable
 {
     /**
-     * The user of the job tracker
+     * The the id of the user of the job tracker
      */
-    private AppUser appUser;
+    private Integer userId;
 
     /**
-     * The role the user has
+     * The id of the role the user has
      */
-    private AppRole appRole;
+    private Integer roleId;
 
     public UserRolePK()
     {
@@ -26,33 +26,33 @@ public class UserRolePK implements Serializable
     /**
      * Creates a new UserRolePK with the associated AppUser and UserRole
      *
-     * @param appUser the AppUser who has the specified role
-     * @param appRole the UserRole of the specified AppUser
+     * @param userId the id of the AppUser who has the specified role
+     * @param roleId the id of the UserRole of the specified AppUser
      */
-    public UserRolePK(AppUser appUser, AppRole appRole)
+    public UserRolePK(Integer userId, Integer roleId)
     {
-        this.appUser = appUser;
-        this.appRole = appRole;
+        this.userId = userId;
+        this.roleId = roleId;
     }
 
-    public AppUser getAppUser()
+    public Integer getUserId()
     {
-        return appUser;
+        return userId;
     }
 
-    public void setAppUser(AppUser appUser)
+    public void setUserId(Integer userId)
     {
-        this.appUser = appUser;
+        this.userId = userId;
     }
 
-    public AppRole getAppRole()
+    public Integer getRoleId()
     {
-        return appRole;
+        return roleId;
     }
 
-    public void setAppRole(AppRole appRole)
+    public void setRoleId(Integer roleId)
     {
-        this.appRole = appRole;
+        this.roleId = roleId;
     }
 
     /**
@@ -61,19 +61,21 @@ public class UserRolePK implements Serializable
      * @return an integer hash code for this object
      */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object o)
     {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+        if (this == o) {
             return true;
         }
-        if (obj instanceof UserRolePK) {
-            UserRolePK other = (UserRolePK) obj;
-            return this.appUser.equals(other.appUser) && this.appRole.equals(other.appRole);
+        if (!(o instanceof UserRolePK)) {
+            return false;
         }
-        return false;
+
+        UserRolePK that = (UserRolePK) o;
+
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) {
+            return false;
+        }
+        return roleId != null ? roleId.equals(that.roleId) : that.roleId == null;
     }
 
     /**
@@ -84,14 +86,8 @@ public class UserRolePK implements Serializable
     @Override
     public int hashCode()
     {
-        int hash = 37;
-        if (appUser != null) {
-            hash += appUser.hashCode();
-        }
-        if (appRole != null) {
-            hash += appRole.hashCode();
-        }
-        return hash;
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+        return result;
     }
-
 }
