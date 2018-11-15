@@ -61,6 +61,7 @@ public class WorkflowController
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
     public String addWorkflow(@RequestParam("jobId") Integer jobId, @RequestParam("wfId") int wfId, @RequestParam("wfdesc") String wfdesc, Model model)
     {
+        /*
         Client client = new Client("test5", "Newtown");
         Job job = new Job("", client);
         job.setClient(client);
@@ -69,6 +70,7 @@ public class WorkflowController
         model.addAttribute("wfId", wfId);
         model.addAttribute("jobId", jobId);
         workflowService.addWorkflow(workflow);
+        */
         return "forward:/inputTasks/add";
     }
 
