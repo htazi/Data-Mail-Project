@@ -54,7 +54,8 @@ public class JobController {
         return "job/findJob";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobs/findjob")
+//    @RequestMapping(method = RequestMethod.POST, value = "/jobs/findjob")
+@RequestMapping(method = RequestMethod.POST, value = "/workflows/createworkflow")
     public String toGetToWf(@RequestParam("jobId") int jobId, Model model)
     {
 

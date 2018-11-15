@@ -68,6 +68,8 @@
             <br>
 
             <!-- Need to create a controller -->
+            <!--<a th:if="${#request.userPrincipal.name} == 'Billing1'"  th:href="@{/billing/displaybilling}">go to inputask page</a>-->
+            <!--<form th:if="${#request.userPrincipal.name} != 'Billing1'"  method='GET'  th:action="@{/inputTasks/add}">-->
             <form  method='GET' action="/inputTasks/add" th:action="@{/inputTasks/add}">
             <!--<form  method='GET' action="/workflows/add" th:action="@{/workflows/add}">-->
                     <table  style="margin: 0px auto;">
