@@ -29,7 +29,6 @@ public class MainController
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal)
     {
-
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
         String userInfo = WebUtils.toString(loginedUser);
@@ -41,7 +40,6 @@ public class MainController
     @RequestMapping(value = {"/" ,"/login"}, method = RequestMethod.GET)
     public String loginPage(Model model)
     {
-
         return "user/loginPage";
     }
 
@@ -88,7 +86,6 @@ public class MainController
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -105,7 +102,6 @@ public class MainController
     @RequestMapping(value = "/billing", method = RequestMethod.GET)
     public String billingPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -122,7 +118,6 @@ public class MainController
     @RequestMapping(value = "/dataProcessing", method = RequestMethod.GET)
     public String dataProcessingPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -139,7 +134,6 @@ public class MainController
     @RequestMapping(value = "/fileTransfer", method = RequestMethod.GET)
     public String fileTransferPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -156,7 +150,6 @@ public class MainController
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String managerPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -190,7 +183,6 @@ public class MainController
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal)
     {
-
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
@@ -201,9 +193,7 @@ public class MainController
             String message = "Hi " + principal.getName() //
                     + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
-
         }
-
         return "user/403Page";
     }
 }

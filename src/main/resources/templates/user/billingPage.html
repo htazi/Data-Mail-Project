@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>User Info</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,6 +19,9 @@
 <br/><br/>
 
 <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+<form  class="container" method='GET' th:action="@{/jobs/findjob}">
+    <input type="submit" class="btn btn-success" value="Find A Job">
+</form>
 
 <form  class="container" method="GET" action="/jobs/findjob" th:action="@{/jobs/findjob}">
     <input type="submit" class="btn btn-success" value="Find a Job">

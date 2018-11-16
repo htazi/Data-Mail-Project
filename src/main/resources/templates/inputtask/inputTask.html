@@ -25,6 +25,11 @@
         td{
             margin: 5px;
         }
+        .btnwidth
+        {
+            width: 102px !important;
+
+        }
     </style>
 </head>
 <body>
@@ -50,6 +55,7 @@
 
             <!--<td>Current Time</td>-->
         </tr>
+
         <tr >
             <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
             <td><input type="text" name="job_id"  size="10"  th:value="${jobId}"></td>
@@ -60,9 +66,7 @@
             <td><input type="text" name="records_input" size="10"></td>
             <td><input type="text" name="records_output" size="10"></td>
             <td><input type="text" name="records_dropped" size="10"></td>
-
-
-</tr>
+        </tr>
 
 <td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
 <td><input type="submit" class="btn btn-success" name="submit" value="New Workflow"></td>
@@ -74,6 +78,6 @@
 </table>
 
 </form>
-<!--<h1>Hellow World!</h1>-->
+
 </body>
 </html>
