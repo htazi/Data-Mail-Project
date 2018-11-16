@@ -33,7 +33,6 @@ public class InputTaskService
         this.inputTaskRepository = inputTaskRepository;
     }
 
-
     /**
      * Finds all InputTasks that are part of a given workflow
      *
