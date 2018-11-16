@@ -35,30 +35,19 @@ public class UserDetailsServiceImpl implements UserDetailsService
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException
     {
         Optional<AppUser> appUserContainer = this.appUserRepository.findByUserName(userName); // attempt to pull a user
-        AppUser appUser;
-        if (!appUserContainer.isPresent()) { // throw an exception if no user was found
-            System.out.println("User not found! " + userName);
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
-        }
-        else { // get the app user if one was found
-            appUser = appUserContainer.get();
-        }
+        AppUser appUser = appUserContainer.orElseThrow(() -> new UsernameNotFoundException("User " + userName
+                + " was not found in the database")); // check if a user was pulled with this username
         System.out.println("Found User: " + appUser);
         List<String> roleNames = userRoleRepository.getRoleNames(appUser.getUserId()); // [ROLE_USER, ROLE_ADMIN,..]
 
         List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {
             for (String role : roleNames) {
-                // ROLE_USER, ROLE_ADMIN,..
-                GrantedAuthority authority = new SimpleGrantedAuthority(role);
+                GrantedAuthority authority = new SimpleGrantedAuthority(role); // ROLE_USER, ROLE_ADMIN,..
                 grantList.add(authority);
             }
         }
-
-        UserDetails userDetails = (UserDetails) new User(appUser.getUserName(),
-                appUser.getEncryptedPassword(), grantList);
-
-        return userDetails;
+        return new User(appUser.getUserName(), appUser.getEncryptedPassword(), grantList);
     }
 
 }
