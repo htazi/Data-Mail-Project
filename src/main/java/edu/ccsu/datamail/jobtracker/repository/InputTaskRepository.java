@@ -43,6 +43,6 @@ public interface InputTaskRepository extends CrudRepository<InputTask, InputTask
      * @param taskNum    the number of this task in the specified workflow
      * @return A container that may contain an InputTask if one was found
      */
-    @Query("FROM InputTask t WHERE t.workflow.job.jobId = :jobId AND t.workflow.workflowId = :workflowId AND t.taskNum = :taskId")
+    @Query("FROM InputTask t WHERE t.jobId = :jobId AND t.workflowId = :workflowId AND t.taskNum = :taskId")
     Optional<InputTask> findInputTask(@Param("jobId") int jobId, @Param("workflowId") int workflowId, @Param("taskId") int taskNum);
 }

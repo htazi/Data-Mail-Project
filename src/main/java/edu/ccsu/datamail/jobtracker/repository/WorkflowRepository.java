@@ -24,7 +24,7 @@ public interface WorkflowRepository extends CrudRepository<Workflow, WorkflowPK>
      * @param workflowId the integer id of the workflow
      * @return An Optional container holding a workflow object if one was found, an empty container otherwise
      */
-    @Query("FROM Workflow w Where w.job.jobId = :jobId AND w.workflowId = :workflowId")
+    @Query("FROM Workflow w Where w.jobId = :jobId AND w.workflowId = :workflowId")
     Optional<Workflow> findWorkflow(@Param("jobId") Integer jobId, @Param("workflowId") Integer workflowId);
 
     /**
