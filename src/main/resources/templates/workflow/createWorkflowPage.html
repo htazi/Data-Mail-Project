@@ -73,7 +73,7 @@
             <br>
             <br>
 
-            <form  method="GET  " action="/workflows/add" th:action="@{/workflows/add}">
+            <form  method='GET' action="/workflows/add" th:action="@{/workflows/add}">
                     <table align="center" style="margin: 0px auto;">
                         <tr>
                             <td>Job ID:</td>
@@ -84,7 +84,7 @@
                         </tr>
                         <tr>
                             <td>Workflow:</td>
-                            <td><input type="text" name="workflow" th:value="${nextWorkflowId}" ></td>
+                            <td><input type="text" name="wfId" th:value="${wfId}" ></td>
 
                         </tr>
                         <tr>
@@ -99,7 +99,7 @@
                     <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
                     <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
                 <input type="hidden" name="jobId" th:value="${job.jobId}" />
-                <input type="hidden" name="wfId" th:value="${nextWorkflowId}"/>
+                <input type="hidden" name="wfId" th:value="${wfId}"/>
             </form>
             <br>
         </div>
