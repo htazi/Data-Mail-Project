@@ -85,7 +85,8 @@ public class InputTaskController
         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
 
         /*TODO figure out how updating and retrieving taskNum will work. Currently its hardcoded*/
-        Integer taskNum = 777;
+        Integer taskNum = inputTaskService.getTaskNum(jobId, wfId);
+        taskNum++;
 
         /*The availableTaskService retrieves an available task object with the tskId
         * parameter. TskId is sent from the inputTask html page*/

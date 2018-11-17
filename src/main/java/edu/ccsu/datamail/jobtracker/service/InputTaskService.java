@@ -33,7 +33,6 @@ public class InputTaskService
         this.inputTaskRepository = inputTaskRepository;
     }
 
-
     /**
      * Finds all InputTasks that are part of a given workflow
      *
@@ -73,6 +72,17 @@ public class InputTaskService
         Optional<InputTask> taskContainer = inputTaskRepository.findInputTask(jobId, workflowId, taskNum);
         return taskContainer.orElseThrow(() -> new TaskNotFoundException("InputTask with jobId " + jobId
                 + " workflowId " + workflowId + " taskNum: " + taskNum + " not Found"));
+    }
+
+    /**
+     * Gets the current task count for the given jobId and workflowId combination
+     *
+     * @param jobId
+     * @param workFlowId
+     * @return
+     */
+    public int getTaskNum(int jobId, int workFlowId){
+        return inputTaskRepository.countTaskNum(jobId, workFlowId);
     }
 
     public void addInputTask(InputTask inputTask)
