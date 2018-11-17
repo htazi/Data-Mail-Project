@@ -21,8 +21,6 @@ import java.security.Principal;
 public class InputTaskController
 {
     private final AvailableTaskService availableTaskService;
-    private final InputTaskService taskService;
-    private final JobService jobService;
     private final InputTaskService inputTaskService;
     private final UserDetailsServiceImpl userDetailsService;
     private final WorkflowService workflowService;
@@ -32,31 +30,36 @@ public class InputTaskController
     public InputTaskController(AvailableTaskService availableTaskService, InputTaskService taskService, JobService jobService, InputTaskService inputTaskService, UserDetailsServiceImpl userDetailsService, WorkflowService workflowService)
     {
         this.availableTaskService = availableTaskService;
-        this.taskService = taskService;
-        this.jobService = jobService;
         this.inputTaskService = inputTaskService;
         this.userDetailsService = userDetailsService;
         this.workflowService = workflowService;
     }
-
+    /*
     @RequestMapping(method = RequestMethod.GET, value = "/taskinputs/displaytaskinputs")
     public String showalltaskinputs(Model model)
     {
         //model.addAttribute("taskinputs", taskService.getAllTaskInputs()); TODO: replace with with another method call
         return "displaytaskinputs";
     }
-
-    /* TODO: Make this method retrieve inputTasks correctly instead of with a partial primary key
-    @RequestMapping(method = RequestMethod.POST, value = "/taskinputs/displaytaskinput")
-    public String gettaskinput(@RequestParam("taskinputs") int taskinputs, Model model)
-    {
-        InputTask t = taskService.get(taskinputs);
-        String result = t.getTaskNum() + " " + t.getTask_id() + " " + t.getDescription() + "" + t.getTimeTaken();
-
-        model.addAttribute("inputtasks", result);
-        return "inputtask/displaytaskinput";
-    }
     */
+
+    /**
+     * Retrieves the input form from the inputTask html page and inserts the
+     * form data into the input_task table.
+     *
+     * @param jobId
+     * @param wfId
+     * @param tskId
+     * @param time
+     * @param recIn
+     * @param recOut
+     * @param recD
+     * @param model
+     * @param principal
+     * @return
+     * @throws JobNotFoundException
+     * @throws TaskNotFoundException
+     */
 
     @RequestMapping(method = RequestMethod.POST, value = "/inputTasks/add")
     public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
@@ -64,61 +67,43 @@ public class InputTaskController
                                @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
                                @RequestParam("records_dropped")  int recD, Model model, Principal principal) throws JobNotFoundException, TaskNotFoundException {
 
+        /*Retrieves the logged in user with spring security's getPrincipal method.
+        * The username is extracted from the authenticated User object with the
+        * User's getUserName method. That name is passed to the custom UserDetailService's
+        * getUser method. The userDetailService handles retrieving the current user's
+        * AppUser Object from the app_user table. The current logged in user is a
+        * parameter for the addInputTask method*/
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
         String name = loginedUser.getUsername();
         AppUser user = userDetailsService.getUser(name);
 
-
+        /*A work flow object is created to contain the current jobId and wfId. This is
+        * used as a parameter in the addInputTask method*/
         Workflow workflow = workflowService.getWorkflow(jobId, wfId);
+
+        /*Timestamp needed for the addInputTask method. Currently displays the UTC time*/
         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+
+        /*TODO figure out how updating and retrieving taskNum will work. Currently its hardcoded*/
         Integer taskNum = 777;
 
+        /*The availableTaskService retrieves an available task object with the tskId
+        * parameter. TskId is sent from the inputTask html page*/
         AvailableTask availableTask = availableTaskService.getAvailableTask(tskId);
+
+        /*Build the inputTask object for insertion*/
         InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, "description here",
                  recIn, recOut, recD, time, timeStamp);
 
+        /*Add the newly created task to the input_task table*/
         inputTaskService.addInputTask(inputTask);
 
+        /*Populate the html fields in the inputTask page with the current job and wf Ids*/
         model.addAttribute("jobId", jobId);
         model.addAttribute("wfId", wfId);
+
+        /*The inputTask html page in the inputtask package is displayed again after form
+        * submission*/
         return ("inputtask/inputTask");
     }
-//
-//    @RequestMapping(method= RequestMethod.POST, value="/taskinputs/add")
-//    //  @ResponseBody
-//    // public void addTaskinput(@RequestParam("inputbox") int [] inputboxes, @RequestParam("inputboxstring") String [] inputboxstring )
-//    public String addTaskinput(Model model,
-//                               @RequestParam("job_id") int job_id,
-//                               @RequestParam("wf_id") int wf_id,
-//                               @RequestParam("task_num") int task_num,
-//                               @RequestParam("task_id") int task_id,
-//                               @RequestParam("user_ID") int user_id,
-//                               @RequestParam("task_description") String task_description,
-//                               @RequestParam("records_in") int records_in,
-//                               @RequestParam("records_out") int records_out,
-//                               @RequestParam("records_dropped")int records_dropped,
-//                               @RequestParam("time_taken") int time_taken,
-//                               @RequestParam("time_recorded") LocalDate time_recorded)
-//    {
-//        InputTask t =  new InputTask(job_id, wf_id, task_num, task_id, user_id, task_description, records_in,records_out,records_dropped, time_taken, time_recorded);
-//        taskService.addTaskInput(t);
-//
-//        model.addAttribute("inputtasks", taskService.getAllTaskInputs());
-//        return "inputtask/displayinputtask";
-//
-//    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/taskinputs/{id}")
-    public void updatetaskinput(@RequestBody InputTask taskinput, @PathVariable int id)
-    {
-        //taskService.updateTaskInput(id, taskinput);
-    }
-
-    /*
-    @RequestMapping(method = RequestMethod.DELETE, value = "/taskinputs/{id}")
-    public void deletetaskinput(@PathVariable int id)
-    {
-        taskService.deleteTaskInput(id);
-    }
-    */
 }

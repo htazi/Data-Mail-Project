@@ -32,6 +32,7 @@
 <p id="timestamp" style="position: relative; left: 50px"></p>
 <h1 style="text-align: center">Please Input A Task Input</h1><br>
 <hr>
+<!--This form calls the POST method that is mapped to "/inputTasks/add" on the InputTaskController -->
 <form  class="container" method="POST" action="/inputTasks/add" th:action="@{/inputTasks/add}">
 
 
@@ -62,6 +63,9 @@
 
 </tr>
 
+<!--TODO when the New Work flow of Finish buttons are pressed with empty fields an error occurs
+This should be fixed to allow those buttons to be pressed. Right now they are tied to
+inputting tasks. They should operate separately-->
 <td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
 <td><input type="submit" class="btn btn-success" name="submit" value="New Workflow"></td>
 <td><input type="submit" class="btn btn-success" name="submit"value="Finish"></td>
@@ -72,6 +76,6 @@
 </table>
 
 </form>
-<!--<h1>Hellow World!</h1>-->
+
 </body>
 </html>

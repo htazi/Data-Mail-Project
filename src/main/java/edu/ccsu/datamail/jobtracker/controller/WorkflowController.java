@@ -24,43 +24,6 @@ public class WorkflowController
         this.jobService = jobService;
     }
 
-//    @RequestMapping(method = RequestMethod.POST, value = "/workflow/displayworkflow")
-//    public String postWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
-//    {
-//        System.out.println("tesing controller");
-//
-//        Workflow t = workflowService.getWorkflows(workflow, job);
-//        String result = t.toString();
-//        model.addAttribute("workflow", result);
-//        return "workflow/displayworkflow";
-//    }
-
-
-//    @RequestMapping(method = RequestMethod.GET, value = "/workflows")
-//    public String getWorkflow()
-//    {
-//
-//        return "workflow/workflows";
-//    }
-//
-//    @RequestMapping(method = RequestMethod.GET, value = "/workflows/displayworkflow")
-//    public String getWorkflow(@RequestParam("workflow") int workflow, @RequestParam("job") int job, Model model)
-//    {
-//        System.out.println("tesing controller");
-//        Workflow t = workflowService.getWorkflows(workflow, job);
-//        if(t != null) {
-//            //String result = t.toString();
-//            model.addAttribute("workflow", t);
-//            return "inputtask/addTaskInput";
-//        }
-//        else
-//        {
-//            model.addAttribute("workflow", "No such a workflow exists");
-//            return "workflow/displayworkflow";
-//        }
-//    }
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
     public String addWorkflow(@RequestParam("jobId") Integer jobId, @RequestParam("wfId") int wfId, @RequestParam("wfdesc") String wfdesc, Model model) throws JobNotFoundException {
 
@@ -75,25 +38,5 @@ public class WorkflowController
 
         return "inputtask/inputTask";
 
-    }
-
-
-//    @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
-//    public String addWorkflow(@RequestParam("jobId") int jobId, @RequestParam("wfId") int wfId, @RequestParam("wfdesc") String wfdesc, Model model)
-//    {
-//        return ("workflow/createWorkflowPage");
-//    }
-
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/workflows/{wf_id}")
-    public void updateWorkflow(@RequestBody Workflow workflow, @PathVariable int wfId)
-    {
-        //workflowService.updateWorkflow(wfId, workflow);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/workflows/{wf_id}")
-    public void deleteWorkflow(@PathVariable int wfId)
-    {
-        //workflowService.deleteWorkflow(wfId);  // workflows cannot be deleted using a single integer
     }
 }

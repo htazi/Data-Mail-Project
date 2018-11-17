@@ -61,13 +61,8 @@ public class UserDetailsServiceImpl implements UserDetailsService
         return userDetails;
     }
 
-    public int getUserId(String userName)
-    {
-        Optional<AppUser> user = appUserRepository.findByUserName(userName);
-        return user.get().getUserId();
-
-    }
-
+    /*This method retrieves an App_User that contains a user_name field equal to the
+    * passed in userName parameter*/
     public AppUser getUser(String userName){
         Optional<AppUser> appUserContainer = this.appUserRepository.findByUserName(userName); // attempt to pull a user
         AppUser appUser = appUserContainer.orElseThrow(() -> new UsernameNotFoundException("User " + userName
