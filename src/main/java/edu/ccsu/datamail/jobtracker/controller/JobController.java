@@ -31,7 +31,12 @@ public class JobController
     @RequestMapping(method = RequestMethod.POST, value = "/jobs/findjob")
     public String toGetToWf(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException
     {
-        Job job = jobService.getJob(jobId);
+        Job job = null;
+        try {
+            job = jobService.getJob(jobId);
+        } catch (JobNotFoundException e) {
+            e.getMessage();
+        }
         if (job != null) {
 
             int nextWorkflowId = jobService.findWFNumber(jobId);
