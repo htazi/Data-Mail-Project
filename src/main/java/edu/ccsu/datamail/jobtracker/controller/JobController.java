@@ -28,7 +28,7 @@ public class JobController
         return "job/findJob";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobs/findjob")
+    @RequestMapping(method = RequestMethod.POST, value = "/createWorkflow")
     public String toGetToWf(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException
     {
         Job job = null;

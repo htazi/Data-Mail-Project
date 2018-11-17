@@ -24,7 +24,7 @@ public class WorkflowController
         this.jobService = jobService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/workflows/add")
+    @RequestMapping(method = RequestMethod.GET, value = "/inputTask")
     public String addWorkflow(@RequestParam("jobId") Integer jobId, @RequestParam("wfId") int wfId, @RequestParam("wfdesc") String wfdesc, Model model) throws JobNotFoundException {
 
 
