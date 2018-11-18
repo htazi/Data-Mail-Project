@@ -7,6 +7,7 @@ import edu.ccsu.datamail.jobtracker.repository.WorkflowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -71,5 +72,17 @@ public class WorkflowService
     public void deleteWorkflow(WorkflowPK workflow)
     {
         workflowRepository.deleteById(workflow);
+    }
+
+    public int findNextWorkflowId(int jobId)
+    {
+        List<Workflow> wfList = workflowRepository.findWorkflowsByJobId(jobId);
+        int nextId = 0;
+        for (Workflow w : wfList) {
+            if (w.getWorkflowId() > nextId) {
+                nextId = w.getWorkflowId();
+            }
+        }
+        return ++nextId;
     }
 }

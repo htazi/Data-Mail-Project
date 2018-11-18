@@ -3,6 +3,7 @@ package edu.ccsu.datamail.jobtracker.controller;
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
 import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
 import edu.ccsu.datamail.jobtracker.service.JobService;
+import edu.ccsu.datamail.jobtracker.service.WorkflowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,13 @@ public class JobController
 
     private final JobService jobService;
 
+    private final WorkflowService workflowService;
+
     @Autowired
-    public JobController(JobService jobService)
+    public JobController(JobService jobService, WorkflowService workflowService)
     {
         this.jobService = jobService;
+        this.workflowService = workflowService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobs/findjob")
@@ -38,10 +42,9 @@ public class JobController
             e.getMessage();
         }
         if (job != null) {
-
-            int nextWorkflowId = jobService.findWFNumber(jobId);
+            int nextWorkflowId = workflowService.findNextWorkflowId(jobId);
             model.addAttribute("job", job);
-            model.addAttribute("nextWorkflowId", nextWorkflowId);
+            model.addAttribute("wfId", nextWorkflowId);
             return "workflow/createWorkflowPage";
         }
         else {
