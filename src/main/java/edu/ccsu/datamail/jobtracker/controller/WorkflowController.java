@@ -2,6 +2,7 @@ package edu.ccsu.datamail.jobtracker.controller;
 
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
 import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
+import edu.ccsu.datamail.jobtracker.entity.workflow.WorkflowNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 import edu.ccsu.datamail.jobtracker.service.JobService;
 import edu.ccsu.datamail.jobtracker.service.WorkflowService;
@@ -27,7 +28,7 @@ public class WorkflowController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTask")
-    public String addWorkflow(@RequestParam("jobId") Integer jobId, @RequestParam("wfId") Integer wfId, @RequestParam("wfdesc") String wfdesc, Model model) throws JobNotFoundException
+    public String addWorkflow(@RequestParam("jobId") Integer jobId, @RequestParam("wfId") Integer wfId, @RequestParam("wfdesc") String wfdesc, Model model) throws WorkflowNotFoundException, JobNotFoundException
     {
         Job job = jobService.getJob(jobId);
         Workflow workflow = new Workflow(wfId, jobId, job, wfdesc);
@@ -46,7 +47,7 @@ public class WorkflowController
             model.addAttribute("wfId", workflow.getWorkflowId());
             model.addAttribute("jobId", workflow.getJobId());
             return "inputtask/inputTask";
-        } catch (JobNotFoundException e) {
+        } catch (WorkflowNotFoundException e) {
             return "user/403Page";
         }
     }
