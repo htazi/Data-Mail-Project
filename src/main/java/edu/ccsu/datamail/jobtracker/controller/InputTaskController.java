@@ -72,7 +72,7 @@ public class InputTaskController
     public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
                                @RequestParam("task_id") int tskId, @RequestParam("time_taken") int time,
                                @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
-                               @RequestParam("records_dropped") int recD, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
+                               @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
 
         /*Retrieves the logged in user with spring security's getPrincipal method.
@@ -101,7 +101,7 @@ public class InputTaskController
         AvailableTask availableTask = availableTaskService.getAvailableTask(tskId);
 
         /*Build the inputTask object for insertion*/
-        InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, "description here",
+        InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, desc,
                 recIn, recOut, recD, time, timeStamp);
 
         /*Add the newly created task to the input_task table*/
