@@ -42,24 +42,4 @@ public class JobService
         Optional<Job> jobContainer = jobRepository.findById(jobId);
         return jobContainer.orElseThrow(() -> new JobNotFoundException("Job with Id: " + jobId + " not found"));
     }
-
-    public int findWFNumber(int jobId)
-    {
-        /*
-        List<Workflow> wf;
-        wf = jobDAO.findNextWorkflowId(jobId);
-        int max = 0;
-
-        for (Workflow w : wf) {
-            int num1 = w.getWorkflowId();
-            if (num1 > max) {
-                max = num1;
-            }
-        }
-        max = max + 1;
-
-        return max;
-        */
-        return 0;
-    }
 }

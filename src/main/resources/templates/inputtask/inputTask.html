@@ -37,17 +37,17 @@
 <p id="timestamp" style="position: relative; left: 50px"></p>
 <h1 style="text-align: center">Please Input A Task Input</h1><br>
 <hr>
-<form  class="container" method="POST" action="/taskinputs/add" th:action="@{/taskinputs/add}">
+<!--This form calls the POST method that is mapped to "/inputTasks/add" on the InputTaskController -->
+<form  class="container" method="POST" action="/inputTasks/add" th:action="@{/inputTasks/add}">
 
 
 
-    <div> <h3>Workflow ID: <span th:text="${jobId}"></span></h3></div>
+    <div> <h3>Workflow ID: <span th:text="${wfId}"></span></h3></div>
     <table align="center">
         <tr>
             <td>Job ID</td>
             <td>Workflow ID</td>
             <td>Task ID</td>
-            <td>User ID</td>
             <td>Time Taken</td>
             <td>Records Input</td>
             <td>Records Output</td>
@@ -58,16 +58,20 @@
 
         <tr >
             <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
-            <td><input type="text" name="job_id"  size="10"  th:value="${jobId}"></td>
+            <td><input type="text" name="job_id"  size="10"    th:value="${jobId}"></td>
             <td><input type="text" name="workflow"  size="10"  th:value="${wfId}"></td>
             <td><input type="text" name="task_id" size="10" ></td>
-            <td><input type="text" name="time_taken" size="10"></td>
-            <td><input type="text" name="user_ID" size="10"></td>
-            <td><input type="text" name="records_input" size="10"></td>
-            <td><input type="text" name="records_output" size="10"></td>
-            <td><input type="text" name="records_dropped" size="10"></td>
-        </tr>
+            <td><input type="text" name="time_taken" size="10" ></td>
+            <td><input type="text" name="records_input" size="10"  ></td>
+            <td><input type="text" name="records_output" size="10"  ></td>
+            <td><input type="text" name="records_dropped" size="10" ></td>
 
+
+</tr>
+
+<!--TODO when the New Work flow of Finish buttons are pressed with empty fields an error occurs
+This should be fixed to allow those buttons to be pressed. Right now they are tied to
+inputting tasks. They should operate separately-->
 <td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
 <td><input type="submit" class="btn btn-success" name="submit" value="New Workflow"></td>
 <td><input type="submit" class="btn btn-success" name="submit"value="Finish"></td>

@@ -34,4 +34,12 @@ public interface WorkflowRepository extends CrudRepository<Workflow, WorkflowPK>
      * @return a List of workflows associated with the job
      */
     List<Workflow> findWorkflowsByJob(Job job);
+
+    /**
+     * Finds all workflows associated with a given Job
+     *
+     * @param jobId the integer id of the job the desired workflows are associated with
+     * @return a List of workflows associated with the job
+     */
+    List<Workflow> findWorkflowsByJobId(Integer jobId);
 }

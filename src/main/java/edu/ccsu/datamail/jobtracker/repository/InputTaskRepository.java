@@ -45,4 +45,13 @@ public interface InputTaskRepository extends CrudRepository<InputTask, InputTask
      */
     @Query("FROM InputTask t WHERE t.jobId = :jobId AND t.workflowId = :workflowId AND t.taskNum = :taskId")
     Optional<InputTask> findInputTask(@Param("jobId") int jobId, @Param("workflowId") int workflowId, @Param("taskId") int taskNum);
+
+    /**
+     * Attempts to count the number of tasks that contain the same workflow and job id
+     * @param jobId
+     * @param workflowId
+     * @return
+     */
+    @Query("SELECT  COUNT (t) FROM InputTask t where t.workflow.job.jobId = :jobId AND t.workflow.workflowId = :workflowId ")
+    int countTaskNum(@Param("jobId") int jobId, @Param("workflowId") int workflowId);
 }

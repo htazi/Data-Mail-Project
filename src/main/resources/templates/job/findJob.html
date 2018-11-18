@@ -42,10 +42,7 @@
     <br>
     <br>
     <div >
-        <h3>Current User: <span id="usertxt" th:utext="${#request.userPrincipal.name}"></span></h3>
-
-          <br>
-        <form   id="frm" method='POST' action="/workflows/createworkflow">
+        <form  method='POST' action="/createWorkflow">
             <h3 style="display: inline;">Jod ID: </h3>
 
             <input id="textbox" name="jobId"  type="text" />

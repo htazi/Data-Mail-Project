@@ -17,10 +17,6 @@
     <script>
         $(document).ready(function(){
             $('#workflow').focus();
-            // $('#submitbtn').on('click', function () {
-            //    return empty();
-
-            //});
         });
 
         function empty() {
@@ -51,13 +47,6 @@
             return true;
         }
 
-        /*function incrementValue()
-        {
-            var value = parseInt(document.getElementById("workflow").value, 10);
-            value = isNaN(value) ? 0 : value;
-            value++;
-            document.getElementById("workflow").value = value;
-        }*/
     </script>
 <style>
    td{text-align: left;
@@ -72,7 +61,7 @@
             <h1>Create Workflow:</h1>
             <br>
             <br>
-            <form  method="GET  " action="/workflows/add" th:action="@{/workflows/add}">
+            <form  method='GET' action="/inputTask" th:action="@{/inputTask}">
                     <table align="center" style="margin: 0px auto;">
                         <tr>
                             <td>Job ID:</td>
@@ -83,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>Workflow:</td>
-                            <td><input type="text" name="workflow" th:value="${nextWorkflowId}" ></td>
+                            <td><input type="text" name="wfId" th:value="${wfId}" ></td>
 
                         </tr>
                         <tr>
@@ -98,7 +87,7 @@
                     <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
                     <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
                 <input type="hidden" name="jobId" th:value="${job.jobId}" />
-                <input type="hidden" name="wfId" th:value="${nextWorkflowId}"/>
+                <input type="hidden" name="wfId" th:value="${wfId}"/>
             </form>
             <br>
         </div>

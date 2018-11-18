@@ -74,6 +74,17 @@ public class InputTaskService
                 + " workflowId " + workflowId + " taskNum: " + taskNum + " not Found"));
     }
 
+    /**
+     * Gets the current task count for the given jobId and workflowId combination
+     *
+     * @param jobId
+     * @param workFlowId
+     * @return
+     */
+    public int getTaskNum(int jobId, int workFlowId){
+        return inputTaskRepository.countTaskNum(jobId, workFlowId);
+    }
+
     public void addInputTask(InputTask inputTask)
     {
         inputTaskRepository.save(inputTask);
