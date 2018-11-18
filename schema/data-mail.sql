@@ -70,11 +70,12 @@ CREATE TABLE client (
   CONSTRAINT client_pk PRIMARY KEY (client_id)
 );
 
--- List of data mail job and their client
+-- Data mail job information along with the client of the job
 CREATE TABLE job (
-  job_id    INT NOT NULL,
-  job_desc  VARCHAR(60),
-  client_id INT,
+  job_id        INT NOT NULL,
+  job_desc      VARCHAR(60),
+  client_id     INT,
+  data_mill_num INT,
   CONSTRAINT job_pk PRIMARY KEY (job_id),
   CONSTRAINT job_fk FOREIGN KEY (client_id) REFERENCES client (client_id)
 );
