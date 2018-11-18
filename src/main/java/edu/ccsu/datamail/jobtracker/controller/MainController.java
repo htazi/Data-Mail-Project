@@ -18,7 +18,7 @@ import java.security.Principal;
 public class MainController
 {
 
-    @RequestMapping(value = { "/welcome"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
     public String welcomePage(Model model)
     {
         model.addAttribute("title", "Welcome");
@@ -29,19 +29,15 @@ public class MainController
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal)
     {
-
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
-
         return "user/adminPage";
     }
 
-    @RequestMapping(value = {"/" ,"/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String loginPage(Model model)
     {
-
         return "user/loginPage";
     }
 
@@ -56,24 +52,29 @@ public class MainController
      * @throws IOException
      */
     @RequestMapping("/success")
-    public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException, IOException {
+    public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException, IOException
+    {
+        String role = authResult.getAuthorities().toString();
 
-        String role =  authResult.getAuthorities().toString();
-
-        if(role.contains("ROLE_ADMIN")){
+        if (role.contains("ROLE_ADMIN")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin"));
         }
-        else if(role.contains("ROLE_USER")) {
+        else if (role.contains("ROLE_USER")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/userInfo"));
-        }else if(role.contains("ROLE_Production_Programmer")) {
+        }
+        else if (role.contains("ROLE_Production_Programmer")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/programmer"));
-        }else if(role.contains("ROLE_File_Transfer")) {
+        }
+        else if (role.contains("ROLE_File_Transfer")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/fileTransfer"));
-        }else if(role.contains("ROLE_Data_Processing")) {
+        }
+        else if (role.contains("ROLE_Data_Processing")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/dataProcessing"));
-        }else if(role.contains("ROLE_Billing")) {
+        }
+        else if (role.contains("ROLE_Billing")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/billing"));
-        }else if(role.contains("ROLE_Manager")) {
+        }
+        else if (role.contains("ROLE_Manager")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/manager"));
         }
     }
@@ -88,7 +89,6 @@ public class MainController
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -105,7 +105,6 @@ public class MainController
     @RequestMapping(value = "/billing", method = RequestMethod.GET)
     public String billingPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -122,7 +121,6 @@ public class MainController
     @RequestMapping(value = "/dataProcessing", method = RequestMethod.GET)
     public String dataProcessingPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -139,7 +137,6 @@ public class MainController
     @RequestMapping(value = "/fileTransfer", method = RequestMethod.GET)
     public String fileTransferPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -156,7 +153,6 @@ public class MainController
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String managerPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -173,7 +169,6 @@ public class MainController
     @RequestMapping(value = "/programmer", method = RequestMethod.GET)
     public String programmerPage(Model model, Principal principal)
     {
-
         // After user login successfully.
         String userName = principal.getName();
 
@@ -190,7 +185,6 @@ public class MainController
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal)
     {
-
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
@@ -198,12 +192,9 @@ public class MainController
 
             model.addAttribute("userInfo", userInfo);
 
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+            String message = "Hi " + principal.getName() + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
-
         }
-
         return "user/403Page";
     }
 }

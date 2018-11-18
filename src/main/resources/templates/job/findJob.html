@@ -12,6 +12,13 @@
     <script>
         $(document).ready(function(){
             $('#textbox').focus();
+
+            var whichuser = $('#usertxt').text();
+            if( whichuser == "Billing1")
+            {
+                $("#frm").attr("action", "/billing/displaybilling");
+                $("#frm").attr("method", "GET");
+            }
         });
         function empty() {
             var x = document.getElementById("textbox").value;
@@ -38,7 +45,7 @@
         <form  method='POST' action="/createWorkflow">
             <h3 style="display: inline;">Jod ID: </h3>
 
-            <input id="textbox" name="jobId"  type="text"  />
+            <input id="textbox" name="jobId"  type="text" />
 
             <input type="submit" class="btn btn-success" onClick= "return empty()" value="find a job">
         </form>
