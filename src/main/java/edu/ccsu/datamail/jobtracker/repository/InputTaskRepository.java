@@ -36,6 +36,14 @@ public interface InputTaskRepository extends CrudRepository<InputTask, InputTask
     List<InputTask> findAllByWorkflow(Workflow workflow);
 
     /**
+     * Finds all InputTasks associated with the specified job
+     *
+     * @param jobId the id of the specified job
+     * @return A List containing all the job's InputTasks
+     */
+    List<InputTask> findAllByJobId(Integer jobId);
+
+    /**
      * Attempts to find an InputTask given the jobId, workflowId, and task number in the workflow
      *
      * @param jobId      the id of the job this task is associated with

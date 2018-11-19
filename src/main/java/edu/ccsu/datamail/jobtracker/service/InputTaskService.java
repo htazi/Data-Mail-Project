@@ -45,6 +45,17 @@ public class InputTaskService
     }
 
     /**
+     * Finds all InpuTasks that are part of a given job
+     *
+     * @param jobId the id of the job that the tasks belong to
+     * @return A list containing all InputTasks associated with the job
+     */
+    public List<InputTask> getAllInJob(Integer jobId)
+    {
+        return inputTaskRepository.findAllByJobId(jobId);
+    }
+
+    /**
      * Retrieves an InputTask from the database using the provided InputTaskPK object
      *
      * @param inputTaskPK the primary key of the InputTask requested
@@ -81,7 +92,8 @@ public class InputTaskService
      * @param workFlowId
      * @return
      */
-    public int getTaskNum(int jobId, int workFlowId){
+    public int getTaskNum(int jobId, int workFlowId)
+    {
         return inputTaskRepository.countTaskNum(jobId, workFlowId);
     }
 
