@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>items</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!--react related src-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function(){
+            $('#workflow').focus();
+            // $('#submitbtn').on('click', function () {
+            //    return empty();
+
+            //});
+        });
+
+        function empty() {
+            var result = validate("workflow");
+            var result2 =  validate("job");
+           if(result && result2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        function validate(elementId) {
+
+            var x = document.getElementById(elementId).value;
+            var xid = "#" + elementId;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for " + elementId);
+                $(xid).focus();
+                $(xid).val("");
+                return false;
+            }
+
+            return true;
+        }
+
+
+    </script>
+
+    <script type="text/babel">
+
+
+
+        ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById("root2")
+        );
+
+        class Test extends React.Component {
+            state ={
+                count:777777
+            };
+
+            render(){
+                return(
+                    <div>
+                    <span className={this.getClass()}>{this.state.count} </span>
+                    <input type="button" className="btn btn-success m-3 " value="please click"/>
+
+                    </div>
+            )
+            }
+
+            getClass()
+            {
+                return "testclass";
+            }
+
+
+        }
+
+        ReactDOM.render(
+            <Test />,
+            document.getElementById('root3')
+        );
+
+
+    </script>
+
+</head>
+<script src="../../jsdir/jsfile.js"></script>
+<body>
+
+
+<br>
+<br>
+<div align="center">
+    <h1>Please Create WorkflowID:</h1>
+    <br>
+    <br>
+    <div >
+        <h1 th:text="${job.jobid}"></h1>
+        <form  method='GET' action="/workflows/displayworkflow" th:action="@{/workflows/displayworkflow}">
+            <h3 style="display: inline;">Workflow ID: </h3>
+
+            <input id="workflow" name="workflow"  type="text"  />
+            <h3 style="display: inline;">Jod ID: </h3>
+            <input id="job" name="job"  type="text" />
+
+            <input id="submitbtn" type="submit" class="btn btn-success" onClick= "return empty()" value="find a workflow">
+        </form>
+        <p> put 0 for WF ID 1 for Job ID or create more record in workflow table</p>
+    </div>
+
+</div>
+<!--<div id="root2"></div>-->
+<!--<div id="root3"></div>-->
+
+</body>
+</html>

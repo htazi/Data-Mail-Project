@@ -12,7 +12,7 @@ public class Client
     @Id
     @GeneratedValue
     @Column(name = "client_id", nullable = false)
-    private int clientId;
+    private Integer clientId;
 
     @Column(name = "client_name", length = 30)
     private String clientName;
@@ -20,12 +20,32 @@ public class Client
     @Column(name = "address", length = 45)
     private String address;
 
-    public int getClientId()
+    /**
+     * Default Constructor:
+     */
+    public Client()
+    {
+    }
+
+    /**
+     * Alternate Constructor
+     * Creates a client with the specified name and address
+     *
+     * @param clientName the name of the client
+     * @param address    the address of the client
+     */
+    public Client(String clientName, String address)
+    {
+        this.clientName = clientName;
+        this.address = address;
+    }
+
+    public Integer getClientId()
     {
         return clientId;
     }
 
-    public void setClientId(int clientId)
+    public void setClientId(Integer clientId)
     {
         this.clientId = clientId;
     }
@@ -50,5 +70,45 @@ public class Client
         this.address = address;
     }
 
+    /**
+     * Determines if this object is equal to another object
+     *
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Client)) {
+            return false;
+        }
+
+        Client client = (Client) o;
+
+        if (clientId != client.clientId) {
+            return false;
+        }
+        if (clientName != null ? !clientName.equals(client.clientName) : client.clientName != null) {
+            return false;
+        }
+        return address != null ? address.equals(client.address) : client.address == null;
+    }
+
+    /**
+     * Returns a hashCode value for this object
+     *
+     * @return an integer hash code for this object
+     */
+    @Override
+    public int hashCode()
+    {
+        int result = clientId;
+        result = 31 * result + (clientName != null ? clientName.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
 }
 

@@ -1,7 +1,7 @@
 package edu.ccsu.datamail.jobtracker.entity.user;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "app_user", uniqueConstraints = {
@@ -9,7 +9,6 @@ import java.time.LocalDate;
 })
 public class AppUser
 {
-
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
@@ -28,14 +27,44 @@ public class AppUser
     private String lastName;
 
     @Column(name = "last_login", length = 32)
-    private LocalDate lastLogin;
+    private Timestamp lastLogin;
 
     @Column(name = "last_logout", length = 32)
-    private LocalDate lastLogout;
+    private Timestamp lastLogout;
 
     @Column(name = "is_active", length = 1, nullable = false)
     private boolean isActive;
 
+    /**
+     * Default Constructor
+     */
+    public AppUser()
+    {
+    }
+
+    /**
+     * Alterate Constructor
+     * Creates a new AppUser with all fields initialized
+     *
+     * @param userName          the username the user will use to login
+     * @param encryptedPassword the user's encrypted password
+     * @param firstName         the user's first name
+     * @param lastName          the user's last name
+     * @param lastLogin         the last time the user logged in
+     * @param lastLogout        the last time the user logged out
+     * @param isActive          flag that allows the user to login and access the system
+     */
+    public AppUser(String userName, String encryptedPassword, String firstName, String lastName, Timestamp lastLogin,
+                   Timestamp lastLogout, boolean isActive)
+    {
+        this.userName = userName;
+        this.encryptedPassword = encryptedPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastLogin = lastLogin;
+        this.lastLogout = lastLogout;
+        this.isActive = isActive;
+    }
 
     public Integer getUserId()
     {
@@ -87,22 +116,22 @@ public class AppUser
         this.lastName = lastName;
     }
 
-    public LocalDate getLastLogin()
+    public Timestamp getLastLogin()
     {
         return lastLogin;
     }
 
-    public void setLastLogin(LocalDate lastLogin)
+    public void setLastLogin(Timestamp lastLogin)
     {
         this.lastLogin = lastLogin;
     }
 
-    public LocalDate getLastLogout()
+    public Timestamp getLastLogout()
     {
         return lastLogout;
     }
 
-    public void setLastLogout(LocalDate lastLogout)
+    public void setLastLogout(Timestamp lastLogout)
     {
         this.lastLogout = lastLogout;
     }
@@ -118,27 +147,45 @@ public class AppUser
     }
 
     /**
-     * Returns a hashCode value for this object
+     * Determines if this object is equal to another object
      *
-     * @return an integer hash code for this object
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
      */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object o)
     {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
+        if (this == o) {
             return true;
         }
-        if (obj instanceof AppUser) {
-            AppUser other = (AppUser) obj;
-            return this.userId.equals(other.userId) && this.userName.equals(other.userName) &&
-                    this.encryptedPassword.equals(other.encryptedPassword) && this.firstName.equals(other.firstName) &&
-                    this.lastName.equals(other.lastName) && this.lastLogin.equals(other.lastLogin) &&
-                    this.lastLogout.equals(other.lastLogout) && this.isActive == other.isActive;
+        if (!(o instanceof AppUser)) {
+            return false;
         }
-        return false;
+
+        AppUser appUser = (AppUser) o;
+
+        if (isActive != appUser.isActive) {
+            return false;
+        }
+        if (userId != null ? !userId.equals(appUser.userId) : appUser.userId != null) {
+            return false;
+        }
+        if (userName != null ? !userName.equals(appUser.userName) : appUser.userName != null) {
+            return false;
+        }
+        if (encryptedPassword != null ? !encryptedPassword.equals(appUser.encryptedPassword) : appUser.encryptedPassword != null) {
+            return false;
+        }
+        if (firstName != null ? !firstName.equals(appUser.firstName) : appUser.firstName != null) {
+            return false;
+        }
+        if (lastName != null ? !lastName.equals(appUser.lastName) : appUser.lastName != null) {
+            return false;
+        }
+        if (lastLogin != null ? !lastLogin.equals(appUser.lastLogin) : appUser.lastLogin != null) {
+            return false;
+        }
+        return lastLogout != null ? lastLogout.equals(appUser.lastLogout) : appUser.lastLogout == null;
     }
 
     /**
@@ -149,28 +196,14 @@ public class AppUser
     @Override
     public int hashCode()
     {
-        int hash = 17;
-        if (userId != null) {
-            hash += userId.hashCode();
-        }
-        if (userName != null) {
-            hash += userName.hashCode();
-        }
-        if (encryptedPassword != null) {
-            hash += encryptedPassword.hashCode();
-        }
-        if (firstName != null) {
-            hash += firstName.hashCode();
-        }
-        if (lastName != null) {
-            hash += lastName.hashCode();
-        }
-        if (lastLogin != null) {
-            hash += lastLogin.hashCode();
-        }
-        if (lastLogout != null) {
-            hash += lastLogout.hashCode();
-        }
-        return hash + Boolean.hashCode(isActive);
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (encryptedPassword != null ? encryptedPassword.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
+        result = 31 * result + (lastLogout != null ? lastLogout.hashCode() : 0);
+        result = 31 * result + (isActive ? 1 : 0);
+        return result;
     }
 }

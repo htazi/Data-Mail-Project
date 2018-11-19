@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Create Workflow </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#workflow').focus();
+        });
+
+        function empty() {
+            var result = validate("workflow");
+            var result2 =  validate("wf_desc");
+            if(result && result2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        function validate(elementId) {
+
+            var x = document.getElementById(elementId).value;
+            var xid = "#" + elementId;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for " + elementId);
+                $(xid).focus();
+                $(xid).val("");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+<style>
+   td{text-align: left;
+     font-size: large;
+   }
+
+</style>
+
+</head>
+    <body>
+    <th:block th:include="user/_menu"></th:block>
+        <div style="text-align:center">
+            <h1>Create Workflow:</h1>
+            <br>
+            <br>
+            <form  method='GET' action="/inputTask" th:action="@{/inputTask}">
+                    <table align="center" style="margin: 0px auto;">
+                        <tr>
+                            <td>Job ID:</td>
+                           <td><input type="text" th:value="${job.jobId}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Workflow:</td>
+                            <td><input type="text" name="wfId" th:value="${wfId}" ></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="8">&nbsp;</td>
+                        </tr>
+                        <tr >
+
+                            <td>Description:</td>
+                            <td><input type="text" name="wfdesc" value=""/></td>
+                        </tr>
+                    </table><br>
+                    <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
+                    <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
+                <input type="hidden" name="jobId" th:value="${job.jobId}" />
+                <input type="hidden" name="wfId" th:value="${wfId}"/>
+            </form>
+            <br>
+        </div>
+    </body>
+</html>

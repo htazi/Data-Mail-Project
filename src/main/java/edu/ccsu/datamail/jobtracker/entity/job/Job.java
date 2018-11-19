@@ -1,18 +1,17 @@
 package edu.ccsu.datamail.jobtracker.entity.job;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "job", uniqueConstraints = {
         @UniqueConstraint(name = "job_pk", columnNames = "job_id")
 })
-public class Job
+public class Job implements Serializable
 {
-
     @Id
-    @GeneratedValue
     @Column(name = "job_id", nullable = false)
-    private int jobId;
+    private Integer jobId;
 
     @Column(name = "job_desc", length = 60)
     private String jobDesc;
@@ -20,6 +19,28 @@ public class Job
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    /**
+     * Default Constructor:
+     */
+    public Job()
+    {
+    }
+
+    /**
+     * Alternate Constructor:
+     * Creates a new Job with the associated description and client
+     *
+     * @param jobId   the integer id of the job
+     * @param jobDesc the description of the job
+     * @param client  the client associated with the job
+     */
+    public Job(Integer jobId, String jobDesc, Client client)
+    {
+        this.jobId = jobId;
+        this.jobDesc = jobDesc;
+        this.client = client;
+    }
 
     public int getJobId()
     {
@@ -51,6 +72,12 @@ public class Job
         this.client = client;
     }
 
+    /**
+     * Determines if this object is equal to another object
+     *
+     * @param o the object this object is being compared to
+     * @return true if the two objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o)
     {
@@ -72,6 +99,11 @@ public class Job
         return client != null ? client.equals(job.client) : job.client == null;
     }
 
+    /**
+     * Returns a hashCode value for this object
+     *
+     * @return an integer hash code for this object
+     */
     @Override
     public int hashCode()
     {
