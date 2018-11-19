@@ -1,55 +1,58 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-     <!--style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">-->
+<!--style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">-->
 
-    <head>
+<head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+</head>
+<style>
+    a{
+        display: inline-block;
+    }
+</style>
+<body>
+<nav class="navbar navbar-default" style=" position: relative ">
+    <div class="container-fluid">
 
-    <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}">Home</a>
-            </div>
-
-            <div class="nav navbar-nav">
+        <div class="nav navbar-nav" style="position: absolute; top: 25%">
+            <a th:href="@{/}">Home</a>
+            &nbsp;&nbsp;
             <a th:href="@{/userInfo}">User Info</a>
 
-                 &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/admin}">Admin</a>
 
-                 &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/billing}">Billing</a>
 
-                &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/dataProcessing}">Data Processing</a>
 
-                &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/fileTransfer}">File Transfer</a>
 
-                &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/manager}">Manager</a>
 
-                &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
             <a th:href="@{/programmer}">Production Programmer</a>
 
-                &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
-            <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
-
-            </div>
         </div>
-    </nav>
-    </body>
+    </div>
+    <a style="position:absolute; right:5%; top:25%;" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+</nav>
+
+</body>
 </html>
