@@ -8,17 +8,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
 
-    <!--<h1>This is a page for billing dept. Job#: <span id="jobId" th:text="${jobId}"></span></h1>-->
     <style>
-        .test{
-            width: 20px;
+        .inputwidth{
+            width: 150px;
+            display: inline-block;
         }
-        /*.tdata{*/
-        /*font-size: 30px;*/
-        /*}*/
+        .lbl {
+            display: inline-block;
+        }
+
     </style>
     <script>
         $(document).ready(function(){
@@ -47,57 +46,76 @@
     <h1>Search For a Job(Billing Page)</h1>
     <br>
     <form  method='GET' action="/inputTasks/getalltasks">
-        Job ID: <input id="jobId" name="jobId" type="text" >
+        <div>
+            <h3 class="lbl">Job ID:</h3> <input class="form-control inputwidth" id="jobId" name="jobId" type="text" >
         <!--Workflow ID: <input id="wfId" name="wfId" type="text" value="2" readonly>-->
-        <input type="submit" value="Get Billing" onclick="return empty()">
+        <input class="btn btn-primary inputwidth" type="submit" value="Get Billing" onclick="return empty()">
         <!--<input class="btn btn-success" type="button" id="mybtn2"  value="Show All Bills"/>-->
+        </div>
     </form>
 
 
     <br>
     <br>
-    <table>
+    <table class="table table-striped">
 
         <th:block th:if="${isempty == false}">
             <tr >
-                <td  th:style="|width: auto;padding-left:10px; padding-bottom:5px|">Job ID</td>
-                <td th:text="${'workflow ID'}"></td>
-                <td>User Name</td>
-                <td>Task Number</td>
-                <td>Task Description</td>
-                <td>Records Input</td>
-                <td>Records Output</td>
-                <td>Records Dropped</td>
-                <td>Time Taken</td>
-                <td>Time Recorced</td>
-                <td>Acronym</td>
-                <td>Task Description</td>
-                <td>Is Billable</td>
-                <td th:style="|width: auto;padding-right:10px|">Price</td>
+                <th  th:style="|width: auto;padding-left:10px; padding-bottom:5px|">Job ID</th>
+                <th >workflow ID</th>
+                <th>User Name</th>
+                <th>Task Number</th>
+                <th>Task Description</th>
+                <th>Records Input</th>
+                <th>Records Output</th>
+                <th>Records Dropped</th>
+                <th>Time Taken</th>
+                <!--<th>Time Recorced</th>-->
+                <th>Acronym</th>
+                <th>Task list Desc</th>
+                <th>Is Billable</th>
+                <th th:style="|width: auto;padding-right:10px|">Price</th>
             </tr>
         </th:block>
 
         <h2 th:text="${message}"></h2>
 
         <tr  th:each="taskinput : ${inputtasks}">
-            <div>
 
-                <td  th:style="|width: auto;padding-left:10px|" ><input  th:style="|width: 80px|"  name="inputNum"  type="text"  th:value="${taskinput.getJobId()}" readonly/></td>
-                <td><input th:style="|width: 80px|" name ="inputNum"  type="text"  th:value="${taskinput.getWorkflowId()}" readonly/></td>
-                <td><input th:style="|width: 110px|" name="input"  type="text"  th:value="${taskinput.getUserId().getUserName()}" readonly/></td>
-                <td><input th:style="|width: 100px|" name="inputNum"  type="text"  th:value="${taskinput.getTaskNum()}" readonly/></td>
-                <td> <input name ="input"  type="text"  th:value="${taskinput.getDescription()}" readonly/></td>
-                <td><input th:style="|width: 100px|" name ="input" type="text"  th:value="${taskinput.getRecordsIn()}" readonly/></td>
-                <td><input th:style="|width: 100px|" name="input" type="text"  th:value="${taskinput.getRecordsOut()}" readonly/></td>
-                <td><input th:style="|width: 120px|" name="input"  type="text"  th:value="${taskinput.getRecordsDropped()}" readonly/></td>
-                <td><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTimeTaken()}" readonly/></td>
-                <td><input name="input"  type="text"  th:value="${taskinput.getTimeRecorded()}" readonly/></td>
-                <td><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTask_id().getAcronym()}" readonly/></td>
-                <td><input name="input"  type="text"  th:value="${taskinput.getTask_id().getTaskDesc()}" readonly/></td>
-                <td><input th:style="|width: 80px|"  name="input"  type="text"  th:value="${taskinput.getTask_id().isBillable()}" readonly/></td>
+
+                <!--<td  th:style="|width: auto;padding-left:10px|" ><input  th:style="|width: 80px|"  name="inputNum"  type="text"  th:value="${taskinput.getJobId()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 80px|" name ="inputNum"  type="text"  th:value="${taskinput.getWorkflowId()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 110px|" name="input"  type="text"  th:value="${taskinput.getUserId().getUserName()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 100px|" name="inputNum"  type="text"  th:value="${taskinput.getTaskNum()}" readonly/></td>-->
+                <!--<td> <input name ="input"  type="text"  th:value="${taskinput.getDescription()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 100px|" name ="input" type="text"  th:value="${taskinput.getRecordsIn()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 100px|" name="input" type="text"  th:value="${taskinput.getRecordsOut()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 120px|" name="input"  type="text"  th:value="${taskinput.getRecordsDropped()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTimeTaken()}" readonly/></td>-->
+                <!--<td><input name="input"  type="text"  th:value="${taskinput.getTimeRecorded()}" readonly/></td>-->
+                <!--<td><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTask_id().getAcronym()}" readonly/></td>-->
+                <!--<td><input name="input"  type="text"  th:value="${taskinput.getTask_id().getTaskDesc()}" readonly/></td>-->
+                  <!--<td><input th:style="|width: 80px|"  name="input"  type="text"  th:value="${taskinput.getTask_id().isBillable()}" readonly/></td>-->
+
+
+
+            <div  >
+                <td  th:style="|padding-left:10px|" th:text="${taskinput.getJobId()}"/></td>
+                <td  th:text="${taskinput.getWorkflowId()}"/></td>
+                <td    th:text="${taskinput.getUserId().getUserName()}"/></td>
+                <td  th:text="${taskinput.getTaskNum()}" /></td>
+                <td   th:text="${taskinput.getDescription()}" /></td>
+                <td  th:text="${taskinput.getRecordsIn()}" /></td>
+                <td   th:text="${taskinput.getRecordsOut()}" /></td>
+                <td th:text="${taskinput.getRecordsDropped()}"/></td>
+                <td  th:text="${taskinput.getTimeTaken()}" /></td>
+                <!--<td>< name="td"    th:text="${taskinput.getTimeRecorded()}" readonly/></td>-->
+                <td   th:text="${taskinput.getTask_id().getAcronym()}" /></td>
+                <td th:text="${taskinput.getTask_id().getTaskDesc()}" /></td>
+                <td   th:text="${taskinput.getTask_id().isBillable()}" /></td>
                 <!--TODO make this element to chekcbox-->
-                <!--<td><input type="checkbox"  th:if="${taskinput.getTask_id().getTaskDesc() == true}" checked/> </td>-->
-                <td th:style="|width: auto;padding-right:10px|"><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTask_id().getPrice()}" readonly/></td>
+                <!--<td>< type="checkbox"  th:if="${taskinput.getTask_id().getTaskDesc() == true}" checked/> </td>-->
+                <td  th:style="|width: auto;padding-right:10px|" th:text="${taskinput.getTask_id().getPrice()}" /></td>
 
             </div>
 
@@ -106,11 +124,6 @@
     </table>
 
 </div>
-
-
-
-
-<!--<h1  th:text="${inputtasks}"></h1>-->
 
 
 </body>
