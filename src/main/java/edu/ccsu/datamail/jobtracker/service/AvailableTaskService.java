@@ -6,6 +6,7 @@ import edu.ccsu.datamail.jobtracker.repository.AvailableTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -45,8 +46,20 @@ public class AvailableTaskService
         return taskContainer.orElseThrow(() -> new TaskNotFoundException("AvailableTask with id " + taskId + " not found"));
     }
 
+    public List<AvailableTask> getAllAvailableTask()
+    {
+
+
+        return(List<AvailableTask>) availableTaskRepository.findAll();
+    }
+
     public void addAvailableTask(AvailableTask availableTask)
     {
         availableTaskRepository.save(availableTask);
+    }
+
+    public void deleteAvailableTask(int taskId)
+    {
+        availableTaskRepository.deleteById(taskId);
     }
 }
