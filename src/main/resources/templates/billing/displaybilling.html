@@ -26,6 +26,15 @@
             $('h1[name=inputNum]').css({"color":"red"});
 
         });
+
+        function empty() {
+            var x = document.getElementById("jobId").value;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for job ID");
+                console.log("function fired");
+                return false;
+            }
+        }
     </script>
 </head>
 
@@ -38,9 +47,9 @@
     <h1>Search For a Job(Billing Page)</h1>
     <br>
     <form  method='GET' action="/inputTasks/getalltasks">
-        Job ID: <input id="jobId" name="jobId" type="text">
+        Job ID: <input id="jobId" name="jobId" type="text" >
         <!--Workflow ID: <input id="wfId" name="wfId" type="text" value="2" readonly>-->
-        <input type="submit" value="Get Billing" >
+        <input type="submit" value="Get Billing" onclick="return empty()">
         <!--<input class="btn btn-success" type="button" id="mybtn2"  value="Show All Bills"/>-->
     </form>
 
