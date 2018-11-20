@@ -122,10 +122,15 @@ public class InputTaskController
     public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
     {
         List<InputTask> inputTasks =inputTaskService.getAllInJob(jobId);
+        boolean isempty = false;
+        model.addAttribute("isempty", isempty);
         model.addAttribute("inputtasks", inputTasks);
-       if(inputTasks.isEmpty()) {
-           model.addAttribute("message", "No Such a Job Id");
-       }
+
+        if(inputTasks.isEmpty()) {
+            isempty = true;
+            model.addAttribute("message", "No Such a Job Id");
+            model.addAttribute("isempty", isempty);
+        }
 
 
         return "/billing/displaybilling";
