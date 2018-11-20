@@ -123,7 +123,7 @@ public class InputTaskController
     {
         List<InputTask> inputTasks =inputTaskService.getAllInJob(jobId);
         model.addAttribute("inputtasks", inputTasks);
-       if(inputTasks == null) {
+       if(inputTasks.isEmpty()) {
            model.addAttribute("message", "No Such a Job Id");
        }
 
