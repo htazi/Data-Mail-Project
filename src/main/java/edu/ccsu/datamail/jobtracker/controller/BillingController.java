@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BillingController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/billing/displaybilling")
-    public String getToBilling(@RequestParam("jobId") int jobId, Model model)
+    public String getToBilling()
     {
-        model.addAttribute("jobId", jobId);
+
         return "billing/displaybilling";
     }
 

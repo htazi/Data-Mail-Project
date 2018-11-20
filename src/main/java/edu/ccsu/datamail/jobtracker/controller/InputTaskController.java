@@ -1,29 +1,31 @@
-package edu.ccsu.datamail.jobtracker.controller;
 
-import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
-import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
-import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
-import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
-import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
-import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
-import edu.ccsu.datamail.jobtracker.entity.workflow.WorkflowNotFoundException;
-import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
-import edu.ccsu.datamail.jobtracker.service.InputTaskService;
-import edu.ccsu.datamail.jobtracker.service.UserDetailsServiceImpl;
-import edu.ccsu.datamail.jobtracker.service.WorkflowService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+        package edu.ccsu.datamail.jobtracker.controller;
 
-import java.security.Principal;
-import java.sql.Timestamp;
+        import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
+        import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
+        import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
+        import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
+        import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+        import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
+        import edu.ccsu.datamail.jobtracker.entity.workflow.WorkflowNotFoundException;
+        import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
+        import edu.ccsu.datamail.jobtracker.service.InputTaskService;
+        import edu.ccsu.datamail.jobtracker.service.UserDetailsServiceImpl;
+        import edu.ccsu.datamail.jobtracker.service.WorkflowService;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.security.core.Authentication;
+        import org.springframework.security.core.userdetails.User;
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.Model;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RequestMethod;
+        import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+        import java.security.Principal;
+        import java.sql.Timestamp;
+        import java.util.List;
+
+        @Controller
 public class InputTaskController
 {
     private final AvailableTaskService availableTaskService;
@@ -114,5 +116,18 @@ public class InputTaskController
         /*The inputTask html page in the inputtask package is displayed again after form
          * submission*/
         return ("inputtask/inputTask");
+    }
+
+    @RequestMapping( method = RequestMethod.GET, value="/inputTasks/getalltasks")
+    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
+    {
+        List<InputTask> inputTasks =inputTaskService.getAllInJob(jobId);
+        model.addAttribute("inputtasks", inputTasks);
+       if(inputTasks == null) {
+           model.addAttribute("message", "No Such a Job Id");
+       }
+
+
+        return "/billing/displaybilling";
     }
 }
