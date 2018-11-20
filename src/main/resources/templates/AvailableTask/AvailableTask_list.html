@@ -1,0 +1,50 @@
+<!--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>-->
+
+<!DOCTYPE html >
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center">AvailableTask List</h1>
+    <table class="table table-striped">
+        <thead>
+        <th scope="row">#ID</th>
+        <th scope="row">Acronym</th>
+        <th scope="row">Description</th>
+        <th scope="row">Is_Billable</th>
+        <th scope="row">Price</th>
+        <th scope="row">Update</th>
+        <th scope="row">Delete</th>
+        </thead>
+        <tbody>
+
+        <tr  th:each="task : ${tasksList}">
+            <div>
+
+                <td><input name="input1"  type="text"  th:value="${task.taskId}"/></td>
+                <td><input name ="input2"  type="text"  th:value="${task.acronym}"/></td>
+                <td><input name="input3"  type="text"  th:value="${task.taskDesc}"/></td>
+                <!--<td><input name="input4"  type="checkbox"  th:value="${task.isBillable}"/></td> -->
+                <td><input name ="input5" type="text"  th:value="${task.price}"/></td>
+                <td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Update</a></td>
+                <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>
+
+            </div>
+        </tr>
+
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="AvailableTask/AvailableTask" role="button" >Add New Task</a>
+</div>
+</body>
+</html>
