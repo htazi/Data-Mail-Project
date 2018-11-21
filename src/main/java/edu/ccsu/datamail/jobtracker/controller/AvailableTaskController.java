@@ -40,7 +40,7 @@ public class AvailableTaskController
         return ("AvailableTask/AvailableTask");
     }
 
-    @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.GET)
+   /* @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.GET)
     public ModelAndView editTask(@PathVariable int taskId) throws TaskNotFoundException {
         ModelAndView model = new ModelAndView();
 
@@ -49,7 +49,7 @@ public class AvailableTaskController
         model.setViewName("task_form");
 
         return model;
-    }
+    }*/
 
     @RequestMapping(value="/saveTask", method=RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("taskForm") AvailableTask availableTask) {
@@ -58,11 +58,11 @@ public class AvailableTaskController
         return new ModelAndView("redirect:/task/list");
     }
 
-    @RequestMapping(value="/deleteTask/{taskId}", method=RequestMethod.GET)
+    /*@RequestMapping(value="/deleteTask/{taskId}", method=RequestMethod.GET)
     public ModelAndView delete(@PathVariable("taskId") int taskId) {
         availableTaskService.deleteAvailableTask(taskId);
 
         return new ModelAndView("redirect:/task/list");
-    }
+    }*/
 
 }
