@@ -1,6 +1,7 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
@@ -40,6 +41,17 @@ public class AvailableTaskController
         return ("AvailableTask/AvailableTask");
     }
 
+    @RequestMapping(value="/list", method=RequestMethod.POST)
+    public String saveTask(@RequestParam("task_id") Integer taskId, @RequestParam("acronym") String acronym,
+                           @RequestParam("t_desc") String taskDesc, @RequestParam("is_billable") Boolean isBillable,
+                           @RequestParam("price") Double price, Model model)
+    {
+        AvailableTask availableTask = new AvailableTask(taskId, acronym, taskDesc, isBillable, price);
+        model.addAttribute("task_id", taskId);
+        availableTaskService. addAvailableTask(availableTask);
+        return "redirect:list";
+    }
+
    /* @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.GET)
     public ModelAndView editTask(@PathVariable int taskId) throws TaskNotFoundException {
         ModelAndView model = new ModelAndView();
@@ -50,13 +62,6 @@ public class AvailableTaskController
 
         return model;
     }*/
-
-    @RequestMapping(value="/saveTask", method=RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("taskForm") AvailableTask availableTask) {
-        availableTaskService.addAvailableTask(availableTask);
-
-        return new ModelAndView("redirect:/task/list");
-    }
 
     /*@RequestMapping(value="/deleteTask/{taskId}", method=RequestMethod.GET)
     public ModelAndView delete(@PathVariable("taskId") int taskId) {

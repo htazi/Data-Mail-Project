@@ -16,8 +16,11 @@
 <div class="container">
     <h1 style="text-align: center">Task</h1>
     <table class="table table-striped">
-    <form method="post" action="/task/save" th:action="@{/task/save}" >
-        <input type="hidden" name="taskId" th:value="${taskId}"/>
+    <form method="POST" action="/task/list" th:action="@{/task/list}" >
+        <div class="form-group">
+            <label>TaskID</label><br>
+            <input type="text" name="task_id"/>
+        </div>
         <div class="form-group">
             <label>Acronym</label><br>
             <input  type="text" name="acronym"/>
