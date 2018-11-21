@@ -14,7 +14,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/task")
-public class AvailableTaskController {
+public class AvailableTaskController
+{
 
     private final AvailableTaskService availableTaskService;
 
@@ -26,26 +27,18 @@ public class AvailableTaskController {
     }
 
     @RequestMapping(value="/list", method= RequestMethod.GET)
-    public String Taskslist(Model model){
-        //ModelAndView model = new ModelAndView("AvailableTask/AvailableTask_list");
-       // List<AvailableTask> taskList = availableTaskService.getAllAvailableTask();
+    public String Taskslist(Model model)
+    {
         model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
-
         return "AvailableTask/AvailableTask_list";
     }
 
-  /* @RequestMapping(value="/addTask/", method=RequestMethod.GET)
-    public String addTask(@RequestParam("task_id") int taskId, @RequestParam("acronym") String acronym,
-                          @RequestParam("_t_desc") String taskDesc, @RequestParam("is_billable") boolean isBillable,
-                          @RequestParam("price") Double price,Model model) {
-        //ModelAndView model = new ModelAndView();
+  @RequestMapping(value="/addTask", method=RequestMethod.GET)
+    public String addTask()
+    {
 
-        AvailableTask availableTask = new AvailableTask(taskId,acronym,taskDesc,isBillable,price);
-        model.addAttribute("taskId", taskId);
-        AvailableTaskService.addAvailableTask(taskId);
-
-        return ("")
-    }*/
+        return ("AvailableTask/AvailableTask");
+    }
 
     @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.GET)
     public ModelAndView editTask(@PathVariable int taskId) throws TaskNotFoundException {

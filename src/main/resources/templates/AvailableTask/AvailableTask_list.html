@@ -23,8 +23,8 @@
         <th scope="row">Description</th>
         <th scope="row">Is_Billable</th>
         <th scope="row">Price</th>
-        <th scope="row">Update</th>
-        <th scope="row">Delete</th>
+       <!-- <th scope="row">Update</th>
+        <th scope="row">Delete</th>-->
         </thead>
         <tbody>
 
@@ -36,15 +36,16 @@
                 <td><input name="input3"  type="text"  th:value="${task.taskDesc}"/></td>
                 <!--<td><input name="input4"  type="checkbox"  th:value="${task.isBillable}"/></td>-->
                 <td><input name ="input5" type="text"  th:value="${task.price}"/></td>
-                <td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Update</a></td>
-                <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>
+                <!--<td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Update</a></td>
+                <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>-->
 
             </div>
         </tr>
 
         </tbody>
     </table>
-    <a class="btn btn-primary" href="AvailableTask/AvailableTask.html" role="button" >Add New Task</a>
+   <!--<a class="btn btn-primary" href="/addTask/" role="button" >Add New Task</a>-->
+    <form method="GET" action="/task/addTask/" th:action="@{/task/addTask}"><input type="submit" class="btn btn-primary" value ="Add New Task"></form>
 </div>
 </body>
 </html>

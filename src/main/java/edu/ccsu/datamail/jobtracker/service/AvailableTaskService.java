@@ -49,7 +49,6 @@ public class AvailableTaskService
     public List<AvailableTask> getAllAvailableTask()
     {
 
-
         return(List<AvailableTask>) availableTaskRepository.findAll();
     }
 
