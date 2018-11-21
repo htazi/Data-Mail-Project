@@ -12,7 +12,11 @@
             var t = d.getHours() + ":" + d.getMinutes();
             jQuery('#timenow').val(t);
             jQuery('#timestamp').text(d);
+
+
         });
+
+
     </script>
     <style>
         .container {
@@ -57,7 +61,7 @@
 
         <tr >
             <!--<td><input type="text" name="job_id"  size="10"  th:value="${workflow.job.getJobId()}"></td>-->
-            <td><input type="text" name="job_id"  size="10"    th:value="${jobId}"></td>
+            <td><input  type="text" name="job_id"  size="10"    th:value="${jobId}"></td>
             <td><input type="text" name="workflow"  size="10"  th:value="${wfId}"></td>
             <td><input type="text" name="task_id" size="10" ></td>
             <td><input type="text" name="time_taken" size="10" ></td>
@@ -72,7 +76,7 @@
         <!--TODO when the New Work flow of Finish buttons are pressed with empty fields an error occurs
         This should be fixed to allow those buttons to be pressed. Right now they are tied to
         inputting tasks. They should operate separately-->
-        <td><input type="submit" class="btn btn-success" name="submit" value= "Submit" ></td>
+        <td><input type="submit" class="btn btn-success" name="submit" value= "Submit"  ></td>
         <td rowspan="2">&nbsp;</td>
 
 

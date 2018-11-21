@@ -76,7 +76,7 @@ public class InputTaskController
                                @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
                                @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-
+       // if(tskId.equal)
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
          * User's getUserName method. That name is passed to the custom UserDetailService's
