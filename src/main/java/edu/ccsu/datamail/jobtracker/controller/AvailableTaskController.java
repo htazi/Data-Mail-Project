@@ -34,7 +34,7 @@ public class AvailableTaskController
         return "AvailableTask/AvailableTask_list";
     }
 
-  @RequestMapping(value="/addTask", method=RequestMethod.GET)
+  @RequestMapping(value="/addTask", method=RequestMethod.POST)
     public String addTask()
     {
 
