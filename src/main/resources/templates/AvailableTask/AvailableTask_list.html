@@ -31,11 +31,11 @@
         <tr  th:each="task : ${tasksList}">
             <div>
 
-                <td><input name="input1"  type="text"  th:value="${task.taskId}"/></td>
-                <td><input name ="input2"  type="text"  th:value="${task.acronym}"/></td>
-                <td><input name="input3"  type="text"  th:value="${task.taskDesc}"/></td>
-                <!--<td><input name="input4"  type="checkbox"  th:value="${task.isBillable}"/></td>-->
-                <td><input name ="input5" type="text"  th:value="${task.price}"/></td>
+                <td><input name="input1"  type="text" disabled="disabled" th:value="${task.taskId}"/></td>
+                <td><input name ="input2"  type="text" disabled="disabled" th:value="${task.acronym}"/></td>
+                <td><input name="input3"  type="text" disabled="disabled" th:value="${task.taskDesc}"/></td>
+                <td><input name="input4"  type="checkbox" disabled="disabled"  th:value="${isBillable}"/></td>
+                <td><input name ="input5" type="text" disabled="disabled" th:value="${task.price}"/></td>
                 <!--<td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Update</a></td>
                 <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>-->
 
