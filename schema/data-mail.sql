@@ -11,6 +11,10 @@ DROP TABLE Persistent_Logins;
 
 DROP TABLE client CASCADE;
 
+DROP TABLE file_job;
+
+DROP TABLE file;
+
 DROP TABLE job CASCADE;
 
 DROP TABLE workflow CASCADE;
@@ -117,6 +121,21 @@ CREATE TABLE input_task (
   CONSTRAINT input_task_fk2 FOREIGN KEY (task_id) REFERENCES task_list (task_id),
   -- this might have to be reworked as must reference both job_id and wf_id from workflow
   CONSTRAINT input_task_fk3 FOREIGN KEY (job_id, wf_id) REFERENCES workflow (job_id, wf_id)
+);
+
+-- Information on Files Manipulated by Users
+CREATE TABLE file (
+  file_id   INT         NOT NULL,
+  file_name VARCHAR(60) NOT NULL,
+  CONSTRAINT file_pk PRIMARY KEY (file_id)
+);
+
+CREATE TABLE file_job (
+  file_id INT NOT NULL,
+  job_id  INT NOT NULL,
+  CONSTRAINT file_job_pk PRIMARY KEY (file_id, job_id),
+  CONSTRAINT file_job_fk1 FOREIGN KEY (job_id) REFERENCES job (job_id),
+  CONSTRAINT file_job_fk2 FOREIGN KEY (file_id) REFERENCES file (file_id)
 );
 
 -- Add any test data here
