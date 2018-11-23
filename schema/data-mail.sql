@@ -11,7 +11,7 @@ DROP TABLE Persistent_Logins;
 
 DROP TABLE client CASCADE;
 
-DROP TABLE file_job;
+DROP TABLE job_file;
 
 DROP TABLE file;
 
@@ -130,12 +130,12 @@ CREATE TABLE file (
   CONSTRAINT file_pk PRIMARY KEY (file_id)
 );
 
-CREATE TABLE file_job (
+CREATE TABLE job_file (
   file_id INT NOT NULL,
   job_id  INT NOT NULL,
-  CONSTRAINT file_job_pk PRIMARY KEY (file_id, job_id),
-  CONSTRAINT file_job_fk1 FOREIGN KEY (job_id) REFERENCES job (job_id),
-  CONSTRAINT file_job_fk2 FOREIGN KEY (file_id) REFERENCES file (file_id)
+  CONSTRAINT job_file_pk PRIMARY KEY (file_id, job_id),
+  CONSTRAINT job_file_fk1 FOREIGN KEY (job_id) REFERENCES job (job_id),
+  CONSTRAINT job_file_fk2 FOREIGN KEY (file_id) REFERENCES file (file_id)
 );
 
 -- Add any test data here

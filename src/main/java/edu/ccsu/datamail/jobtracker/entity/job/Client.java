@@ -88,7 +88,7 @@ public class Client
 
         Client client = (Client) o;
 
-        if (clientId != client.clientId) {
+        if (!clientId.equals(client.clientId)) {
             return false;
         }
         if (clientName != null ? !clientName.equals(client.clientName) : client.clientName != null) {
