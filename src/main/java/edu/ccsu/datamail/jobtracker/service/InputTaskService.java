@@ -1,16 +1,15 @@
+package edu.ccsu.datamail.jobtracker.service;
 
-        package edu.ccsu.datamail.jobtracker.service;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTaskPK;
+import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
+import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
+import edu.ccsu.datamail.jobtracker.repository.InputTaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-        import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
-        import edu.ccsu.datamail.jobtracker.entity.task.InputTaskPK;
-        import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
-        import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
-        import edu.ccsu.datamail.jobtracker.repository.InputTaskRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Service;
-
-        import java.util.List;
-        import java.util.Optional;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Provides services related to manipulating InputTasks and accessing InputTasks in the database
