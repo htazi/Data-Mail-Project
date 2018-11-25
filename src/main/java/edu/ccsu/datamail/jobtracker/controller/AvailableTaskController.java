@@ -43,7 +43,7 @@ public class AvailableTaskController
 
     @RequestMapping(value="/list", method=RequestMethod.POST)
     public String saveTask(@RequestParam("task_id") Integer taskId, @RequestParam("acronym") String acronym,
-                           @RequestParam("t_desc") String taskDesc, @RequestParam("is_billable") Boolean isBillable,
+                           @RequestParam("t_desc") String taskDesc, @RequestParam(value="is_billable", defaultValue = "false") Boolean isBillable,
                            @RequestParam("price") Double price, Model model)
     {
         AvailableTask availableTask = new AvailableTask(taskId, acronym, taskDesc, isBillable, price);
