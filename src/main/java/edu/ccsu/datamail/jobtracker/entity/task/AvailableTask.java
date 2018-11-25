@@ -48,7 +48,7 @@ public class AvailableTask
 
     }
 
-    public AvailableTask(Integer taskId, String acronym, String taskDesc, boolean isBillable, Double price)
+    public AvailableTask(Integer taskId, String acronym, String taskDesc, Boolean isBillable, Double price)
     {
         this.taskId = taskId;
         this.acronym = acronym;
