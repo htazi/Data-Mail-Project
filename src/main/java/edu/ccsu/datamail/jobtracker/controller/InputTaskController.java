@@ -1,5 +1,4 @@
 package edu.ccsu.datamail.jobtracker.controller;
-
 import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
@@ -16,12 +15,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.security.Principal;
 import java.sql.Timestamp;
+
+
 
 @Controller
 public class InputTaskController
@@ -70,10 +71,15 @@ public class InputTaskController
 
     @RequestMapping(method = RequestMethod.POST, value = "/inputTasks/add")
     public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
-                               @RequestParam("task_id") int tskId, @RequestParam("time_taken") int time,
-                               @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
-                               @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
+                               @RequestParam("task_id") Integer tskId, @RequestParam("time_taken") Integer time,
+                               @RequestParam("records_input") Integer recIn, @RequestParam("records_output") Integer recOut,
+                               @RequestParam("records_dropped") Integer recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
+//
+//        if(time == 0)
+//        {System.out.println("time is 0");}
+//        if(recIn == 0)
+//        {System.out.println("recIn is 0");}
 
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
