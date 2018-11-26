@@ -14,6 +14,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<th:block th:include="user/_menu"></th:block>
+
+<h3>Welcome :
+    <span th:utext="${#request.userPrincipal.name}"></span>
+</h3>
+
 <div class="container">
     <h1 style="text-align: center">AvailableTask List</h1>
     <table class="table table-striped">
