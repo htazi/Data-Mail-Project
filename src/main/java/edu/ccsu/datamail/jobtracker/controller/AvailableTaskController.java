@@ -27,6 +27,12 @@ public class AvailableTaskController
         this.availableTaskService = availableTaskService;
     }
 
+    /**
+     * Uses input form data from AvailableTask_list html and retrieves
+     * all available tasks from task_list table
+     *
+     */
+
     @RequestMapping(value="/list", method= RequestMethod.GET)
     public String Taskslist(Model model)
     {
@@ -34,12 +40,31 @@ public class AvailableTaskController
         return "AvailableTask/AvailableTask_list";
     }
 
+    /**
+     * Uses RequestMethod from AvailableTask_list html to call AvailableTask html
+     * which has the input form to insert a new task into task_list table
+     *
+     */
+
   @RequestMapping(value="/addTask", method=RequestMethod.POST)
     public String addTask()
     {
 
         return ("AvailableTask/AvailableTask");
     }
+
+    /**
+     * Retrieves the input form from the availableTask html page and inserts the
+     * form data into the task_list table.
+     *
+     * @param taskId
+     * @param acronym
+     * @param taskDesc
+     * @param isBillable
+     * @param price
+     * @param model
+     * @return
+     */
 
     @RequestMapping(value="/list", method=RequestMethod.POST)
     public String saveTask(@RequestParam("task_id") Integer taskId, @RequestParam("acronym") String acronym,
