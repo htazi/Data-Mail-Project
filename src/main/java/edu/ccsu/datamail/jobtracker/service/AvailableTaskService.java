@@ -67,8 +67,8 @@ public class AvailableTaskService
         availableTaskRepository.save(availableTask);
     }
 
-    public void deleteAvailableTask(int taskId)
+    public void updateAvailableTask(AvailableTask availableTask)
     {
-        availableTaskRepository.deleteById(taskId);
+        availableTaskRepository.save(availableTask);
     }
 }
