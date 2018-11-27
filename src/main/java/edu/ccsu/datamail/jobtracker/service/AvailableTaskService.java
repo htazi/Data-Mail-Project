@@ -52,6 +52,16 @@ public class AvailableTaskService
         return(List<AvailableTask>) availableTaskRepository.findAll();
     }
 
+    /**
+     * Gets the current max taskId
+     *
+     * @param taskId
+     * @return
+     */
+    public int getTaskId(int taskId){
+        return availableTaskRepository.maxTaskId(taskId);
+    }
+
     public void addAvailableTask(AvailableTask availableTask)
     {
         availableTaskRepository.save(availableTask);

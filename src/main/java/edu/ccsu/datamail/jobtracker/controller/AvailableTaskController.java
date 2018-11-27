@@ -49,7 +49,6 @@ public class AvailableTaskController
   @RequestMapping(value="/addTask", method=RequestMethod.POST)
     public String addTask()
     {
-
         return ("AvailableTask/AvailableTask");
     }
 
@@ -60,8 +59,8 @@ public class AvailableTaskController
      * @param taskId
      * @param acronym
      * @param taskDesc
-     * @param isBillable
      * @param price
+     * @param isBillable
      * @param model
      * @return
      */
@@ -71,7 +70,12 @@ public class AvailableTaskController
                            @RequestParam("t_desc") String taskDesc, @RequestParam(value="is_billable", defaultValue = "false") Boolean isBillable,
                            @RequestParam("price") Double price, Model model)
     {
-        AvailableTask availableTask = new AvailableTask(taskId, acronym, taskDesc, isBillable, price);
+        /*TODO figure out how  the auto-increment when inserting new task will work. Currently its hardcoded*/
+        Integer newTaskId = availableTaskService.getTaskId(taskId);
+        newTaskId++;
+
+       /*Build the availableTask object for insertion*/
+       AvailableTask availableTask = new AvailableTask(newTaskId, acronym, taskDesc, isBillable, price);
         model.addAttribute("task_id", taskId);
         availableTaskService. addAvailableTask(availableTask);
         return "redirect:list";
