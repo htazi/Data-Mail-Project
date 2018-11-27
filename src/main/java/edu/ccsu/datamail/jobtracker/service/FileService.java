@@ -6,6 +6,7 @@ import edu.ccsu.datamail.jobtracker.repository.ProductionFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,25 @@ public class FileService
         Optional<ProductionFile> productionFileContainer = productionFileRepository.findById(productionFileId);
         return productionFileContainer.orElseThrow(() -> new JobFileNotFoundException("File with Id "
                 + productionFileId + " not found"));
+    }
+
+    /**
+     * Returns all ProductionFiles stored in the database
+     *
+     * @return a list of all the productionfiles
+     */
+    public List<ProductionFile> getAllFiles()
+    {
+        return productionFileRepository.getAll();
+    }
+
+    /**
+     * Saves a ProductionFile object to the database
+     *
+     * @param productionFile a productionfile that will be saved to the database
+     */
+    public void saveFile(ProductionFile productionFile)
+    {
+        productionFileRepository.save(productionFile);
     }
 }
