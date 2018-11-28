@@ -49,7 +49,7 @@ public class AvailableTaskService
     public List<AvailableTask> getAllAvailableTask()
     {
 
-        return(List<AvailableTask>) availableTaskRepository.findAll();
+        return (List<AvailableTask>) availableTaskRepository.findAll();
     }
 
     /**
@@ -58,7 +58,8 @@ public class AvailableTaskService
      * @param taskId
      * @return
      */
-    public int getTaskId(int taskId){
+    public int getTaskId(int taskId)
+    {
         return availableTaskRepository.maxTaskId(taskId);
     }
 
@@ -71,9 +72,4 @@ public class AvailableTaskService
     {
         availableTaskRepository.save(availableTask);
     }
-
-//    public int getNewestTaskId(){
-//        return availableTaskRepository.newestTaskId();
-//    }
-
 }
