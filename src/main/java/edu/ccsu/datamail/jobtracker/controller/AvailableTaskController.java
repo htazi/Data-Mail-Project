@@ -1,19 +1,13 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.number.money.MonetaryAmountFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.text.DecimalFormat;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/task")
@@ -50,12 +44,12 @@ public class AvailableTaskController
      */
 
     @RequestMapping(value="/addTask", method=RequestMethod.POST)
-    public String addTask(Model model)
+    public String addTask(@RequestParam("taskId") Integer taskId, Model model)
     {
-        //int newestTaskId = availableTaskService.getNewestTaskId();
-       // model.addAttribute("newestTaskId", newestTaskId);
+        int newestTaskId = availableTaskService.getTaskId(taskId);
+        model.addAttribute("taskId", ++newestTaskId);
         model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
-        return ("AvailableTask/AvailableTask");
+        return ("AvailableTask/AvailableTaskAddNew");
     }
 
     /**
@@ -72,19 +66,19 @@ public class AvailableTaskController
      */
 
     @RequestMapping(value="/list", method=RequestMethod.POST)
-    public String saveTask(@RequestParam("task_id") Integer taskId, @RequestParam("acronym") String acronym,
+    public String saveTask(@RequestParam("taskId") Integer taskId, @RequestParam("acronym") String acronym,
                            @RequestParam("t_desc") String taskDesc, @RequestParam(value="is_billable", defaultValue = "false") Boolean isBillable,
                            @RequestParam("price") Double price, Model model)
     {
         /*TODO figure out how  the auto-increment when inserting new task will work. Currently its hardcoded*/
-        Integer newTaskId = availableTaskService.getTaskId(taskId);
-        newTaskId++;
 
         /*Build the availableTask object for insertion*/
-        AvailableTask availableTask = new AvailableTask(newTaskId, acronym, taskDesc, isBillable, price);
+        AvailableTask availableTask = new AvailableTask(taskId, acronym, taskDesc, isBillable, price);
         model.addAttribute("task_id", taskId);
         availableTaskService. addAvailableTask(availableTask);
-        return "redirect:list";
+        model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
+
+        return ("AvailableTask/AvailableTask_list");
     }
     //
     @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.POST)
@@ -97,7 +91,7 @@ public class AvailableTaskController
         model.addAttribute("t_desc", t_desc);
         model.addAttribute("price", price);
 
-        return("AvailableTask/AvailableTask");
+        return("AvailableTask/AvailableTaskUpdate");
     }
 
 
