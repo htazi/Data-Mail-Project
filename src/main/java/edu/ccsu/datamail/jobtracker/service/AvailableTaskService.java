@@ -71,4 +71,9 @@ public class AvailableTaskService
     {
         availableTaskRepository.save(availableTask);
     }
+
+//    public int getNewestTaskId(){
+//        return availableTaskRepository.newestTaskId();
+//    }
+
 }

@@ -6,11 +6,13 @@ import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.number.money.MonetaryAmountFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Controller
@@ -40,15 +42,19 @@ public class AvailableTaskController
         return "AvailableTask/AvailableTask_list";
     }
 
+
     /**
      * Uses RequestMethod from AvailableTask_list html to call AvailableTask html
      * which has the input form to insert a new task into task_list table
      *
      */
 
-  @RequestMapping(value="/addTask", method=RequestMethod.POST)
-    public String addTask()
+    @RequestMapping(value="/addTask", method=RequestMethod.POST)
+    public String addTask(Model model)
     {
+        //int newestTaskId = availableTaskService.getNewestTaskId();
+       // model.addAttribute("newestTaskId", newestTaskId);
+        model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
         return ("AvailableTask/AvailableTask");
     }
 
@@ -74,28 +80,46 @@ public class AvailableTaskController
         Integer newTaskId = availableTaskService.getTaskId(taskId);
         newTaskId++;
 
-       /*Build the availableTask object for insertion*/
-       AvailableTask availableTask = new AvailableTask(newTaskId, acronym, taskDesc, isBillable, price);
+        /*Build the availableTask object for insertion*/
+        AvailableTask availableTask = new AvailableTask(newTaskId, acronym, taskDesc, isBillable, price);
         model.addAttribute("task_id", taskId);
         availableTaskService. addAvailableTask(availableTask);
         return "redirect:list";
     }
+    //
+    @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.POST)
+    public String updateTask(@PathVariable("taskId") int taskId, Model model, @RequestParam("acronym") String acronym, @RequestParam("t_desc") String t_desc, @RequestParam("isbillable") boolean isbillable, @RequestParam("price") double price) throws TaskNotFoundException {
 
-   @RequestMapping(value="/updateTask/{taskId}", method=RequestMethod.GET)
-    public String updateTask(@PathVariable("taskId") int taskId, Model model) throws TaskNotFoundException {
 
-        AvailableTask availableTask = availableTaskService.getAvailableTask(taskId);
-        model.addAttribute("AvailableTask", availableTask);
-        availableTaskService.updateAvailableTask(availableTask);
+        model.addAttribute("isbillable", isbillable);
+        model.addAttribute("taskId", taskId);
+        model.addAttribute("acronym", acronym);
+        model.addAttribute("t_desc", t_desc);
+        model.addAttribute("price", price);
 
-       return("AvailableTask/AvailableTask");
+        return("AvailableTask/AvailableTask");
     }
 
-    /*@RequestMapping(value="/deleteTask/{taskId}", method=RequestMethod.GET)
-    public ModelAndView delete(@PathVariable("taskId") int taskId) {
-        availableTaskService.deleteAvailableTask(taskId);
 
-        return new ModelAndView("redirect:/task/list");
-    }*/
+    @RequestMapping(value="/updateTaskPost/{taskId}", method=RequestMethod.POST)
+    public String updateTask2(@PathVariable("taskId") int taskId, Model model, @RequestParam("acronym") String acronym, @RequestParam("t_desc") String t_desc,
+                              @RequestParam("isbillable") boolean isbillable, @RequestParam("price") double price) throws TaskNotFoundException {
 
+        AvailableTask availableTask = availableTaskService.getAvailableTask(taskId);
+        availableTask.setAcronym(acronym);
+        availableTask.setBillable(isbillable);
+        availableTask.setPrice(price);
+        availableTask.setTaskDesc(t_desc);
+
+        model.addAttribute("taskId", taskId);
+        model.addAttribute("acronym", acronym);
+        model.addAttribute("t_desc", t_desc);
+        model.addAttribute("price", price);
+        model.addAttribute("isbillable", isbillable);
+        model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
+        availableTaskService.updateAvailableTask(availableTask);
+
+
+        return ("AvailableTask/AvailableTask_list");
+    }
 }

@@ -22,4 +22,7 @@ public interface AvailableTaskRepository extends CrudRepository<AvailableTask, I
     @Query("Select taskId FROM AvailableTask where taskId = (SELECT MAX(taskId) FROM AvailableTask)")
     int maxTaskId(@Param("task_id") int taskId);
 
+//    @Query("Select maxelement(taskId) FROM AvailableTask ")
+//    int newestTaskId();
+
 }
