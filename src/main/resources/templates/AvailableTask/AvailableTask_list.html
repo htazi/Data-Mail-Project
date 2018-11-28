@@ -42,7 +42,7 @@
                 <td><input name="input3"  type="text" disabled="disabled" th:value="${task.taskDesc}"/></td>
                 <td><input name="input4"  type="text" disabled="disabled"  th:value="${task.isBillable()}"/></td>
                 <td><input name ="input5" type="text" disabled="disabled" th:value="${task.price}"/></td>
-                <td><form method="GET" action="/task/updateTask/taskId" th:action="@{'/task/updateTask/'+ ${task.taskId}}"><input type="submit" class="btn btn-primary" value ="Update"></form></td>
+                <td><form method="GET" action="/task/updateTask/taskId" th:action="@{'/task/updateTask/'+ git ${task.taskId}}"><input type="submit" class="btn btn-primary" value ="Update"></form></td>
                 <!--<td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Edit</a></td>
                 <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>-->
 
