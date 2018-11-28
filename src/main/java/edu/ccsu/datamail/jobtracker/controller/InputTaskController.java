@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class InputTaskController
@@ -74,7 +75,7 @@ public class InputTaskController
                                @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
                                @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-
+        // if(tskId.equal)
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
          * User's getUserName method. That name is passed to the custom UserDetailService's
@@ -114,5 +115,23 @@ public class InputTaskController
         /*The inputTask html page in the inputtask package is displayed again after form
          * submission*/
         return ("inputtask/inputTask");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
+    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
+    {
+        List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
+        boolean isempty = false;
+        model.addAttribute("isempty", isempty);
+        model.addAttribute("inputtasks", inputTasks);
+
+        if (inputTasks.isEmpty()) {
+            isempty = true;
+            model.addAttribute("message", "No Such a Job Id");
+            model.addAttribute("isempty", isempty);
+        }
+
+
+        return "/billing/displaybilling";
     }
 }
