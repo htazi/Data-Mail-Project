@@ -85,8 +85,8 @@
                             <td><input type="text" name="wfdesc" value=""/></td>
                         </tr>
                     </table><br>
-                    <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
-                    <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
+                    <button class="btn btn-primary" type ="submit" name = " submit" > Add New Workflow</button>
+                    <button class="btn btn-primary" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
                 <input type="hidden" name="jobId" th:value="${job.jobId}" />
                 <input type="hidden" name="wfId" th:value="${wfId}"/>
             </form>

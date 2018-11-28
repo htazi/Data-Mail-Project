@@ -76,7 +76,7 @@
         <!--TODO when the New Work flow of Finish buttons are pressed with empty fields an error occurs
         This should be fixed to allow those buttons to be pressed. Right now they are tied to
         inputting tasks. They should operate separately-->
-        <td><input type="submit" class="btn btn-success" name="submit" value= "Submit"  ></td>
+        <td><input type="submit" class="btn btn-primary" name="submit" value= "Submit"  ></td>
         <td rowspan="2">&nbsp;</td>
 
 
@@ -88,8 +88,8 @@
 <table align="right">
     <tr>
 
-        <td colspan="2"><form   method='POST'  th:action="@{/createWorkflow}"><input type="hidden" name="jobId" th:value="${jobId}"> <input type="hidden" name="wfId"  th:value="${wfId+1}"> <input  type="submit" class="btn btn-success btnwidth" value="New Workflow"></form></td>
-        <td colspan="2"><form   method='GET'  th:action="@{/jobs/findjob}"><input type="submit" class="btn btn-success btnwidth" value="Finish" ></form></td>
+        <td colspan="2"><form   method='POST'  th:action="@{/createWorkflow}"><input type="hidden" name="jobId" th:value="${jobId}"> <input type="hidden" name="wfId"  th:value="${wfId+1}"> <input  type="submit" class="btn btn-primary btnwidth" value="New Workflow"></form></td>
+        <td colspan="2"><form   method='GET'  th:action="@{/jobs/findjob}"><input type="submit" class="btn btn-primary btnwidth" value="Finish" ></form></td>
 
     </tr>
 
