@@ -6,6 +6,7 @@ import edu.ccsu.datamail.jobtracker.repository.AvailableTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +49,9 @@ public class AvailableTaskService
 
     public List<AvailableTask> getAllAvailableTask()
     {
-
-        return(List<AvailableTask>) availableTaskRepository.findAll();
+        List<AvailableTask> taskList = (List<AvailableTask>) availableTaskRepository.findAll();
+        taskList.sort(Comparator.comparing(AvailableTask::getTaskId));
+        return taskList;
     }
 
     /**
@@ -58,7 +60,8 @@ public class AvailableTaskService
      * @param taskId
      * @return
      */
-    public int getTaskId(int taskId){
+    public int getTaskId(int taskId)
+    {
         return availableTaskRepository.maxTaskId(taskId);
     }
 
