@@ -38,19 +38,15 @@ public class JobController
         Job job = null;
         try {
             job = jobService.getJob(jobId);
-        } catch (JobNotFoundException e) {
-            e.getMessage();
-        }
-        if (job != null) {
             int nextWorkflowId = workflowService.findNextWorkflowId(jobId);
             model.addAttribute("job", job);
             model.addAttribute("wfId", nextWorkflowId);
             return "workflow/createWorkflowPage";
-        }
-        else {
+        } catch (JobNotFoundException e) {
             model.addAttribute("job", "No such a job exists");
             return "job/findJob";
         }
+
     }
 
 }

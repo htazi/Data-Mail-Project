@@ -60,5 +60,24 @@ public class UserDetailsServiceImpl implements UserDetailsService
         return appUser;
     }
 
+    public AppUser findByEmail(String email) throws Exception {
+        Optional<AppUser> appUserContainer = this.appUserRepository.findByEmail(email); // attempt to pull a user
+        AppUser appUser = appUserContainer.orElseThrow(() -> new Exception("User " + email
+                + " was not found in the database"));
+        return appUser;
 
+    }
+
+    public AppUser findByConfirmationToken(String confirmationToken) throws Exception {
+
+        Optional<AppUser> appUserContainer = this.appUserRepository.findByConfirmationToken(confirmationToken); // attempt to pull a user
+        AppUser appUser = appUserContainer.orElseThrow(() -> new Exception("User " + confirmationToken
+                + " was not found in the database"));
+        return appUser;
+
+    }
+
+    public void saveAppUser(AppUser user) {
+        appUserRepository.save(user);
+    }
 }

@@ -13,4 +13,10 @@ public interface AppUserRepository extends CrudRepository<AppUser, Integer>
 {
     @Query("FROM AppUser e where e.userName = :userName")
     Optional<AppUser> findByUserName(@Param("userName") String userName);
+
+   @Query("FROM AppUser e where e.email = :email")
+    Optional<AppUser> findByEmail(@Param("email")String email);
+
+    @Query("FROM AppUser e where e.confirmationToken = :confirmationToken")
+    Optional <AppUser> findByConfirmationToken(@Param("confirmationToken")String confirmationToken);
 }

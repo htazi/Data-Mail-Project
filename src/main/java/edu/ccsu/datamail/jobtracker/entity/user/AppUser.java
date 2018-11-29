@@ -1,7 +1,10 @@
 package edu.ccsu.datamail.jobtracker.entity.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "app_user", uniqueConstraints = {
@@ -34,6 +37,14 @@ public class AppUser
 
     @Column(name = "is_active", length = 1, nullable = false)
     private boolean isActive;
+
+    @Column(name = "email", length = 60, nullable = false)
+   // @Email(message = "Please provide a valid e-mail")
+   // @NotEmpty(message = "Please provide an e-mail")
+    private String email;
+
+    @Column(name = "confirmation_token", length = 60)
+    private String confirmationToken;
 
     /**
      * Default Constructor
@@ -146,64 +157,34 @@ public class AppUser
         isActive = active;
     }
 
-    /**
-     * Determines if this object is equal to another object
-     *
-     * @param o the object this object is being compared to
-     * @return true if the two objects are equal, false otherwise
-     */
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof AppUser)) {
-            return false;
-        }
+    public String getEmail() { return email; }
 
+    public void setEmail(String email) { this.email = email; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AppUser)) return false;
         AppUser appUser = (AppUser) o;
-
-        if (isActive != appUser.isActive) {
-            return false;
-        }
-        if (userId != null ? !userId.equals(appUser.userId) : appUser.userId != null) {
-            return false;
-        }
-        if (userName != null ? !userName.equals(appUser.userName) : appUser.userName != null) {
-            return false;
-        }
-        if (encryptedPassword != null ? !encryptedPassword.equals(appUser.encryptedPassword) : appUser.encryptedPassword != null) {
-            return false;
-        }
-        if (firstName != null ? !firstName.equals(appUser.firstName) : appUser.firstName != null) {
-            return false;
-        }
-        if (lastName != null ? !lastName.equals(appUser.lastName) : appUser.lastName != null) {
-            return false;
-        }
-        if (lastLogin != null ? !lastLogin.equals(appUser.lastLogin) : appUser.lastLogin != null) {
-            return false;
-        }
-        return lastLogout != null ? lastLogout.equals(appUser.lastLogout) : appUser.lastLogout == null;
+        return isActive == appUser.isActive &&
+                Objects.equals(userId, appUser.userId) &&
+                Objects.equals(userName, appUser.userName) &&
+                Objects.equals(encryptedPassword, appUser.encryptedPassword) &&
+                Objects.equals(firstName, appUser.firstName) &&
+                Objects.equals(lastName, appUser.lastName) &&
+                Objects.equals(lastLogin, appUser.lastLogin) &&
+                Objects.equals(lastLogout, appUser.lastLogout) &&
+                Objects.equals(email, appUser.email) &&
+                Objects.equals(confirmationToken, appUser.confirmationToken);
     }
 
-    /**
-     * Returns a hashCode value for this object
-     *
-     * @return an integer hash code for this object
-     */
     @Override
-    public int hashCode()
-    {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (encryptedPassword != null ? encryptedPassword.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (lastLogin != null ? lastLogin.hashCode() : 0);
-        result = 31 * result + (lastLogout != null ? lastLogout.hashCode() : 0);
-        result = 31 * result + (isActive ? 1 : 0);
-        return result;
+    public int hashCode() {
+        return Objects.hash(userId, userName, encryptedPassword, firstName, lastName, lastLogin, lastLogout, isActive, email, confirmationToken);
     }
+
+    public String getConfirmationToken() { return confirmationToken; }
+
+    public void setConfirmationToken(String confirmationToken) { this.confirmationToken = confirmationToken; }
+
 }
