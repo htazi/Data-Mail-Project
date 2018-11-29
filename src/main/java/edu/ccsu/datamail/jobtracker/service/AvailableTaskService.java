@@ -58,12 +58,11 @@ public class AvailableTaskService
     /**
      * Gets the current max taskId
      *
-     * @param taskId
      * @return
      */
-    public int getTaskId(int taskId)
+    public int getTaskId()
     {
-        return availableTaskRepository.maxTaskId(taskId);
+        return availableTaskRepository.maxTaskId();
     }
 
     public void addAvailableTask(AvailableTask availableTask)
