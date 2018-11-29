@@ -4,6 +4,7 @@ import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.repository.AvailableTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -49,7 +50,7 @@ public class AvailableTaskService
 
     public List<AvailableTask> getAllAvailableTask()
     {
-        List<AvailableTask> taskList = (List<AvailableTask>) availableTaskRepository.findAll();
+        List<AvailableTask> taskList = availableTaskRepository.getAllBy();
         taskList.sort(Comparator.comparing(AvailableTask::getTaskId));
         return taskList;
     }

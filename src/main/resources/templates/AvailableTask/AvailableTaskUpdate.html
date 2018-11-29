@@ -28,14 +28,15 @@
 </h3>
 
 <div style="text-align: center">
-    <h1 style="text-align: center">Add New Task</h1><br><br>
+    <h1 style="text-align: center">Update Task</h1><br><br>
 
-    <form method="POST" action="/task/list" th:action="@{/task/list}" >
+
+    <form method="POST"  th:action="@{'/task/updateTaskPost/' + ${taskId} }" >
 
         <table align="center" style="margin: 0px auto;">
             <tr>
                 <td>TaskID:</td>
-                <td><input type="text"  name="task_id" th:value="${TaskId}"/></td>
+                <td><input type="text"  name="taskId" th:value="${taskId}" readonly/></td>
             </tr>
 
             <tr>
@@ -44,7 +45,7 @@
 
             <tr>
                 <td>Acronym:</td>
-                <td><input  type="text" id="acronym" name="acronym" onkeyup="lettersOnly(this)" required></td>
+                <td><input  type="text" id="acronym" name="acronym" th:value="${acronym}" required></td>
             </tr>
 
             <tr>
@@ -53,7 +54,7 @@
 
             <tr>
                 <td>Description:</td>
-                <td><input type="text" id="t_desc"  name="t_desc" onkeyup="lettersOnly(this)" required></td>
+                <td><input type="text" id="t_desc"  name="t_desc" th:value="${t_desc}"  required></td>
             </tr>
 
             <tr>
@@ -61,8 +62,10 @@
             </tr>
 
             <tr>
-                <td>Is_Billabe:</td>
-                <td><input type="checkbox" name="is_billable" checked="true"></td>
+                <td>Is Billable:</td>
+                <!--TODO figure out how to represent boolean with html element-->
+                <!--<td><input type="checkbox" name="isbillable" value="true" th:checked="${isbillable}"></td>-->
+                <td><input type="text" name="isbillable"  th:value="${isbillable}">
             </tr>
 
             <tr>
@@ -71,7 +74,7 @@
 
             <tr>
                 <td>Price:</td>
-                <td><input type= "number" id="price" name="price" required></td>
+                <td><input type= "number" id="price" name="price" th:value="${price}" required></td>
             </tr>
 
         </table><br>
