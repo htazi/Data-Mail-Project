@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Edit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function lettersOnly(input) {
+            var regex = /[^a-zA-Z ]+/;
+            input.value = input.value.replace(regex, "");
+        }
+    </script>
+    <style>
+        td{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<th:block th:include="user/_menu"></th:block>
+
+<h3>Welcome :
+    <span th:utext="${#request.userPrincipal.name}"></span>
+</h3>
+
+<div style="text-align: center">
+    <h1 style="text-align: center">Update Job</h1><br><br>
+
+
+    <form method="POST"  th:action="@{'/job/updateJob/' + ${jobId} }" >
+
+        <table align="center" style="margin: 0px auto;">
+            <tr>
+                <td>Job ID:</td>
+                <td><input type="text"  name="jobId" th:value="${jobId}" readonly/></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Workflow ID:</td>
+                <td><input  type="text"  name="workflowId" th:value="${workflowId}" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>User name:</td>
+                <td><input type="text"  name="userName" th:value="${userName}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Task Number:</td>
+                <td><input type="text"  name="taskNum" th:value="${taskNum}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Task Description:</td>
+                <td><input type="text"  name="t_desc" th:value="${t_desc}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Records Input:</td>
+                <td><input type="text"  name="recordsIn" th:value="${recordsIn}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Records Output:</td>
+                <td><input type="text"  name="recordsOut" th:value="${recordsOut}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Records Dropped:</td>
+                <td><input type="text"  name="recordsDropped" th:value="${recordsDropped}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Time Taken:</td>
+                <td><input type="text"  name="timeTaken" th:value="${timeTaken}"  required></td>
+            </tr>
+
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Time Recorded:</td>
+                <td><input type="text"  name="timeRecorded" th:value="${timeRecorded}"  required></td>
+            </tr>
+
+        </table><br>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>
