@@ -17,6 +17,9 @@
         .lbl {
             display: inline-block;
         }
+        .table{
+            width: 95% !important;
+        }
 
     </style>
     <script>
@@ -38,18 +41,26 @@
 </head>
 
 <body>
+<th:block th:include="user/_menu"></th:block>
 <br>
 <br>
 
 
 <div align="center">
-    <h1>Search For a Job(Billing Page)</h1>
+    <!--<th:block th:if="${user == 'ROLE_Billing'}">-->
+    <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+    <!--<th:block th:if="${user == 'ROLE_Manager'}">-->
+        <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+
+    <h1>Search For a Job</h1>
     <br>
     <form  method='GET' action="/inputTasks/getalltasks">
         <div>
-            <h3 class="lbl">Job ID:</h3> <input class="form-control inputwidth" id="jobId" name="jobId" type="text" >
+            <h3 class="lbl" style="display: inline-block">Job ID:</h3> <input style="display: inline-block;width: 150px" class="form-control inputwidth" id="jobId" name="jobId" type="text" >
         <!--Workflow ID: <input id="wfId" name="wfId" type="text" value="2" readonly>-->
-        <input class="btn btn-primary inputwidth" type="submit" value="Get Billing" onclick="return empty()">
+        <input class="btn btn-primary inputwidth" type="submit" value="View Records" onclick="return empty()">
         <!--<input class="btn btn-success" type="button" id="mybtn2"  value="Show All Bills"/>-->
         </div>
     </form>

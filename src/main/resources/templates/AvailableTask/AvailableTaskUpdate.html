@@ -19,11 +19,16 @@
                 input.value = input.value.replace(regex, "");
             }
         </script>
+    <style>
+        td{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <th:block th:include="user/_menu"></th:block>
 
-<h3>Welcome :
+<h3 style="padding-left: 50px">Welcome :
     <span th:utext="${#request.userPrincipal.name}"></span>
 </h3>
 

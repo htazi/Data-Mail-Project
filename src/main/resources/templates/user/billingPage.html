@@ -11,7 +11,7 @@
 <!-- Include _menu.html -->
 <th:block th:include="user/_menu"></th:block>
 
-
+<div style="padding-left: 100px">
 <h2>Billing Page</h2>
 <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
 <b>This is protected page!</b>
@@ -22,9 +22,9 @@
 <!--<form  class="container" method='GET' th:action="@{/jobs/findjob}">-->
     <!--<input type="submit" class="btn btn-success" value="Find A Job">-->
 <!--</form>-->
-
+<br>
 <button class="btn btn-primary" onclick="window.location.href='/billing/displaybilling'">Go to View Billing</button>
-
+</div>
 </body>
 
 </html>

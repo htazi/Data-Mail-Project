@@ -70,12 +70,31 @@ public class InputTaskController
      */
 
     @RequestMapping(method = RequestMethod.POST, value = "/inputTasks/add")
-    public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
-                               @RequestParam("task_id") int tskId, @RequestParam("time_taken") int time,
-                               @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
-                               @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
+    public String addInputTask(@RequestParam("job_id") Integer jobId, @RequestParam("workflow") Integer wfId,
+                               @RequestParam("task_id") Integer tskId, @RequestParam("time_taken") Integer time,
+                               @RequestParam("records_input") Integer recIn, @RequestParam("records_output") Integer recOut,
+                               @RequestParam("records_dropped") Integer recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-        // if(tskId.equal)
+        if(tskId==0)
+        {
+            tskId =null;
+        }
+        if (time ==0)
+        {
+            time=null;
+        }
+        if (recIn == 0)
+        {
+            recIn=null;
+        }
+        if ( recOut ==0)
+        {
+            recOut=null;
+        }
+        if( recD==0)
+        {
+            recD=null;
+        }
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
          * User's getUserName method. That name is passed to the custom UserDetailService's
