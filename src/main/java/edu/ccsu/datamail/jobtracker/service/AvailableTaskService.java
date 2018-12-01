@@ -55,6 +55,13 @@ public class AvailableTaskService
         return taskList;
     }
 
+    public List<AvailableTask> getAllAvailableTaskSortByAcronym()
+    {
+        List<AvailableTask> taskList = availableTaskRepository.getAllBy();
+        taskList.sort(Comparator.comparing(AvailableTask::getAcronym));
+        return taskList;
+    }
+
     /**
      * Gets the current max taskId
      *

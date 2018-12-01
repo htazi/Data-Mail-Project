@@ -14,34 +14,57 @@
             var today = new Date();
             var t =today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ '-'+today.getHours() + ":" + today.getMinutes();;
               jQuery('#timestamp').text(t);
-            $('[name="task_id"]').focus();
+            //$('[name="time_taken"]').focus();
 
             $("input:not(#notes)").on('change', function ()
             {
                 isNumber(this);
             });
 
+            $.ajax({
+                type: "GET",
+                url: "/task/getAcronym",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data){
+                    $.each(data, function (i,d) {
 
-            function isNumber(that)
-            {
+                        $('#list').append('<option value='+ d.taskId+ '>'+d.acronym+ '</option>');
 
-                if(isNaN(that.value ))
-                {
-                    alert("Enter a number");
-                    $(that).focus();
-                    that.value='';
+                    })
+                },
+
+                error: function (){
+
+                    alert("wasn't succesful");
 
                 }
 
-            }
+            });
+            //$('#list').onmouseover($(this).attr('size', 5));
 
+            $('#list').on("change", function () {
+
+                $('[name="time_taken"]').focus().select();
+
+            });
 
         });
 
+        function isNumber(that)
+        {
+            if(isNaN(that.value ) || that.value <0)
+            {
+                alert("Enter a number");
+                $(that).focus();
+                that.value='';
+            }
+        }
 
 
     </script>
     <style>
+
 
         .form-control{
 
@@ -68,7 +91,6 @@
 <body>
 
 <th:block th:include="user/_menu"></th:block>
-<br>
 <h3 id="timestamp" style="position: relative; left: 50px"></h3>
 <h1 style="text-align: center">Please Input A Task</h1><br>
 <hr>
@@ -77,7 +99,7 @@
 <form  id="inputtask" class="container" method="POST" action="/inputTasks/add" th:action="@{/inputTasks/add}">
 
 
-    <!--<div> <h3>Workflow ID: <span th:text="${wfId}"></span></h3></div>-->
+
     <table align="center">
         <tr>
             <th>Job ID</th>
@@ -95,7 +117,7 @@
 
             <td><input class="form-control" type="text" name="job_id"  size="10"    th:value="${jobId}" required></td>
             <td><input class="form-control" type="text" name="workflow"  size="10"  th:value="${wfId}" required></td>
-            <td><input class="form-control" type="text" name="task_id" size="10" required></td>
+            <td><select id="list" class="form-control" type="text" name="task_id"  required></select></td>
             <td><input class="form-control" type="text" name="time_taken" size="10" value="0" required ></td>
             <td><input class="form-control" type="text" name="records_input" size="10"  value="0" required></td>
             <td><input class="form-control" type="text" name="records_output" size="10"  value="0" required></td>

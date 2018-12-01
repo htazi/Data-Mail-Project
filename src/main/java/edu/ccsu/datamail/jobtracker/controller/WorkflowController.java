@@ -2,8 +2,10 @@ package edu.ccsu.datamail.jobtracker.controller;
 
 import edu.ccsu.datamail.jobtracker.entity.job.Job;
 import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
+import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
 import edu.ccsu.datamail.jobtracker.entity.workflow.WorkflowNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
+import edu.ccsu.datamail.jobtracker.service.InputTaskService;
 import edu.ccsu.datamail.jobtracker.service.JobService;
 import edu.ccsu.datamail.jobtracker.service.WorkflowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WorkflowController
@@ -19,12 +25,14 @@ public class WorkflowController
 
     private final WorkflowService workflowService;
     private final JobService jobService;
+    private final InputTaskService inputTaskService;
 
     @Autowired
-    public WorkflowController(WorkflowService workflowService, JobService jobService)
+    public WorkflowController(WorkflowService workflowService, JobService jobService,InputTaskService inputTaskService)
     {
         this.workflowService = workflowService;
         this.jobService = jobService;
+        this.inputTaskService = inputTaskService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTask")
@@ -51,4 +59,5 @@ public class WorkflowController
             return "user/403Page";
         }
     }
+
 }

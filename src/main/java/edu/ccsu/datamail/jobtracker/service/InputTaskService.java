@@ -8,6 +8,7 @@ import edu.ccsu.datamail.jobtracker.repository.InputTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,5 +111,13 @@ public class InputTaskService
     public void deleteInputTask(InputTaskPK inputTaskPK)
     {
         inputTaskRepository.deleteById(inputTaskPK);
+    }
+
+    public List<InputTask> getAllInputTasks(){
+
+        List<InputTask> inputTasks = new ArrayList<>();
+        inputTaskRepository.findAll().forEach(inputTasks::add);
+
+        return inputTasks;
     }
 }
