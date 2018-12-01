@@ -7,28 +7,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../static/jsFile.js"></script>
+    <script type="text/javascript">
 
-    <script>
         $(document).ready(function() {
-            var d = new Date();
-            var t = d.getHours() + ":" + d.getMinutes();
-            jQuery('#timenow').val(t);
-            jQuery('#timestamp').text(d);
+            var today = new Date();
+            var t =today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ '-'+today.getHours() + ":" + today.getMinutes();;
+              jQuery('#timestamp').text(t);
             $('[name="task_id"]').focus();
 
-            $("input:not(#notes)").on('change', function () {
+            $("input:not(#notes)").on('change', function ()
+            {
                 isNumber(this);
-
             });
 
 
-            function isNumber(that) {
+            function isNumber(that)
+            {
 
+                if(isNaN(that.value ))
+                {
+                    alert("Enter a number");
+                    $(that).focus();
+                    that.value='';
 
-                var regex = /[^/0-9]/g;
-                that.value = that.value.replace(regex, "");
-
-                //that.focus();
+                }
 
             }
 
@@ -63,9 +66,10 @@
 
 </head>
 <body>
+
 <th:block th:include="user/_menu"></th:block>
 <br>
-<p id="timestamp" style="position: relative; left: 50px"></p>
+<h3 id="timestamp" style="position: relative; left: 50px"></h3>
 <h1 style="text-align: center">Please Input A Task</h1><br>
 <hr>
 
