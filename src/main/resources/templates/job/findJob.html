@@ -13,22 +13,25 @@
     <script>
         $(document).ready(function(){
             $('#textbox').focus();
-            var whichuser = $('#usertxt').text();
-            if( whichuser == "Billing1")
-            {
-                $("#frm").attr("action", "/billing/displaybilling");
-                $("#frm").attr("method", "GET");
+            $('#textbox').on('change', function (){
+                isNumber(this);
+            });
+
+            function isNumber(that) {
+
+                that.focus();
+                var regex = /[^/0-9]/g;
+                that.value = that.value.replace(regex, "");
+
+
             }
+
         });
-        function empty() {
-            var x = document.getElementById("textbox").value;
-            if (x == "" || isNaN(x)) {
-                alert("Enter A Number for job ID");
-                console.log("function fired");
-                return false;
-            };
-        }
+
+
     </script>
+
+
 
 </head>
 
@@ -41,7 +44,7 @@
         <form  method='POST' action="/createWorkflow">
             <h3 style="display: inline-block;">Job ID: </h3>
 
-            <input id="textbox" style="width: 150px;display: inline-block;" class="form-control" name="jobId"  type="text" />
+            <input id="textbox" style="width: 150px;display: inline-block;" class="form-control" name="jobId"  type="text" required />
 
             <input type="submit" class="btn btn-primary" onClick= "return empty()" value="find a job">
         </form>

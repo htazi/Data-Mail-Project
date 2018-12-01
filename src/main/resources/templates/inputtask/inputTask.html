@@ -7,27 +7,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function() {
             var d = new Date();
             var t = d.getHours() + ":" + d.getMinutes();
             jQuery('#timenow').val(t);
             jQuery('#timestamp').text(d);
+            $('[name="task_id"]').focus();
+
+            $("input:not(#notes)").on('change', function () {
+                isNumber(this);
+
+            });
+
+
+            function isNumber(that) {
+
+
+                var regex = /[^/0-9]/g;
+                that.value = that.value.replace(regex, "");
+
+                //that.focus();
+
+            }
 
 
         });
 
-        $()
 
-        function empty() {
-
-            if (this == "" || isNaN(this)) {
-                alert("Enter A Number for the input");
-                console.log("function fired");
-                this.clear;
-                this.focus();
-            }
-        }
 
     </script>
     <style>
@@ -50,6 +58,7 @@
         }
     </style>
     <link rel="stylesheet" href="../../static/static/css/cssfile.css">
+
 
 
 </head>
@@ -82,12 +91,12 @@
 
             <td><input class="form-control" type="text" name="job_id"  size="10"    th:value="${jobId}" required></td>
             <td><input class="form-control" type="text" name="workflow"  size="10"  th:value="${wfId}" required></td>
-            <td><input class="form-control" id="test" type="text" name="task_id" size="10" required></td>
+            <td><input class="form-control" type="text" name="task_id" size="10" required></td>
             <td><input class="form-control" type="text" name="time_taken" size="10" value="0" required ></td>
             <td><input class="form-control" type="text" name="records_input" size="10"  value="0" required></td>
             <td><input class="form-control" type="text" name="records_output" size="10"  value="0" required></td>
             <td><input class="form-control" type="text" name="records_dropped" size="10" value="0" required></td>
-            <td><input class="form-control" type="text" name="notes" size="10" ></td>
+            <td><input id="notes" class="form-control" type="text" name="notes" size="10" ></td>
         </tr>
 
         <tr>
