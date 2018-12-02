@@ -63,6 +63,11 @@
 
     </script>
     <style>
+        .border1{
+           border-radius: 5px;border-width: 2px;
+            border-color: #d9d9d9;border-style: solid;
+            width:fit-content; padding:5px
+        }
         .form-control{
 
             width: 95% !important;
@@ -86,7 +91,9 @@
 <body>
 
 <th:block th:include="user/_menu"></th:block>
-<h3 id="timestamp" style="position: relative; left: 50px"></h3>
+<div style="padding-left: 50px;">
+<h3 id="timestamp" class="border1"></h3>
+</div>
 <h1 style="text-align: center">Please Input A Task</h1><br>
 <hr>
 
@@ -109,7 +116,7 @@
 
             <td><input class="form-control" type="text" name="job_id"  size="10"    th:value="${jobId}" required></td>
             <td><input class="form-control" type="text" name="workflow"  size="10"  th:value="${wfId}" required></td>
-            <td><select id="list" class="form-control" type="text" name="task_id"  required></select></td>
+            <td><select style="width: 100px;" id="list" class="form-control" type="text" name="task_id"  required></select></td>
             <td><input class="form-control" type="text" name="time_taken" size="10" value="0" required ></td>
             <td><input class="form-control" type="text" name="records_input" size="10"  value="0" required></td>
             <td><input class="form-control" type="text" name="records_output" size="10"  value="0" required></td>
