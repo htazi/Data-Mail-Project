@@ -12,7 +12,7 @@
         $(document).ready(function() {
             var today = new Date();
             var t =today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ '-'+today.getHours() + ":" + today.getMinutes();;
-              jQuery('#timestamp').text(t);
+            jQuery('#timestamp').text(t);
             //$('[name="time_taken"]').focus();
 
             $("input:not(#notes)").on('change', function ()
@@ -27,27 +27,21 @@
                 contentType: "application/json",
                 success: function (data){
                     $.each(data, function (i,d) {
-
                         $('#list').append('<option value='+ d.taskId+ '>'+d.acronym+ '</option>');
-
                     })
                 },
 
                 error: function (){
-
                     alert("wasn't succesful");
-
-                }
+               }
 
             });
             //$('#list').onmouseover($(this).attr('size', 5));
-
             $('#list').on("change", function () {
 
                 $('[name="time_taken"]').focus().select();
 
             });
-
         });
 
         function isNumber(that)
@@ -59,19 +53,15 @@
                 that.value='';
             }
         }
-
-
     </script>
     <style>
         .border1{
-           border-radius: 5px;border-width: 2px;
+            border-radius: 5px;border-width: 2px;
             border-color: #d9d9d9;border-style: solid;
             width:fit-content; padding:5px
         }
         .form-control{
-
             width: 95% !important;
-
         }
         .container {
             justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
@@ -92,14 +82,13 @@
 
 <th:block th:include="user/_menu"></th:block>
 <div style="padding-left: 50px;">
-<h3 id="timestamp" class="border1"></h3>
+    <h3 id="timestamp" class="border1"></h3>
 </div>
 <h1 style="text-align: center">Please Input A Task</h1><br>
 <hr>
-
 <!--This form calls the POST method that is mapped to "/inputTasks/add" on the InputTaskController -->
 <form  id="inputtask" class="container" method="POST" action="/inputTasks/add" th:action="@{/inputTasks/add}">
-<table align="center">
+    <table align="center">
         <tr>
             <th>Job ID</th>
             <th>Workflow ID</th>
@@ -109,11 +98,8 @@
             <th>Records Output</th>
             <th>Records Dropped</th>
             <th>Notes</th>
-
         </tr>
-
         <tr >
-
             <td><input class="form-control" type="text" name="job_id"  size="10"    th:value="${jobId}" required></td>
             <td><input class="form-control" type="text" name="workflow"  size="10"  th:value="${wfId}" required></td>
             <td><select style="width: 100px;" id="list" class="form-control" type="text" name="task_id"  required></select></td>
@@ -123,24 +109,18 @@
             <td><input class="form-control" type="text" name="records_dropped" size="10" value="0" required></td>
             <td><input id="notes" class="form-control" type="text" name="notes" size="10" ></td>
         </tr>
-
         <tr>
             <td colspan="8">&nbsp;</td>
-
         </tr>
         <tr>
             <td colspan="8">&nbsp;</td>
-
         </tr>
         <tr>
             <!--TODO when the New Work flow of Finish buttons are pressed with empty fields an error occurs
             This should be fixed to allow those buttons to be pressed. Right now they are tied to
             inputting tasks. They should operate separately-->
-
         </tr>
-
     </table>
-
 </form>
 
 <form  id="createWf" method='POST' th:action="@{/createWorkflow}">
@@ -154,7 +134,6 @@
         <input form="createWf" type="submit" class="btn btn-primary btnwidth" value="New Workflow">
         <button class="btn btn-primary" onclick="window.location.href='/jobs/findjob'">Go to Find Job</button>
     </div>
-
 </div>
 
 </body>

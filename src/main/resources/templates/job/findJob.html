@@ -23,41 +23,23 @@
                 that.focus();
                 var regex = /[^/0-9]/g;
                 that.value = that.value.replace(regex, "");
-
-
             }
-
         });
-
-
     </script>
-
-
-
 </head>
 
 <body>
 <th:block th:include="user/_menu"></th:block>
-
 <div align="center">
     <br>
     <br>
     <h1>Please Input Job ID</h1>
     <br>
-    <!--<div class="container" >-->
-
-    <!--<div class="card" style="height: 200px; width: 400px; position: relative">-->
-
-        <!--<form  method='POST' action="/createWorkflow" style="position: absolute; top: 40%; left: 16%;">-->
     <form  method='POST' action="/createWorkflow">
-            <h3 style="display: inline-block;">Job ID: </h3>
-
-            <input id="textbox" style="width: 150px;display: inline-block;" class="form-control" name="jobId"  type="text" required />
-
-            <input type="submit" class="btn btn-primary" onClick= "return empty()" value="find a job">
-        </form>
-    <!--</div>-->
-    <!--</div>-->
+        <h3 style="display: inline-block;">Job ID: </h3>
+        <input id="textbox" style="width: 150px;display: inline-block;" class="form-control" name="jobId"  type="text" required />
+        <input type="submit" class="btn btn-primary" onClick= "return empty()" value="find a job">
+    </form>
     <h1 style="color: red;" th:text="${job}"></h1>
 </div>
 </body>

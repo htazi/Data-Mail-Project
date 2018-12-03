@@ -30,7 +30,6 @@
             }
         }
 
-
         function validate(elementId) {
 
             var x = document.getElementById(elementId).value;
@@ -44,9 +43,6 @@
 
             return true;
         }
-
-
-
     </script>
     <style>
         td{text-align: left;
@@ -74,13 +70,11 @@
             <tr>
                 <td>Workflow:</td>
                 <td><input type="text" name="wfId" th:value="${wfId}" ></td>
-
             </tr>
             <tr>
                 <td colspan="8">&nbsp;</td>
             </tr>
             <tr >
-
                 <td>Description:</td>
                 <td><input type="text" name="wfdesc" value=""/></td>
             </tr>
@@ -89,13 +83,8 @@
         <button class="btn btn-primary" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
         <input type="hidden" name="jobId" th:value="${job.jobId}" />
         <input type="hidden" name="wfId" th:value="${wfId}"/>
-
     </form>
-
-
-
 </div>
-
 <br>
 </div>
 </body>

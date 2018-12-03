@@ -14,23 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BillingController
 {
-//    private final UserDetailsServiceImpl userDetailsService;
-//
-//    @Autowired
-//    public BillingController( UserDetailsServiceImpl userDetailsService)
-//    {
-//
-//        this.userDetailsService = userDetailsService;
-//
-//    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/billing/displaybilling")
     public String getToBilling(Model model, Principal principal)
     {
-//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-//        String name = loginedUser.getUsername();
-//        AppUser user = userDetailsService.getUser(name);
-//        String userName = user.getUserName();
-//        model.addAttribute("userName", userName);
+
         return "billing/displaybilling";
     }
 }

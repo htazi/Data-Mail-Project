@@ -60,12 +60,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
                 + " was not found in the database"));
     }
 
-//    public UserRole getUserRole(int userId)
-//    {
-//        Optional<UserRole> userRoleContainer = this.userRoleRepository.getUserRole(userId); // attempt to pull a user
-//        return UserRole.orElseThrow(() -> new UsernameNotFoundException("User ID " + userId
-//                + " was not found in the database"));
-//    }
+
 
 
 }
