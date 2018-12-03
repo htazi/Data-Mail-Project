@@ -19,9 +19,7 @@
 
 <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
     <br>
-<form  class="container" method='GET' action="/jobs/findjob" th:action="@{/jobs/findjob}">
-    <input type="submit" class="btn btn-primary" value="Find a Job">
-</form>
+    <button class="btn btn-primary" onclick="window.location.href='/jobs/findjob'">Go To Find A Job</button>
 </div>
 </body>
 

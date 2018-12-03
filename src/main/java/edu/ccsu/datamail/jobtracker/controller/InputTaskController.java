@@ -75,23 +75,23 @@ public class InputTaskController
                                @RequestParam("records_input") Integer recIn, @RequestParam("records_output") Integer recOut,
                                @RequestParam("records_dropped") Integer recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-        if(tskId==0)
+        if(tskId<0)
         {
             tskId =null;
         }
-        if (time ==0)
+        if (time <0)
         {
             time=null;
         }
-        if (recIn == 0)
+        if (recIn < 0)
         {
             recIn=null;
         }
-        if ( recOut ==0)
+        if ( recOut <0)
         {
             recOut=null;
         }
-        if( recD==0)
+        if( recD<0)
         {
             recD=null;
         }

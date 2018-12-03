@@ -30,7 +30,6 @@
                         $('#list').append('<option value='+ d.taskId+ '>'+d.acronym+ '</option>');
                     })
                 },
-
                 error: function (){
                     alert("wasn't succesful");
                }
@@ -38,9 +37,7 @@
             });
             //$('#list').onmouseover($(this).attr('size', 5));
             $('#list').on("change", function () {
-
                 $('[name="time_taken"]').focus().select();
-
             });
         });
 
