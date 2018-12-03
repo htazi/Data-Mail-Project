@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css"></script>
+
     <script>
         $(document).ready(function() {
             var d = new Date();
@@ -13,6 +16,24 @@
             jQuery('#timenow').val(t);
             jQuery('#timestamp').text(d);
         });
+
+        $('#task_id').autocomplete({
+            serviceUrl: 'availableTaskAjax',
+            paramName: "acronym",
+
+            delimiter: ",",
+
+            transformResult: function(response) {
+                console.log(response);
+                return {
+                    suggestions: $.map($.parseJSON(response), function(list) {
+                        return { value: list.name, data: list.id };
+                    })
+                };
+            }
+        });
+
+
     </script>
     <style>
         .container {

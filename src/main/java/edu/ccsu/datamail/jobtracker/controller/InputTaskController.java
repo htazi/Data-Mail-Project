@@ -19,9 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class InputTaskController
@@ -92,7 +95,7 @@ public class InputTaskController
         /*Timestamp needed for the addInputTask method. Currently displays the UTC time*/
         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
 
-        /*TODO figure out how updating and retrieving taskNum will work. Currently its hardcoded*/
+        /*Increments the taskNum*/
         Integer taskNum = inputTaskService.getTaskNum(jobId, wfId);
         taskNum++;
 
@@ -115,4 +118,7 @@ public class InputTaskController
          * submission*/
         return ("inputtask/inputTask");
     }
+
+
+
 }

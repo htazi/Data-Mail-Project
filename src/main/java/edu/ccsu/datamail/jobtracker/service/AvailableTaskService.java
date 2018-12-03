@@ -6,6 +6,7 @@ import edu.ccsu.datamail.jobtracker.repository.AvailableTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -48,5 +49,9 @@ public class AvailableTaskService
     public void addAvailableTask(AvailableTask availableTask)
     {
         availableTaskRepository.save(availableTask);
+    }
+
+    public List<AvailableTask> getAvailableTaskList(){
+        return availableTaskRepository.findAll();
     }
 }
