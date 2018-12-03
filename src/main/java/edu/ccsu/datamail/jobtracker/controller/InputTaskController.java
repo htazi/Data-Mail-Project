@@ -103,7 +103,7 @@ public class InputTaskController
 
         /*Build the inputTask object for insertion*/
         InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, desc,
-                recIn, recOut, recD, time, timeStamp);
+                false, recIn, recOut, recD, time, timeStamp);
 
         /*Add the newly created task to the input_task table*/
         inputTaskService.addInputTask(inputTask);
