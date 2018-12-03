@@ -66,7 +66,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
     public AppRole findAppRole(String roleName){
         return appRoleRepository.findByRoleName(roleName);
+
     }
+
+
 
 
 }

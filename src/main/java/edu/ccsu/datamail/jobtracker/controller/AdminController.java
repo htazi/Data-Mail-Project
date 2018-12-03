@@ -45,7 +45,8 @@ public class AdminController
      */
     @RequestMapping(value = "admin/addUser", method = RequestMethod.POST)
     public String addUser(@RequestParam("user_name") String user_name, @RequestParam("f_name") String f_name,
-                          @RequestParam("l_name") String l_name, @RequestParam("user_id") Integer user_id, Model model)
+                          @RequestParam("l_name") String l_name, @RequestParam("user_id") Integer user_id,
+                          @RequestParam("app_role") String app_role,Model model)
     {
         AppUser user = new AppUser();
         user.setUserName(user_name);
@@ -56,10 +57,16 @@ public class AdminController
         user.isActive(false);
         //TODO randomly generate password
         user.setEncryptedPassword("generated");
-        AppRole role = new AppRole();
-
+        AppRole role = userDetailsService.findAppRole(app_role);
         UserRole userRole = new UserRole();
-       // role.se
+        userRole.setAppRole(role);
+        userRole.setAppUser(user);
+        //TODO create
+       // userRole.save();
+
+
+
+
 
 
      return "user/addUser";
