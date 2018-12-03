@@ -137,7 +137,7 @@ public class InputTaskController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
-    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
+    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model,Authentication authResult) throws JobNotFoundException, WorkflowNotFoundException
     {
         List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
         boolean isempty = false;
@@ -150,7 +150,28 @@ public class InputTaskController
             model.addAttribute("isempty", isempty);
         }
 
+        String role = authResult.getAuthorities().toString();
 
-        return "/billing/displaybilling";
+
+
+        if (role.contains("ROLE_Billing")) {
+
+            return "/billing/displaybilling";
+
+        }
+
+        else if  (role.contains("ROLE_Production_Programmer")) {
+
+            return "/inputtask/baseDisplayJob";
+
+        }
+        else if  (role.contains("ROLE_Manager")) {
+
+            return "/billing/displaybilling";
+
+        }
+
+        return "default";
+        //return "/billing/displaybilling";
     }
 }
