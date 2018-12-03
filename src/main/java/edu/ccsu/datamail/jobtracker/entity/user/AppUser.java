@@ -136,7 +136,7 @@ public class AppUser
         this.lastLogout = lastLogout;
     }
 
-    public boolean isActive()
+    public boolean isActive(boolean b)
     {
         return isActive;
     }

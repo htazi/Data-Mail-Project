@@ -1,6 +1,8 @@
 package edu.ccsu.datamail.jobtracker.service;
 
+import edu.ccsu.datamail.jobtracker.entity.user.AppRole;
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.repository.AppRoleRepository;
 import edu.ccsu.datamail.jobtracker.repository.AppUserRepository;
 import edu.ccsu.datamail.jobtracker.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,14 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
     private final UserRoleRepository userRoleRepository;
 
+    private final AppRoleRepository appRoleRepository;
+
     @Autowired
-    public UserDetailsServiceImpl(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository)
+    public UserDetailsServiceImpl(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository, AppRoleRepository appRoleRepository)
     {
         this.appUserRepository = appUserRepository;
         this.userRoleRepository = userRoleRepository;
+        this.appRoleRepository = appRoleRepository;
     }
 
     @Override
@@ -57,6 +62,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
         Optional<AppUser> appUserContainer = this.appUserRepository.findByUserName(userName); // attempt to pull a user
         return appUserContainer.orElseThrow(() -> new UsernameNotFoundException("User " + userName
                 + " was not found in the database"));
+    }
+
+    public AppRole findAppRole(String roleName){
+        return appRoleRepository.findByRoleName(roleName);
     }
 
 
