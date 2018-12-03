@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value = "/admin")
+//@RequestMapping(value = "/admin")
 public class AdminController
 {
 
@@ -39,13 +39,13 @@ public class AdminController
     /**
      *
      */
-  /*  @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "admin/addUser", method = RequestMethod.POST)
     public String addUser(@RequestParam("user_name") String user_name, @RequestParam("f_name") String f_name,
                           @RequestParam("l_name") String l_name, @RequestParam("user_id") Integer user_id, Model model)
     {
 
-     return "addUser";
-    }*/
+     return "user/addUser";
+    }
 
 
 }

@@ -31,7 +31,7 @@
     <h1 style="text-align: center">Add New User</h1><br><br>
 
 
-    <form method="POST" action="/addUser" th:action="@{/addUser}">
+    <form method="POST" action="admin/addUser" th:action="@{admin/addUser}">
 
         <table align="center" style="margin: 0px auto;">
             <tr>
@@ -45,7 +45,7 @@
 
             <tr>
                 <td>First Name:</td>
-                <td><input  type="text" id="f_name" name="acronym" th:value="${f_name}" ></td>
+                <td><input  type="text"  name="f_name" th:value="${f_name}" ></td>
             </tr>
 
             <tr>
@@ -54,7 +54,7 @@
 
             <tr>
                 <td>Last Name</td>
-                <td><input type="text" id="l_name"  name="t_desc" th:value="${l_name}" ></td>
+                <td><input type="text" name="l_name"  th:value="${l_name}" ></td>
             </tr>
 
             <tr>
