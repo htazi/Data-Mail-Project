@@ -11,17 +11,15 @@
 <th:block th:include="user/_menu"></th:block>
 
 
-<h2>Data Processing Page</h2>
+<h2>Text Specialist Page</h2>
 <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
 <b>This is protected page!</b>
 
 <br/><br/>
 
-<!--<div th:if="${userInfo != null}" th:utext="${userInfo}"></div>-->
-<!--<form  class="container" method='GET' action="/jobs/findjob" th:action="@{/jobs/findjob}">
+<div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+<form  class="container" method='GET' action="/jobs/findjob" th:action="@{/jobs/findjob}">
     <input type="submit" class="btn btn-primary" value="Find a Job">
-</form>-->
-<button class="btn btn-primary" onclick="window.location.href='/dataProcessing/displayJob'">Search for a Job</button>
+</form>
 </body>
 
-</html>
