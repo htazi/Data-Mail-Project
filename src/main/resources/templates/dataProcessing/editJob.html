@@ -32,12 +32,12 @@
     <h1 style="text-align: center">Update Job</h1><br><br>
 
 
-    <form method="POST"  th:action="@{'/job/updateJob/' + ${jobId} }" >
+    <form method="POST"  th:action="@{'/job/updatedJob/' + ${job_id}+'/'+${workflow}+'/'+${taskNum}}" >
 
         <table align="center" style="margin: 0px auto;">
             <tr>
                 <td>Job ID:</td>
-                <td><input type="text"  name="jobId" th:value="${jobId}" readonly/></td>
+                <td><input type="text"  name="job_id" th:value="${job_id}" readonly /></td>
             </tr>
 
             <tr>
@@ -46,7 +46,7 @@
 
             <tr>
                 <td>Workflow ID:</td>
-                <td><input  type="text"  name="workflowId" th:value="${workflowId}" required></td>
+                <td><input  type="text"  name="workflow" th:value="${workflow}" readonly></td>
             </tr>
 
             <tr>
@@ -55,7 +55,7 @@
 
             <tr>
                 <td>User name:</td>
-                <td><input type="text"  name="userName" th:value="${userName}"  required></td>
+                <td><input type="text" id="user_name" name="user_name" th:value="${user_name}"  readonly ></td>
             </tr>
 
             <tr>
@@ -64,7 +64,7 @@
 
             <tr>
                 <td>Task Number:</td>
-                <td><input type="text"  name="taskNum" th:value="${taskNum}"  required></td>
+                <td><input type="number"  name="taskNum" th:value="${taskNum}"  readonly></td>
             </tr>
 
             <tr>
@@ -73,7 +73,7 @@
 
             <tr>
                 <td>Task Description:</td>
-                <td><input type="text"  name="t_desc" th:value="${t_desc}"  required></td>
+                <td><input type="text"  name="task_desc" th:value="${task_desc}" required></td>
             </tr>
 
             <tr>
@@ -82,7 +82,7 @@
 
             <tr>
                 <td>Records Input:</td>
-                <td><input type="text"  name="recordsIn" th:value="${recordsIn}"  required></td>
+                <td><input type="number"  name="records_input" th:value="${records_input}" required></td>
             </tr>
 
             <tr>
@@ -91,7 +91,7 @@
 
             <tr>
                 <td>Records Output:</td>
-                <td><input type="text"  name="recordsOut" th:value="${recordsOut}"  required></td>
+                <td><input type="number"  name="records_output" th:value="${records_output}" required></td>
             </tr>
 
             <tr>
@@ -100,8 +100,7 @@
 
             <tr>
                 <td>Records Dropped:</td>
-                <td><input type="text"  name="recordsDropped" th:value="${recordsDropped}"  required></td>
-            </tr>
+                <td><input type="number"  name="records_dropped" th:value="${records_dropped}" required></td>
 
             <tr>
                 <td colspan="8">&nbsp;</td>
@@ -109,7 +108,7 @@
 
             <tr>
                 <td>Time Taken:</td>
-                <td><input type="text"  name="timeTaken" th:value="${timeTaken}"  required></td>
+                <td><input type="number"  name="time_taken" th:value="${time_taken}" required></td>
             </tr>
 
             <tr>
@@ -118,7 +117,7 @@
 
             <tr>
                 <td>Time Recorded:</td>
-                <td><input type="text"  name="timeRecorded" th:value="${timeRecorded}"  required></td>
+                <td><input type="text"  name="time_recorded" th:value="${time_recorded}" readonly></td>
             </tr>
 
         </table><br>
