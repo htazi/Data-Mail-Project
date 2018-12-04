@@ -14,7 +14,7 @@
             jQuery('#timestamp').text(t);
             //$('[name="time_taken"]').focus();
 
-            $("input:not(#notes)").on('change', function ()
+            $("input:not(#notes)", "input:not(#is_pcr)").on('change', function ()
             {
                 isNumber(this);
             });
