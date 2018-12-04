@@ -1,5 +1,6 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
+import com.sun.xml.internal.fastinfoset.algorithm.IntegerEncodingAlgorithm;
 import edu.ccsu.datamail.jobtracker.entity.job.JobNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
@@ -70,10 +71,11 @@ public class InputTaskController
      */
 
     @RequestMapping(method = RequestMethod.POST, value = "/inputTasks/add")
-    public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
-                               @RequestParam("task_id") int tskId, @RequestParam("time_taken") int time,
-                               @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
-                               @RequestParam("records_dropped") int recD, @RequestParam("is_pcr") Boolean isPCR,
+    public String addInputTask(@RequestParam("job_id") Integer jobId, @RequestParam("workflow") Integer wfId,
+                               @RequestParam("task_id") Integer tskId, @RequestParam("time_taken") Integer time,
+                               @RequestParam("records_input") Integer recIn, @RequestParam("records_output") Integer recOut,
+                               @RequestParam("records_dropped") Integer recD,
+                               @RequestParam(name = "is_pcr", defaultValue = "false") Boolean isPCR,
                                @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
         // if(tskId.equal)
@@ -119,7 +121,7 @@ public class InputTaskController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
-    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
+    public String getAllInputTasks(@RequestParam("jobId") Integer jobId, Model model) throws JobNotFoundException, WorkflowNotFoundException
     {
         List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
         boolean isempty = false;
