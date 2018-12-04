@@ -2,7 +2,7 @@
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>-->
-
+<!-- TODO: Merge TaskUpdate and TaskAddNew files into one file -->
 <!DOCTYPE html >
 <html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,8 +11,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
         <script>
             function lettersOnly(input) {
                 var regex = /[^a-zA-Z ]+/;
@@ -63,9 +61,7 @@
 
             <tr>
                 <td>Is Billable:</td>
-                <!--TODO figure out how to represent boolean with html element-->
-                <!--<td><input type="checkbox" name="isbillable" value="true" th:checked="${isbillable}"></td>-->
-                <td><input type="text" name="isbillable"  th:value="${isbillable}">
+                <td><input type="checkbox" name="is_billable" th:checked="${isbillable}"></td>
             </tr>
 
             <tr>

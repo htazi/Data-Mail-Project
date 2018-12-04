@@ -101,12 +101,13 @@ CREATE TABLE task_list (
 
 -- List of all the recorded tasks input by employees
 CREATE TABLE input_task (
-  job_id          INT NOT NULL,
-  wf_id           INT NOT NULL,
-  task_num        INT NOT NULL,
-  task_id         INT NOT NULL,
-  user_id         INT NOT NULL,
+  job_id          INT     NOT NULL,
+  wf_id           INT     NOT NULL,
+  task_num        INT     NOT NULL,
+  task_id         INT     NOT NULL,
+  user_id         INT     NOT NULL,
   task_desc       VARCHAR(60),
+  is_pcr          BOOLEAN NOT NULL,
   records_in      INT,
   records_out     INT,
   records_dropped INT,
