@@ -84,8 +84,8 @@ values (1, 1, 'Test workflow 1 for job 1');
 insert into task_list (task_id, acronym, t_desc, is_billable)
 values (0, 'test', 'this is a test task', FALSE);
 
-insert into input_task (job_id, wf_id, task_num, task_id, user_id)
-values (1, 0, 1, 0, 2);
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, is_pcr)
+values (1, 0, 1, 0, 2, false);
 
 ---task_list preload data
 insert into task_list (task_id, acronym, t_desc, is_billable, price)
