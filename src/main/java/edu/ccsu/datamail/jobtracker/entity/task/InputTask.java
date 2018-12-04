@@ -5,7 +5,6 @@ import edu.ccsu.datamail.jobtracker.entity.workflow.Workflow;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
 /**
  * JPA class for the input_task table in the database
  * <p>

@@ -77,6 +77,9 @@ public class MainController
         else if (role.contains("ROLE_Manager")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/manager"));
         }
+        else if (role.contains("ROLE_Text_Specialist")) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/text"));
+        }
     }
 
     @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
@@ -180,6 +183,22 @@ public class MainController
         model.addAttribute("userInfo", userInfo);
 
         return "user/programmerPage";
+    }
+
+    @RequestMapping(value = "/text", method = RequestMethod.GET)
+    public String textSpecialistPage(Model model, Principal principal)
+    {
+        // After user login successfully.
+        String userName = principal.getName();
+
+        System.out.println("User Name: " + userName);
+
+        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+        String userInfo = WebUtils.toString(loginedUser);
+        model.addAttribute("userInfo", userInfo);
+
+        return "user/textPage";
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)

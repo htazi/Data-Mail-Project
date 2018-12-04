@@ -22,6 +22,11 @@ values (2, 'dbuser1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TC
 insert into app_user (user_id, user_name, encrypted_password, is_active)
 values (1, 'dbadmin1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', TRUE);
 
+insert into app_user (user_id, user_name, encrypted_password, is_active)
+values (8, 'text1', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', TRUE);
+
+
+
 -- AppUser Permissions
 insert into app_role (role_id, role_name)
 values (1, 'ROLE_ADMIN');
@@ -43,6 +48,9 @@ values (6, 'ROLE_Billing');
 
 insert into app_role (role_id, role_name)
 values (7, 'ROLE_Manager');
+
+insert into app_role (role_id, role_name)
+values (8, 'ROLE_Text_Specialist');
 
 -- Tie test app_user to app_user permissions
 insert into user_role (USER_ID, ROLE_ID)
@@ -68,6 +76,9 @@ values (6, 6);
 
 insert into user_role (USER_ID, ROLE_ID)
 values (7, 7);
+
+insert into user_role (USER_ID, ROLE_ID)
+values (8, 8);
 
 insert into client (client_id)
 values (1);

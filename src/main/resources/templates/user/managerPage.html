@@ -18,9 +18,13 @@
 <br/><br/>
 
 <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-    <br>
-<button class="btn btn-primary" onclick="window.location.href='/billing/displaybilling'">Go to View Job</button>
 </div>
+
+<!--<form  class="container" method='GET' action="/jobs/findjob" th:action="@{/jobs/findjob}">-->
+    <!--<input type="submit" class="btn btn-primary" value="Find a Job">-->
+<!--</form>-->
+
+<button class="btn btn-primary" onclick="window.location.href='/billing/displaybilling'">Go to View Job Record</button>
 </body>
 
 </html>

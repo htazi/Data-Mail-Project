@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Processing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+        .inputwidth{
+            width: 150px;
+            display: inline-block;
+        }
+        .lbl {
+            display: inline-block;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            $('h1[name=inputNum]').css({"color":"red"});
+
+        });
+
+        function empty() {
+            var x = document.getElementById("jobId").value;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for job ID");
+                console.log("function fired");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<th:block th:include="user/_menu"></th:block>
+<h3>Welcome :
+    <span th:utext="${#request.userPrincipal.name}"></span>
+</h3>
+
+<div align="center">
+    <h1>Search a Job For Review</h1>
+    <br>
+    <form  method='GET' action="/inputTasks/getalltasks">
+        <div>
+            <!--<h3 class="lbl">Job ID:</h3> <input class="form-control inputwidth" id="jobId" name="jobId" type="text" >-->
+            <h3 style="display: inline;">Job ID: </h3><input name="jobId" id="jobId" type="text" />
+            <input class="btn btn-primary inputwidth" type="submit" value="Get Job History" onclick="return empty()">
+        </div>
+    </form>
+
+
+    <br>
+    <br>
+    <table class="table table-striped">
+
+       <th:block th:if="${isempty == false}">
+            <tr >
+                <th  th:style="|width: auto;padding-left:10px; padding-bottom:5px|">Job ID</th>
+                <th >workflow ID</th>
+                <th>User Name</th>
+                <th>Task Number</th>
+                <th>Task Description</th>
+                <th>Records Input</th>
+                <th>Records Output</th>
+                <th>Records Dropped</th>
+                <th>Time Taken</th>
+                <th>Time Recorded</th>
+                <th  th:style="|width: auto;padding-right:10px|">Edit</th>
+
+            </tr>
+        </th:block>
+
+        <h2 th:text="${message}"></h2>
+
+        <tr  th:each="taskinput : ${inputtasks}">
+            <div>
+                <form method="POST" action="/job/updateJob/jobId/workflowId/taskNum" th:action="@{'/job/updateJob/'+${taskinput.getJobId()}+'/'+${taskinput.getWorkflowId()}+'/'+${taskinput.getTaskNum()}}">
+                <td><input size="8" name="job_id"  th:style="|padding-left:10px|" th:value="${taskinput.getJobId()}" readonly/></td>
+                <td><input size="8" name="workflow" th:value="${taskinput.getWorkflowId()}" readonly/></td>
+                <td><input size="8" name="user_name"  th:value="${taskinput.getUserId().getUserName()}" readonly/></td>
+                <td><input size="8" name="taskNum" th:value="${taskinput.getTaskNum()}" readonly/></td>
+                <td><input size="8" name="task_desc" th:value="${taskinput.getDescription()}" readonly/></td>
+                <td><input size="8" name="records_input" th:value="${taskinput.getRecordsIn()}" readonly/></td>
+                <td><input size="8" name="records_output"  th:value="${taskinput.getRecordsOut()}" readonly/></td>
+                <td><input size="8" name="records_dropped" th:value="${taskinput.getRecordsDropped()}" readonly/></td>
+                <td><input size="8" name="time_taken" th:value="${taskinput.getTimeTaken()}" readonly/></td>
+                <td><input size="12" name="time_recorded" th:value="${taskinput.getTimeRecorded()}" readonly/></td>
+                <td><input type="submit" class="btn btn-primary" value ="Update"></td></form>
+            </div>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

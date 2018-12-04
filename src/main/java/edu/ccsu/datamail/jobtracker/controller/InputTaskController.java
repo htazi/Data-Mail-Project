@@ -139,7 +139,7 @@ public class InputTaskController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
-    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model,Authentication authResult) throws JobNotFoundException, WorkflowNotFoundException
+    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model, Authentication authResult) throws JobNotFoundException, WorkflowNotFoundException
     {
         List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
         boolean isempty = false;
@@ -151,29 +151,27 @@ public class InputTaskController
             model.addAttribute("message", "No Such a Job Id");
             model.addAttribute("isempty", isempty);
         }
-
+    /**
+     * Displays the record from input task table based on the user role
+     * each user will see different field from the input task table
+     * these fields are set on the html page for each user
+     */
         String role = authResult.getAuthorities().toString();
-
-
-
+        /* billing user*/
         if (role.contains("ROLE_Billing")) {
-
             return "/billing/displaybilling";
-
         }
-
+        /* Data-Processing user*/
+        else if (role.contains("ROLE_Data_Processing")) {
+            return "/dataProcessing/displayJob";
+        }
+        /* Manager user*/
+        else if (role.contains("ROLE_Manager")) {
+            return "/billing/displaybilling";
+        }
         else if  (role.contains("ROLE_Production_Programmer")) {
-
             return "/inputtask/baseDisplayJob";
-
         }
-        else if  (role.contains("ROLE_Manager")) {
-
-            return "/billing/displaybilling";
-
-        }
-
         return "default";
-        //return "/billing/displaybilling";
     }
 }
