@@ -17,6 +17,9 @@
         .lbl {
             display: inline-block;
         }
+        .table{
+            width: 95% !important;
+        }
 
     </style>
     <script>
@@ -38,27 +41,32 @@
 </head>
 
 <body>
+<th:block th:include="user/_menu"></th:block>
 <br>
 <br>
 
 
 <div align="center">
-    <h1>Search For a Job(Billing Page)</h1>
+    <!--<th:block th:if="${user == 'ROLE_Billing'}">-->
+    <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+    <!--<th:block th:if="${user == 'ROLE_Manager'}">-->
+        <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+
+    <h1>Search For a Job</h1>
     <br>
     <form  method='GET' action="/inputTasks/getalltasks">
         <div>
-            <h3 class="lbl">Job ID:</h3> <input class="form-control inputwidth" id="jobId" name="jobId" type="text" >
+            <h3 class="lbl" style="display: inline-block">Job ID:</h3> <input style="display: inline-block;width: 150px" class="form-control inputwidth" id="jobId" name="jobId" type="text" >
         <!--Workflow ID: <input id="wfId" name="wfId" type="text" value="2" readonly>-->
         <input class="btn btn-primary inputwidth" type="submit" value="View Records" onclick="return empty()">
         <!--<input class="btn btn-success" type="button" id="mybtn2"  value="Show All Bills"/>-->
         </div>
     </form>
-
-
     <br>
     <br>
     <table class="table table-striped">
-
         <th:block th:if="${isempty == false}">
             <tr >
                 <th  th:style="|width: auto;padding-left:10px; padding-bottom:5px|">Job ID</th>
@@ -81,8 +89,6 @@
         <h2 th:text="${message}"></h2>
 
         <tr  th:each="taskinput : ${inputtasks}">
-
-
                 <!--<td  th:style="|width: auto;padding-left:10px|" ><input  th:style="|width: 80px|"  name="inputNum"  type="text"  th:value="${taskinput.getJobId()}" readonly/></td>-->
                 <!--<td><input th:style="|width: 80px|" name ="inputNum"  type="text"  th:value="${taskinput.getWorkflowId()}" readonly/></td>-->
                 <!--<td><input th:style="|width: 110px|" name="input"  type="text"  th:value="${taskinput.getUserId().getUserName()}" readonly/></td>-->
@@ -96,9 +102,6 @@
                 <!--<td><input th:style="|width: 80px|" name="input"  type="text"  th:value="${taskinput.getTask_id().getAcronym()}" readonly/></td>-->
                 <!--<td><input name="input"  type="text"  th:value="${taskinput.getTask_id().getTaskDesc()}" readonly/></td>-->
                   <!--<td><input th:style="|width: 80px|"  name="input"  type="text"  th:value="${taskinput.getTask_id().isBillable()}" readonly/></td>-->
-
-
-
             <div  >
                 <td  th:style="|padding-left:10px|" th:text="${taskinput.getJobId()}"/></td>
                 <td  th:text="${taskinput.getWorkflowId()}"/></td>
@@ -109,22 +112,15 @@
                 <td   th:text="${taskinput.getRecordsOut()}" /></td>
                 <td th:text="${taskinput.getRecordsDropped()}"/></td>
                 <td  th:text="${taskinput.getTimeTaken()}" /></td>
-                <!--<td>< name="td"    th:text="${taskinput.getTimeRecorded()}" readonly/></td>-->
                 <td   th:text="${taskinput.getTask_id().getAcronym()}" /></td>
                 <td th:text="${taskinput.getTask_id().getTaskDesc()}" /></td>
                 <td   th:text="${taskinput.getTask_id().isBillable()}" /></td>
                 <!--TODO make this element to chekcbox-->
                 <!--<td>< type="checkbox"  th:if="${taskinput.getTask_id().getTaskDesc() == true}" checked/> </td>-->
                 <td  th:style="|width: auto;padding-right:10px|" th:text="${taskinput.getTask_id().getPrice()}" /></td>
-
             </div>
-
-
         </tr>
     </table>
-
 </div>
-
-
 </body>
 </html>

@@ -1,6 +1,7 @@
 package edu.ccsu.datamail.jobtracker.service;
 
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
+import edu.ccsu.datamail.jobtracker.entity.user.UserRole;
 import edu.ccsu.datamail.jobtracker.repository.AppUserRepository;
 import edu.ccsu.datamail.jobtracker.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,8 @@ public class UserDetailsServiceImpl implements UserDetailsService
         return appUserContainer.orElseThrow(() -> new UsernameNotFoundException("User " + userName
                 + " was not found in the database"));
     }
+
+
 
 
 }

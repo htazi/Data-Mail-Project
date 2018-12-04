@@ -77,7 +77,26 @@ public class InputTaskController
                                @RequestParam(name = "is_pcr", defaultValue = "false") Boolean isPCR,
                                @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-        // if(tskId.equal)
+        if(tskId<0)
+        {
+            tskId =null;
+        }
+        if (time <0)
+        {
+            time=null;
+        }
+        if (recIn < 0)
+        {
+            recIn=null;
+        }
+        if ( recOut <0)
+        {
+            recOut=null;
+        }
+        if( recD<0)
+        {
+            recD=null;
+        }
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
          * User's getUserName method. That name is passed to the custom UserDetailService's
@@ -121,7 +140,6 @@ public class InputTaskController
 
     @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
     public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model, Authentication authResult) throws JobNotFoundException, WorkflowNotFoundException
-  
     {
         List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
         boolean isempty = false;
@@ -148,10 +166,12 @@ public class InputTaskController
             return "/dataProcessing/displayJob";
         }
         /* Manager user*/
-        else if (role.contains("ROLE_Manage")) {
+        else if (role.contains("ROLE_Manager")) {
             return "/billing/displaybilling";
         }
-
+        else if  (role.contains("ROLE_Production_Programmer")) {
+            return "/inputtask/baseDisplayJob";
+        }
         return "default";
     }
 }

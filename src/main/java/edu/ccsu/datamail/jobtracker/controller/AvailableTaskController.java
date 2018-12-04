@@ -2,14 +2,14 @@ package edu.ccsu.datamail.jobtracker.controller;
 
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
+import edu.ccsu.datamail.jobtracker.entity.task.acronymDD;
 import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/task")
@@ -87,5 +87,22 @@ public class AvailableTaskController
         model.addAttribute("t_desc", t_desc);
         model.addAttribute("price", price);
         return "AvailableTask/AvailableTaskUpdate";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAcronym", method = RequestMethod.GET)
+    public List<acronymDD> getAcronym(Model model)
+    {
+        List<acronymDD> acronymDDList = new ArrayList<>();
+        List<AvailableTask> taskList = availableTaskService.getAllAvailableTaskSortByAcronym();
+
+        for (int i = 0; i < taskList.size(); i++)
+        {
+            int taskid = taskList.get(i).getTaskId();
+            String acronym = taskList.get(i).getAcronym();
+            acronymDDList.add(new acronymDD(taskid, acronym));
+        }
+
+        return acronymDDList;
     }
 }

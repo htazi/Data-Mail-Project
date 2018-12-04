@@ -5,11 +5,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          //autologin('#submit','Programmer1','123');
+            $('#usr').focus();
+        })
+function autologin(elemID, user, pass) {
+    $('#usr').val(user);
+    $('#pwd').val(pass);
+    $(elemID).focus();
+    $(elemID).click();
+
+}
+    </script>
+    <style>
+        .navbar{
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
 <!-- Include _menu.html -->
 <th:block th:include="user/_menu"></th:block>
-<div align="left">
+
+<div align="left" style="padding-left: 100px" class="jumbotron">
     <h1>Login</h1>
 
     <!-- /login?error=true -->
@@ -28,17 +47,17 @@
     <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
         <div class="form-group">
             <label for="usr">Name:</label>
-            <input style="width: 250px" type="text" name="username" class="form-control" id="usr">
+            <input style="width: 250px" type="text" name="username" class="form-control" id="usr" >
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input style="width: 250px" type="password" name="password" class="form-control" id="pwd">
+            <input style="width: 250px" type="password" name="password" class="form-control" id="pwd" >
 
         </div>
         <div class="checkbox">
             <label><input type="checkbox"> Remember me</label>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
 
     </form>
 </div>
