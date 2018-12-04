@@ -33,24 +33,17 @@ public class JobController
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/createWorkflow")
-    public String toGetToWf(@RequestParam("jobId") int jobId, Model model) throws JobNotFoundException
+    public String serveWorkflowPage(@RequestParam("jobId") int jobId, Model model)
     {
-        Job job = null;
         try {
-            job = jobService.getJob(jobId);
-        } catch (JobNotFoundException e) {
-            e.getMessage();
-        }
-        if (job != null) {
+            Job job = jobService.getJob(jobId);
             int nextWorkflowId = workflowService.findNextWorkflowId(jobId);
             model.addAttribute("job", job);
             model.addAttribute("wfId", nextWorkflowId);
             return "workflow/createWorkflowPage";
-        }
-        else {
+        } catch (JobNotFoundException e) {
             model.addAttribute("job", "No such a job exists");
             return "job/findJob";
         }
     }
-
 }

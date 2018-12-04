@@ -44,7 +44,6 @@ public class AvailableTaskController
     {
         int newestTaskId = availableTaskService.getTaskId();
         model.addAttribute("taskId", ++newestTaskId);
-        model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
         return "AvailableTask/AvailableTaskAddNew";
     }
 
@@ -60,7 +59,7 @@ public class AvailableTaskController
      * @param model
      * @return
      */
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @RequestMapping(value = {"/list", "/updateTaskPost/{taskId}"}, method = RequestMethod.POST)
     public String saveTask(@RequestParam("taskId") Integer taskId, @RequestParam("acronym") String acronym,
                            @RequestParam("t_desc") String taskDesc, @RequestParam(value = "is_billable", defaultValue = "false") Boolean isBillable,
                            @RequestParam("price") Double price, Model model)
@@ -68,6 +67,7 @@ public class AvailableTaskController
         /*TODO figure out how  the auto-increment when inserting new task will work. Currently its hardcoded*/
 
         /*Build the availableTask object for insertion*/
+        // TODO: Validation may have to be added when a task is being updated
         AvailableTask availableTask = new AvailableTask(taskId, acronym, taskDesc, isBillable, price);
         model.addAttribute("task_id", taskId);
         availableTaskService.addAvailableTask(availableTask);
@@ -89,28 +89,6 @@ public class AvailableTaskController
         return "AvailableTask/AvailableTaskUpdate";
     }
 
-    @RequestMapping(value = "/updateTaskPost/{taskId}", method = RequestMethod.POST)
-    public String updateTask(@PathVariable("taskId") int taskId, Model model, @RequestParam("acronym") String acronym, @RequestParam("t_desc") String t_desc,
-                             @RequestParam("isbillable") boolean isBillable, @RequestParam("price") double price) throws TaskNotFoundException
-    {
-
-        AvailableTask availableTask = availableTaskService.getAvailableTask(taskId);
-        availableTask.setAcronym(acronym);
-        availableTask.setBillable(isBillable);
-        availableTask.setPrice(price);
-        availableTask.setTaskDesc(t_desc);
-
-        model.addAttribute("taskId", taskId);
-        model.addAttribute("acronym", acronym);
-        model.addAttribute("t_desc", t_desc);
-        model.addAttribute("price", price);
-        model.addAttribute("isbillable", isBillable);
-        model.addAttribute("tasksList", availableTaskService.getAllAvailableTask());
-        availableTaskService.updateAvailableTask(availableTask);
-
-        return "AvailableTask/AvailableTask_list";
-    }
-
     @ResponseBody
     @RequestMapping(value = "/getAcronym", method = RequestMethod.GET)
     public List<acronymDD> getAcronym(Model model)
@@ -127,5 +105,4 @@ public class AvailableTaskController
 
         return acronymDDList;
     }
-
 }

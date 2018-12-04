@@ -70,6 +70,12 @@ public class InputTask
     private String description;
 
     /**
+     * Flag that marks the task as part of a pcr if true
+     */
+    @Column(name = "is_pcr", nullable = false)
+    private Boolean isPCR;
+
+    /**
      * The number of records in to the task
      */
     @Column(name = "records_in")
@@ -114,9 +120,10 @@ public class InputTask
      * @param workflowId     the integer id of the workflow this task is a part of
      * @param jobId          the integer id of the job this task is a part of
      * @param workflow       the workflow (and by extension job) the task is associated with
-     * @param taskId        the identifier of the task type
+     * @param taskId         the identifier of the task type
      * @param userId         the user who input the task
      * @param description    the optional description of the task
+     * @param isPCR          flag that determines if the task is a PCR
      * @param recordsIn      the amount of records in before the task was completed
      * @param recordsOut     the amount of records out after the task was completed
      * @param recordsDropped the amount of records dropped as a result of the task
@@ -124,7 +131,7 @@ public class InputTask
      * @param timeRecorded   the time the record of the task was entered by the user
      */
     public InputTask(Integer taskNum, Integer workflowId, Integer jobId, Workflow workflow, AvailableTask taskId, AppUser userId, String description,
-                     Integer recordsIn, Integer recordsOut, Integer recordsDropped, Integer timeTaken, Timestamp timeRecorded)
+                     Boolean isPCR, Integer recordsIn, Integer recordsOut, Integer recordsDropped, Integer timeTaken, Timestamp timeRecorded)
     {
         this.taskNum = taskNum;
         this.workflowId = workflowId;
@@ -133,6 +140,7 @@ public class InputTask
         this.taskId = taskId;
         this.userId = userId;
         this.description = description;
+        this.isPCR = isPCR;
         this.recordsIn = recordsIn;
         this.recordsOut = recordsOut;
         this.recordsDropped = recordsDropped;
@@ -208,6 +216,16 @@ public class InputTask
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public Boolean getPCR()
+    {
+        return isPCR;
+    }
+
+    public void setPCR(Boolean PCR)
+    {
+        isPCR = PCR;
     }
 
     public Integer getRecordsIn()
@@ -299,6 +317,9 @@ public class InputTask
         if (description != null ? !description.equals(inputTask.description) : inputTask.description != null) {
             return false;
         }
+        if (isPCR != null ? !isPCR.equals(inputTask.isPCR) : inputTask.isPCR != null) {
+            return false;
+        }
         if (recordsIn != null ? !recordsIn.equals(inputTask.recordsIn) : inputTask.recordsIn != null) {
             return false;
         }
@@ -329,6 +350,7 @@ public class InputTask
         result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (isPCR != null ? isPCR.hashCode() : 0);
         result = 31 * result + (recordsIn != null ? recordsIn.hashCode() : 0);
         result = 31 * result + (recordsOut != null ? recordsOut.hashCode() : 0);
         result = 31 * result + (recordsDropped != null ? recordsDropped.hashCode() : 0);
