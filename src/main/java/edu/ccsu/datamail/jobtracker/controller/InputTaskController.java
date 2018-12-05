@@ -169,8 +169,13 @@ public class InputTaskController
         else if (role.contains("ROLE_Manager")) {
             return "/billing/displaybilling";
         }
+        /* Production-Programmer user */
         else if  (role.contains("ROLE_Production_Programmer")) {
             return "/inputtask/baseDisplayJob";
+        }
+        /* Admin user */
+        else if  (role.contains("ROLE_ADMIN")) {
+            return "/billing/displaybilling";
         }
         return "default";
     }
