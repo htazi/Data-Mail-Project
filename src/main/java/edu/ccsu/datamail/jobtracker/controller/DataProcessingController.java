@@ -1,6 +1,5 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
-
 import edu.ccsu.datamail.jobtracker.entity.task.InputTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.user.AppUser;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 @Controller
 public class DataProcessingController
 {
@@ -31,12 +29,12 @@ public class DataProcessingController
     /**
      * Display the data retrieved from input task to displayJob page
      * the data retrieved  is handled by InputTask Controller
+     *
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, value = "/dataProcessing/displayJob")
     public String getJobHistory()
     {
-
         return "dataProcessing/displayJob";
     }
 
@@ -70,7 +68,6 @@ public class DataProcessingController
                                 @RequestParam("time_taken") Integer timeTaken,
                                 @RequestParam("time_recorded") Timestamp timeRecorded) throws TaskNotFoundException
     {
-
         model.addAttribute("job_id", jobId);
         model.addAttribute("workflow", workflowId);
         model.addAttribute("taskNum", taskNum);
@@ -116,7 +113,6 @@ public class DataProcessingController
                              @RequestParam("time_taken") Integer timeTaken,
                              @RequestParam("time_recorded") Timestamp timeRecorded) throws TaskNotFoundException
     {
-
         InputTask inputTask = inputTaskService.getInputTask(jobId, workflowId, taskNum);
         /* call AppUser object to set userName input*/
         AppUser appUser = inputTask.getUserId();

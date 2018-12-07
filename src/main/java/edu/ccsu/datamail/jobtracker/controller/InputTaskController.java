@@ -77,25 +77,20 @@ public class InputTaskController
                                @RequestParam(name = "is_pcr", defaultValue = "false") Boolean isPCR,
                                @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-        if(tskId<0)
-        {
-            tskId =null;
+        if (tskId < 0) {
+            tskId = null;
         }
-        if (time <0)
-        {
-            time=null;
+        if (time < 0) {
+            time = null;
         }
-        if (recIn < 0)
-        {
-            recIn=null;
+        if (recIn < 0) {
+            recIn = null;
         }
-        if ( recOut <0)
-        {
-            recOut=null;
+        if (recOut < 0) {
+            recOut = null;
         }
-        if( recD<0)
-        {
-            recD=null;
+        if (recD < 0) {
+            recD = null;
         }
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
@@ -151,31 +146,31 @@ public class InputTaskController
             model.addAttribute("message", "No Such a Job Id");
             model.addAttribute("isempty", isempty);
         }
-    /**
-     * Displays the record from input task table based on the user role
-     * each user will see different field from the input task table
-     * these fields are set on the html page for each user
-     */
+        /**
+         * Displays the record from input task table based on the user role
+         * each user will see different field from the input task table
+         * these fields are set on the html page for each user
+         */
         String role = authResult.getAuthorities().toString();
         /* billing user*/
         if (role.contains("ROLE_Billing")) {
-            return "/billing/displaybilling";
+            return "billing/displaybilling";
         }
         /* Data-Processing user*/
         else if (role.contains("ROLE_Data_Processing")) {
-            return "/dataProcessing/displayJob";
+            return "dataProcessing/displayJob";
         }
         /* Manager user*/
         else if (role.contains("ROLE_Manager")) {
-            return "/billing/displaybilling";
+            return "billing/displaybilling";
         }
         /* Production-Programmer user */
-        else if  (role.contains("ROLE_Production_Programmer")) {
-            return "/inputtask/baseDisplayJob";
+        else if (role.contains("ROLE_Production_Programmer")) {
+            return "inputtask/baseDisplayJob";
         }
         /* Admin user */
-        else if  (role.contains("ROLE_ADMIN")) {
-            return "/billing/displaybilling";
+        else if (role.contains("ROLE_ADMIN")) {
+            return "billing/displaybilling";
         }
         return "default";
     }

@@ -1,13 +1,13 @@
 package edu.ccsu.datamail.jobtracker.controller;
 
 import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
-import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.entity.task.acronymDD;
 import edu.ccsu.datamail.jobtracker.service.AvailableTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,8 +96,7 @@ public class AvailableTaskController
         List<acronymDD> acronymDDList = new ArrayList<>();
         List<AvailableTask> taskList = availableTaskService.getAllAvailableTaskSortByAcronym();
 
-        for (int i = 0; i < taskList.size(); i++)
-        {
+        for (int i = 0; i < taskList.size(); i++) {
             int taskid = taskList.get(i).getTaskId();
             String acronym = taskList.get(i).getAcronym();
             acronymDDList.add(new acronymDD(taskid, acronym));
