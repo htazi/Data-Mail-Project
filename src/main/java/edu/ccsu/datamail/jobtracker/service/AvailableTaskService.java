@@ -4,8 +4,11 @@ import edu.ccsu.datamail.jobtracker.entity.task.AvailableTask;
 import edu.ccsu.datamail.jobtracker.entity.task.TaskNotFoundException;
 import edu.ccsu.datamail.jobtracker.repository.AvailableTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -45,7 +48,36 @@ public class AvailableTaskService
         return taskContainer.orElseThrow(() -> new TaskNotFoundException("AvailableTask with id " + taskId + " not found"));
     }
 
+    public List<AvailableTask> getAllAvailableTask()
+    {
+        List<AvailableTask> taskList = availableTaskRepository.getAllBy();
+        taskList.sort(Comparator.comparing(AvailableTask::getTaskId));
+        return taskList;
+    }
+
+    public List<AvailableTask> getAllAvailableTaskSortByAcronym()
+    {
+        List<AvailableTask> taskList = availableTaskRepository.getAllBy();
+        taskList.sort(Comparator.comparing(AvailableTask::getAcronym));
+        return taskList;
+    }
+
+    /**
+     * Gets the current max taskId
+     *
+     * @return
+     */
+    public int getTaskId()
+    {
+        return availableTaskRepository.maxTaskId();
+    }
+
     public void addAvailableTask(AvailableTask availableTask)
+    {
+        availableTaskRepository.save(availableTask);
+    }
+
+    public void updateAvailableTask(AvailableTask availableTask)
     {
         availableTaskRepository.save(availableTask);
     }

@@ -21,16 +21,13 @@
 
         function empty() {
             var result = validate("workflow");
-            var result2 =  validate("wf_desc");
-            if(result && result2)
-            {
+            var result2 = validate("wf_desc");
+            if (result && result2) {
                 return true;
             }
-            else
-            {
+            else {
                 return false;
             }
-
         }
 
         function validate(elementId) {
@@ -46,51 +43,49 @@
 
             return true;
         }
-
     </script>
-<style>
-   td{text-align: left;
-     font-size: large;
-   }
+    <style>
+        td{text-align: left;
+            font-size: large;
+        }
 
-</style>
+    </style>
 
 </head>
-    <body>
-    <th:block th:include="user/_menu"></th:block>
-        <div style="text-align:center">
-            <h1>Create Workflow:</h1>
-            <br>
-            <br>
-            <form  method='GET' action="/inputTask" th:action="@{/inputTask}">
-                    <table align="center" style="margin: 0px auto;">
-                        <tr>
-                            <td>Job ID:</td>
-                           <td><input type="text" th:value="${job.jobId}"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="8">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Workflow:</td>
-                            <td><input type="text" name="wfId" th:value="${wfId}" ></td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="8">&nbsp;</td>
-                        </tr>
-                        <tr >
-
-                            <td>Description:</td>
-                            <td><input type="text" name="wfdesc" value=""/></td>
-                        </tr>
-                    </table><br>
-                    <button class="btn btn-success" type ="submit" name = " submit" > Add New Workflow</button>
-                    <button class="btn btn-success" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
-                <input type="hidden" name="jobId" th:value="${job.jobId}" />
-                <input type="hidden" name="wfId" th:value="${wfId}"/>
-            </form>
-            <br>
-        </div>
-    </body>
+<body>
+<th:block th:include="user/_menu"></th:block>
+<div style="text-align:center">
+    <h1>Create Workflow:</h1>
+    <br>
+    <br>
+    <form  method='GET' action="/inputTask" th:action="@{/inputTask}">
+        <table align="center" style="margin: 0px auto;">
+            <tr>
+                <td>Job ID:</td>
+                <td><input type="text" name="jobId" th:value="${job.jobId}"></td>
+            </tr>
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Workflow:</td>
+                <td><input type="text" name="wfId" th:value="${wfId}" ></td>
+            </tr>
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+            <tr >
+                <td>Description:</td>
+                <td><input type="text" name="wfdesc" value=""/></td>
+            </tr>
+        </table><br>
+        <button class="btn btn-primary" type ="submit" name = " submit" > Add New Workflow</button>
+        <button class="btn btn-primary" type ="submit" name = " submit"formaction="/workflow/find" th:formaction="@{/workflows/find}"> Find Workflow</button>
+        <input type="hidden" name="jobId" th:value="${job.jobId}" />
+        <input type="hidden" name="wfId" th:value="${wfId}"/>
+    </form>
+</div>
+<br>
+</div>
+</body>
 </html>

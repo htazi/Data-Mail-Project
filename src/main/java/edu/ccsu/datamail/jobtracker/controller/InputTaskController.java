@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class InputTaskController
@@ -69,12 +70,28 @@ public class InputTaskController
      */
 
     @RequestMapping(method = RequestMethod.POST, value = "/inputTasks/add")
-    public String addInputTask(@RequestParam("job_id") int jobId, @RequestParam("workflow") int wfId,
-                               @RequestParam("task_id") int tskId, @RequestParam("time_taken") int time,
-                               @RequestParam("records_input") int recIn, @RequestParam("records_output") int recOut,
-                               @RequestParam("records_dropped") int recD, @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
+    public String addInputTask(@RequestParam("job_id") Integer jobId, @RequestParam("workflow") Integer wfId,
+                               @RequestParam("task_id") Integer tskId, @RequestParam("time_taken") Integer time,
+                               @RequestParam("records_input") Integer recIn, @RequestParam("records_output") Integer recOut,
+                               @RequestParam("records_dropped") Integer recD,
+                               @RequestParam(name = "is_pcr", defaultValue = "false") Boolean isPCR,
+                               @RequestParam("notes") String desc, Model model, Principal principal) throws WorkflowNotFoundException, TaskNotFoundException
     {
-
+        if (tskId < 0) {
+            tskId = null;
+        }
+        if (time < 0) {
+            time = null;
+        }
+        if (recIn < 0) {
+            recIn = null;
+        }
+        if (recOut < 0) {
+            recOut = null;
+        }
+        if (recD < 0) {
+            recD = null;
+        }
         /*Retrieves the logged in user with spring security's getPrincipal method.
          * The username is extracted from the authenticated User object with the
          * User's getUserName method. That name is passed to the custom UserDetailService's
@@ -101,8 +118,8 @@ public class InputTaskController
         AvailableTask availableTask = availableTaskService.getAvailableTask(tskId);
 
         /*Build the inputTask object for insertion*/
-        InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, desc,
-                recIn, recOut, recD, time, timeStamp);
+        InputTask inputTask = new InputTask(taskNum, wfId, jobId, workflow, availableTask, user, desc, isPCR, recIn,
+                recOut, recD, time, timeStamp);
 
         /*Add the newly created task to the input_task table*/
         inputTaskService.addInputTask(inputTask);
@@ -114,5 +131,47 @@ public class InputTaskController
         /*The inputTask html page in the inputtask package is displayed again after form
          * submission*/
         return ("inputtask/inputTask");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/inputTasks/getalltasks")
+    public String getAllInputTasks(@RequestParam("jobId") int jobId, Model model, Authentication authResult) throws JobNotFoundException, WorkflowNotFoundException
+    {
+        List<InputTask> inputTasks = inputTaskService.getAllInJob(jobId);
+        boolean isempty = false;
+        model.addAttribute("isempty", isempty);
+        model.addAttribute("inputtasks", inputTasks);
+
+        if (inputTasks.isEmpty()) {
+            isempty = true;
+            model.addAttribute("message", "No Such a Job Id");
+            model.addAttribute("isempty", isempty);
+        }
+        /**
+         * Displays the record from input task table based on the user role
+         * each user will see different field from the input task table
+         * these fields are set on the html page for each user
+         */
+        String role = authResult.getAuthorities().toString();
+        /* billing user*/
+        if (role.contains("ROLE_Billing")) {
+            return "billing/displaybilling";
+        }
+        /* Data-Processing user*/
+        else if (role.contains("ROLE_Data_Processing")) {
+            return "dataProcessing/displayJob";
+        }
+        /* Manager user*/
+        else if (role.contains("ROLE_Manager")) {
+            return "billing/displaybilling";
+        }
+        /* Production-Programmer user */
+        else if (role.contains("ROLE_Production_Programmer")) {
+            return "inputtask/baseDisplayJob";
+        }
+        /* Admin user */
+        else if (role.contains("ROLE_ADMIN")) {
+            return "billing/displaybilling";
+        }
+        return "default";
     }
 }

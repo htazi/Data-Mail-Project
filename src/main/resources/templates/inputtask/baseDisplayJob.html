@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <style>
+        .inputwidth{
+            width: 150px;
+            display: inline-block;
+        }
+        .lbl {
+            display: inline-block;
+        }
+        .table{
+            width: 95% !important;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            $('h1[name=inputNum]').css({"color":"red"});
+
+        });
+
+        function empty() {
+            var x = document.getElementById("jobId").value;
+            if (x == "" || isNaN(x)) {
+                alert("Enter A Number for job ID");
+                console.log("function fired");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+<br>
+<br>
+
+
+<div align="center">
+    <!--<th:block th:if="${user == 'ROLE_Billing'}">-->
+    <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+    <!--<th:block th:if="${user == 'ROLE_Manager'}">-->
+    <!--<h1>Search For a Job(Billing Page)</h1>-->
+    <!--</th:block>-->
+
+    <h1>Search For a Job</h1>
+    <br>
+    <form  method='GET' action="/inputTasks/getalltasks">
+        <div>
+            <h3 class="lbl" style="display: inline-block">Job ID:</h3> <input style="display: inline-block;width: 150px !important;" class="form-control inputwidth" id="jobId" name="jobId" type="text" >
+            <!--Workflow ID: <input id="wfId" name="wfId" type="text" value="2" readonly>-->
+            <input class="btn btn-primary inputwidth" type="submit" value="View Records" onclick="return empty()">
+            <!--<input class="btn btn-success" type="button" id="mybtn2"  value="Show All Bills"/>-->
+        </div>
+    </form>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <th:block th:if="${isempty == false}">
+            <tr >
+                <th  th:style="|width: auto;padding-left:10px; padding-bottom:5px|">Job ID</th>
+                <th >workflow ID</th>
+                <th>User Name</th>
+                <th>Task Number</th>
+                <th>Task Description</th>
+                <th>Records Input</th>
+                <th>Records Output</th>
+                <th>Records Dropped</th>
+                <th>Time Taken</th>
+                <!--<th>Time Recorced</th>-->
+                <th>Acronym</th>
+                <!--<th>Task list Desc</th>-->
+                <!--<th>Is Billable</th>-->
+                <!--<th th:style="|width: auto;padding-right:10px|">Price</th>-->
+            </tr>
+        </th:block>
+
+        <h2 th:text="${message}"></h2>
+
+        <tr  th:each="taskinput : ${inputtasks}">
+            <div  >
+                <td  th:style="|padding-left:10px|" th:text="${taskinput.getJobId()}"/></td>
+                <td  th:text="${taskinput.getWorkflowId()}"/></td>
+                <td    th:text="${taskinput.getUserId().getUserName()}"/></td>
+                <td  th:text="${taskinput.getTaskNum()}" /></td>
+                <td   th:text="${taskinput.getDescription()}" /></td>
+                <td  th:text="${taskinput.getRecordsIn()}" /></td>
+                <td   th:text="${taskinput.getRecordsOut()}" /></td>
+                <td th:text="${taskinput.getRecordsDropped()}"/></td>
+                <td  th:text="${taskinput.getTimeTaken()}" /></td>
+                <td   th:text="${taskinput.getTask_id().getAcronym()}" /></td>
+
+            </div>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

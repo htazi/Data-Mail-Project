@@ -8,6 +8,7 @@ import edu.ccsu.datamail.jobtracker.repository.InputTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,17 @@ public class InputTaskService
     public List<InputTask> getAllInWorkflow(Workflow workflow)
     {
         return inputTaskRepository.findAllByWorkflow(workflow);
+    }
+
+    /**
+     * Finds all InpuTasks that are part of a given job
+     *
+     * @param jobId the id of the job that the tasks belong to
+     * @return A list containing all InputTasks associated with the job
+     */
+    public List<InputTask> getAllInJob(Integer jobId)
+    {
+        return inputTaskRepository.findAllByJobId(jobId);
     }
 
     /**
@@ -81,7 +93,8 @@ public class InputTaskService
      * @param workFlowId
      * @return
      */
-    public int getTaskNum(int jobId, int workFlowId){
+    public int getTaskNum(int jobId, int workFlowId)
+    {
         return inputTaskRepository.countTaskNum(jobId, workFlowId);
     }
 
@@ -98,5 +111,13 @@ public class InputTaskService
     public void deleteInputTask(InputTaskPK inputTaskPK)
     {
         inputTaskRepository.deleteById(inputTaskPK);
+    }
+
+    public List<InputTask> getAllInputTasks(){
+
+        List<InputTask> inputTasks = new ArrayList<>();
+        inputTaskRepository.findAll().forEach(inputTasks::add);
+
+        return inputTasks;
     }
 }

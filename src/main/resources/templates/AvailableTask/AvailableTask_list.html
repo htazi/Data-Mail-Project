@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html >
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<th:block th:include="user/_menu"></th:block>
+
+<h3 style="padding-left: 50px">Welcome :
+    <span th:utext="${#request.userPrincipal.name}"></span>
+</h3>
+
+<div class="container">
+    <h1 style="text-align: center">AvailableTask List</h1>
+    <form method="POST" action="/task/addTask/" th:action="@{/task/addTask}">
+        <input name="taskId"  type="hidden" value="1"/>
+        <input type="submit" class="btn btn-primary" value ="Add New Task"></form>
+    <table class="table table-striped">
+        <thead>
+        <th scope="row">#ID</th>
+        <th scope="row">Acronym</th>
+        <th scope="row">Description</th>
+        <th scope="row">Is Billable</th>
+        <th scope="row">Price</th>
+        <th scope="row">Update</th>
+        <!--<th scope="row">Delete</th>-->
+        </thead>
+        <tbody>
+
+        <tr  th:each="task : ${tasksList}">
+            <div>
+                <form method="POST" action="/task/updateTask/taskId" th:action="@{'/task/updateTask/'+${task.taskId}}">
+                <td><input name="taskId"  type="text"  th:value="${task.taskId}" readonly/></td>
+                <td><input name ="acronym"  type="text"  th:value="${task.acronym}" readonly/></td>
+                <td><input name="t_desc"  type="text" th:value="${task.taskDesc}" readonly/></td>
+                <td><input name="isbillable"  type="text"   th:value="${task.isBillable()}" readonly/></td>
+                <td><input name ="price" type="text"  th:value="${task.price}" readonly/></td>
+                <td><input type="submit" class="btn btn-primary" value ="Update"></td></form>
+                <!--<td> <a class="btn btn-primary" href="/task/updateTask" role="button" >Edit</a></td>
+                <td> <a class="btn btn-primary" href="/task/deleteTask" role="button" >Delete</a></td>-->
+
+            </div>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <!--<a class="btn btn-primary" href="/addTask/" role="button" >Add New Task</a>-->
+
+</div>
+</body>
+</html>
