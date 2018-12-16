@@ -151,5 +151,121 @@ values (19, 'MTRK', 'Mail Tracking', TRUE, 0.00);
 insert into task_list (task_id, acronym, t_desc, is_billable, price)
 values (20, 'DEDUPE', 'Merge/Purge (Dedupe)', TRUE, 0.00);
 
----
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (21, 'SPLIT', 'Header Detail', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (22, 'ASSIGN', 'Scanline', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (23, 'MOD', 'MOD10', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (24, 'DROP', 'drop', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (25, 'CODE', 'designate', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (26, 'MERGE', 'designate', TRUE, 0.00);
+
+insert into task_list (task_id, acronym, t_desc, is_billable, price)
+values (27, 'NCOA', 'designate', TRUE, 0.00);
+
+--- JCM Demo Data
+
+insert into job (job_id, client_id)
+values (37913, 1);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 1, 'Datamail Demo workflow 1');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 1, 1, 5, 3,'Convert Live Statement File',70778, 70778,null,10,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 1, 2, 21, 3,'Split',70778, 17745,53033,10,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 2, 'Datamail Demo workflow 2');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 2, 1, 22, 3,'Scanline',17745, 17745,null,10,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 2, 2, 23, 3,'MOD10',17745, 17745,null,15,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 3, 'Datamail Demo workflow 3');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 3, 1, 24, 3,'Drop Foreign from months 2,3,5',17745, 17506,239,15,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 3, 2, 15, 3,'to verify',17506, null,null,10,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 4, 'Datamail Demo workflow 4');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 4, 1, 25, 3,'SponserFlowFlag',17506, 17506,null,20,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 4, 2, 15, 3,'',17506, 0,0,5,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 4, 3, 25, 3,'Text',17506, 17506,null,5,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 4, 4, 15, 3,'',17506, null,null,10,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 6, 'Datamail Demo workflow 6');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 6, 1, 25, 3,'Apply version code to file',17506, 17506,null,60,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 6, 2, 15, 3,'',17506, null,null,10,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 7, 'Datamail Demo workflow 7');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 7, 1, 26, 3,'Merge Seeds',7, 7,null,5,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 7, 2, 25, 3,'Code Seeds',7, 266,null,20,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 7, 3, 26, 3,'Merge with mail file',17772, 17772,null,5,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 7, 4, 15, 3,'',17772, null,null,5,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 8, 'Datamail Demo workflow 8');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 8, 1, 26, 3,'Flag VIP then merge back with live',17772, null,null,20,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 8, 2, 21, 3,'Split off international',17630, 142,null,10,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 8, 3, 15, 3,'',17630, null,null,5,null ,false);
+
+insert into workflow (job_id, wf_id, wf_desc)
+values (37913, 9, 'Datamail Demo workflow 9');
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 9, 1, 27, 3,'NCOA Update',17630, 17621,9,15,null ,false);
+
+insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
+values (37913, 9, 2, 25, 3,'Fixed 2CSV for NonForwardables',9, 9,null,15,null ,false);
+
+
+
+
+
 Commit;
