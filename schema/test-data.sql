@@ -264,8 +264,4 @@ values (37913, 9, 1, 27, 3,'NCOA Update',17630, 17621,9,15,null ,false);
 insert into input_task (job_id, wf_id, task_num, task_id, user_id, task_desc, records_in, records_out, records_dropped, time_taken, time_recorded, is_pcr)
 values (37913, 9, 2, 25, 3,'Fixed 2CSV for NonForwardables',9, 9,null,15,null ,false);
 
-
-
-
-
 Commit;
