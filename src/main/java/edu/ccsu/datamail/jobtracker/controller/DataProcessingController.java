@@ -44,41 +44,26 @@ public class DataProcessingController
      * @param jobId
      * @param workflowId
      * @param taskNum
-     * @param userName
-     * @param description
-     * @param recordsIn
-     * @param recordsOut
-     * @param recordsDropped
-     * @param timeTaken
-     * @param timeRecorded
      * @param model
      * @return
      * @throws TaskNotFoundException
      */
-
     @RequestMapping(value = "job/updateJob/{job_id}/{workflow}/{taskNum}", method = RequestMethod.POST)
     public String updateJobPage(@PathVariable("job_id") Integer jobId,
                                 @PathVariable("workflow") Integer workflowId,
-                                @PathVariable("taskNum") Integer taskNum, Model model,
-                                @RequestParam("user_name") String userName,
-                                @RequestParam("task_desc") String description,
-                                @RequestParam("records_input") Integer recordsIn,
-                                @RequestParam("records_output") Integer recordsOut,
-                                @RequestParam("records_dropped") Integer recordsDropped,
-                                @RequestParam("time_taken") Integer timeTaken,
-                                @RequestParam("time_recorded") Timestamp timeRecorded) throws TaskNotFoundException
+                                @PathVariable("taskNum") Integer taskNum, Model model) throws TaskNotFoundException
     {
-        model.addAttribute("job_id", jobId);
-        model.addAttribute("workflow", workflowId);
-        model.addAttribute("taskNum", taskNum);
-        model.addAttribute("user_name", userName);
-        model.addAttribute("task_desc", description);
-        model.addAttribute("records_input", recordsIn);
-        model.addAttribute("records_output", recordsOut);
-        model.addAttribute("records_dropped", recordsDropped);
-        model.addAttribute("time_taken", timeTaken);
-        model.addAttribute("time_recorded", timeRecorded);
-
+        InputTask task = inputTaskService.getInputTask(jobId, workflowId, taskNum);
+        model.addAttribute("job_id", task.getJobId());
+        model.addAttribute("workflow", task.getWorkflowId());
+        model.addAttribute("taskNum", task.getTaskNum());
+        model.addAttribute("user_name", task.getUserId().getUserName());
+        model.addAttribute("task_desc", task.getDescription());
+        model.addAttribute("records_input", task.getRecordsIn());
+        model.addAttribute("records_output", task.getRecordsOut());
+        model.addAttribute("records_dropped", task.getRecordsDropped());
+        model.addAttribute("time_taken", task.getTimeTaken());
+        model.addAttribute("time_recorded", task.getTimeRecorded());
         return "dataProcessing/editJob";
     }
 
@@ -95,12 +80,10 @@ public class DataProcessingController
      * @param recordsOut
      * @param recordsDropped
      * @param timeTaken
-     * @param timeRecorded
      * @param model
      * @return
      * @throws TaskNotFoundException
      */
-
     @RequestMapping(value = "job/updatedJob/{job_id}/{workflow}/{taskNum}", method = RequestMethod.POST)
     public String updateTask(@PathVariable("job_id") Integer jobId, Model model,
                              @PathVariable("workflow") Integer workflowId,
@@ -110,8 +93,7 @@ public class DataProcessingController
                              @RequestParam("records_input") Integer recordsIn,
                              @RequestParam("records_output") Integer recordsOut,
                              @RequestParam("records_dropped") Integer recordsDropped,
-                             @RequestParam("time_taken") Integer timeTaken,
-                             @RequestParam("time_recorded") Timestamp timeRecorded) throws TaskNotFoundException
+                             @RequestParam("time_taken") Integer timeTaken) throws TaskNotFoundException
     {
         InputTask inputTask = inputTaskService.getInputTask(jobId, workflowId, taskNum);
         /* call AppUser object to set userName input*/
@@ -125,7 +107,7 @@ public class DataProcessingController
         inputTask.setRecordsOut(recordsOut);
         inputTask.setRecordsDropped(recordsDropped);
         inputTask.setTimeTaken(timeTaken);
-        inputTask.setTimeRecorded(timeRecorded);
+        inputTask.setTimeRecorded(new Timestamp(System.currentTimeMillis()));
 
         /* insert the new updated task*/
         inputTaskService.updateInputTask(inputTask);
